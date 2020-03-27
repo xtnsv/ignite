@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.LongAdder;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
 import org.apache.ignite.IgniteCheckedException;
 import org.apache.ignite.IgniteDeploymentException;
 import org.apache.ignite.IgniteException;
@@ -144,7 +145,7 @@ public class GridJobProcessor extends GridProcessorAdapter {
     /** Total jobs waiting time metric name. */
     public static final String WAITING_TIME = "WaitingTime";
 
-    private static final Comparator<StampedIgniteUuid> UUID_COMPARATOR = Comparator.comparing(StampedIgniteUuid::getStamp);
+    private static final Comparator<IgniteUuidHolder> UUID_COMPARATOR = Comparator.comparing(IgniteUuidHolder::getStamp);
 
     /** */
     private final Marshaller marsh;
@@ -153,10 +154,10 @@ public class GridJobProcessor extends GridProcessorAdapter {
     private final boolean jobAlwaysActivate;
 
     /** */
-    private final ConcurrentMap<StampedIgniteUuid, GridJobWorker> activeJobs;
+    private final ConcurrentMap<IgniteUuidHolder, GridJobWorker> activeJobs;
 
     /** */
-    private final ConcurrentMap<StampedIgniteUuid, GridJobWorker> passiveJobs;
+    private final ConcurrentMap<IgniteUuidHolder, GridJobWorker> passiveJobs;
 
     /** */
     private final ConcurrentMap<IgniteUuid, GridJobWorker> cancelledJobs =
@@ -2211,16 +2212,16 @@ public class GridJobProcessor extends GridProcessorAdapter {
     /**
      *
      */
-    private class JobsMap extends ConcurrentSkipListMap<StampedIgniteUuid, GridJobWorker> {
+    private class JobsMap extends ConcurrentSkipListMap<IgniteUuidHolder, GridJobWorker> {
 
         private static final long serialVersionUID = 0L;
 
-        private JobsMap(Comparator<StampedIgniteUuid> comparator) {
+        private JobsMap(Comparator<IgniteUuidHolder> comparator) {
             super(comparator);
         }
 
         /** {@inheritDoc} */
-        @Override public GridJobWorker put(StampedIgniteUuid key, GridJobWorker val) {
+        @Override public GridJobWorker put(IgniteUuidHolder key, GridJobWorker val) {
             assert !val.isInternal();
 
             GridJobWorker old = super.put(key, val);
@@ -2233,7 +2234,7 @@ public class GridJobProcessor extends GridProcessorAdapter {
         }
 
         /** {@inheritDoc} */
-        @Override public GridJobWorker putIfAbsent(StampedIgniteUuid key, GridJobWorker val) {
+        @Override public GridJobWorker putIfAbsent(IgniteUuidHolder key, GridJobWorker val) {
             assert !val.isInternal();
 
             GridJobWorker old = super.putIfAbsent(key, val);
@@ -2257,6 +2258,10 @@ public class GridJobProcessor extends GridProcessorAdapter {
 
         public IgniteUuid getUuid() {
             return uuid;
+        }
+
+        public LocalDateTime getStamp() {
+            throw new IllegalStateException();
         }
 
         @Override public boolean equals(Object o) {
@@ -2290,7 +2295,7 @@ public class GridJobProcessor extends GridProcessorAdapter {
             stamp = LocalDateTime.now();
         }
 
-        public LocalDateTime getStamp() {
+        @Override public LocalDateTime getStamp() {
             return stamp;
         }
     }
