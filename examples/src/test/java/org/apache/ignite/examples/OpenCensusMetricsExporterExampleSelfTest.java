@@ -18,7 +18,7 @@
 package org.apache.ignite.examples;
 
 import org.apache.ignite.examples.opencensus.OpenCensusMetricsExporterExample;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /** */
 public class OpenCensusMetricsExporterExampleSelfTest {

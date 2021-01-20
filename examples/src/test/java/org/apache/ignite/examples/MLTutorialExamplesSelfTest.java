@@ -38,7 +38,7 @@ import org.apache.ignite.examples.ml.tutorial.hyperparametertuning.Step_15_Paral
 import org.apache.ignite.examples.ml.tutorial.hyperparametertuning.Step_16_Genetic_Programming_Search;
 import org.apache.ignite.examples.ml.tutorial.hyperparametertuning.Step_17_Parallel_Genetic_Programming_Search;
 import org.apache.ignite.testframework.junits.common.GridAbstractExamplesTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * ML Titanic Tutorial self test.

@@ -47,16 +47,18 @@ import org.apache.ignite.examples.SpringBeanExamplesSelfTest;
 import org.apache.ignite.examples.SqlExamplesSelfTest;
 import org.apache.ignite.examples.TaskExamplesMultiNodeSelfTest;
 import org.apache.ignite.examples.TaskExamplesSelfTest;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 /**
  * Examples test suite.
  * <p>
  * Contains all Ignite examples tests.</p>
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@SuppressWarnings("JUnit5Platform")
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     CacheExamplesSelfTest.class,
     SqlExamplesSelfTest.class,
     BasicExamplesSelfTest.class,

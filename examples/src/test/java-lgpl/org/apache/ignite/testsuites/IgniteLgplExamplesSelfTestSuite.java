@@ -24,17 +24,19 @@ import org.apache.ignite.examples.HibernateL2CacheExampleSelfTest;
 import org.apache.ignite.examples.SpatialQueryExampleMultiNodeSelfTest;
 import org.apache.ignite.examples.SpatialQueryExampleSelfTest;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_OVERRIDE_MCAST_GRP;
 
 /**
  * Examples test suite. <p> Contains only Spring ignite examples tests.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@SuppressWarnings("JUnit5Platform")
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     HibernateL2CacheExampleSelfTest.class,
     SpatialQueryExampleSelfTest.class,
     ComputeScheduleExampleSelfTest.class,
@@ -46,7 +48,7 @@ import static org.apache.ignite.IgniteSystemProperties.IGNITE_OVERRIDE_MCAST_GRP
 })
 public class IgniteLgplExamplesSelfTestSuite {
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         System.setProperty(IGNITE_OVERRIDE_MCAST_GRP,
             GridTestUtils.getNextMulticastGroup(IgniteLgplExamplesSelfTestSuite.class));
