@@ -28,8 +28,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains tests for {@link AsymmetricKeyEncryptionService}.
@@ -78,7 +78,7 @@ public class AsymmetricKeyEncryptionServiceTest extends GridCommonAbstractTest {
             encryptionSvc.init();
         }
         catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            Assert.fail();
+            Assertions.fail();
         }
     }
 
@@ -92,6 +92,6 @@ public class AsymmetricKeyEncryptionServiceTest extends GridCommonAbstractTest {
         byte[] encData = encryptionSvc.encrypt(testData);
         byte[] decData = encryptionSvc.decrypt(encData);
 
-        Assert.assertArrayEquals(testData, decData);
+        Assertions.assertArrayEquals(testData, decData);
     }
 }

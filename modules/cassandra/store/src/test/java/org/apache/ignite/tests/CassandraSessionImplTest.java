@@ -38,9 +38,9 @@ import org.apache.ignite.cache.store.cassandra.persistence.KeyValuePersistenceSe
 import org.apache.ignite.cache.store.cassandra.session.BatchExecutionAssistant;
 import org.apache.ignite.cache.store.cassandra.session.CassandraSessionImpl;
 import org.apache.ignite.cache.store.cassandra.session.WrappedPreparedStatement;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;

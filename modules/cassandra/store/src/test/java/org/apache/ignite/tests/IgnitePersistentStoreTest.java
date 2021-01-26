@@ -53,11 +53,12 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for Ignite caches which utilizing {@link org.apache.ignite.cache.store.cassandra.CassandraCacheStore}
@@ -68,7 +69,7 @@ public class IgnitePersistentStoreTest {
     private static final Logger LOGGER = Logger.getLogger(IgnitePersistentStoreTest.class.getName());
 
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
         if (CassandraHelper.useEmbeddedCassandra()) {
             try {
@@ -92,7 +93,7 @@ public class IgnitePersistentStoreTest {
     }
 
     /** */
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
         try {
             CassandraHelper.dropTestKeyspaces();
@@ -566,24 +567,23 @@ public class IgnitePersistentStoreTest {
             personCache3.loadCache(null, qry);
 
             size = personCache3.size(CachePeekMode.ALL);
-            Assert.assertEquals("Cache data was incorrectly loaded from Cassandra table by '" + qry + "'", 3, size);
+            assertEquals(3, size, "Cache data was incorrectly loaded from Cassandra table by '" + qry + "'");
 
             personCache3.clear();
 
             personCache3.loadCache(null, new SimpleStatement(qry));
 
             size = personCache3.size(CachePeekMode.ALL);
-            Assert.assertEquals("Cache data was incorrectly loaded from Cassandra table by statement", 3, size);
+            assertEquals(3, size, "Cache data was incorrectly loaded from Cassandra table by statement");
 
             personCache3.clear();
 
             personCache3.loadCache(null);
 
             size = personCache3.size(CachePeekMode.ALL);
-            Assert.assertEquals("Cache data was incorrectly loaded from Cassandra. " +
+            assertEquals(TestsHelper.getBulkOperationSize(), size, "Cache data was incorrectly loaded from Cassandra. " +
                     "Expected number of records is " + TestsHelper.getBulkOperationSize() +
-                    ", but loaded number of records is " + size,
-                TestsHelper.getBulkOperationSize(), size);
+                    ", but loaded number of records is " + size);
 
             LOGGER.info("Cache data loaded from Cassandra table");
         }

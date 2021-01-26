@@ -28,9 +28,9 @@ import java.util.List;
 import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -81,7 +81,7 @@ public class JdbcThinMetadataSqlMatchTest extends GridCommonAbstractTest {
     }
 
     /** Create tables. */
-    @Before
+    @BeforeEach
     public void createTables() throws Exception {
         executeDDl("CREATE TABLE MY_FAV_TABLE (id INT PRIMARY KEY, val VARCHAR)");
         executeDDl("CREATE TABLE MY0FAV0TABLE (id INT PRIMARY KEY, val VARCHAR)");
@@ -90,7 +90,7 @@ public class JdbcThinMetadataSqlMatchTest extends GridCommonAbstractTest {
     }
 
     /** Drop tables. */
-    @After
+    @AfterEach
     public void dropTables() throws Exception {
         // tables that matched by "TABLE MY_FAV_TABLE" sql pattern:
         executeDDl("DROP TABLE MY_FAV_TABLE");

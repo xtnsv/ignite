@@ -25,8 +25,8 @@ import java.sql.Statement;
 import org.apache.ignite.IgniteSystemProperties;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for ddl queries that contain multiply sql statements, separated by ";".
@@ -42,7 +42,7 @@ public class JdbcThinMultiStatementSelfTest extends GridCommonAbstractTest {
     /**
      * Setup tables.
      */
-    @Before
+    @BeforeEach
     public void setupTables() throws Exception {
         execute("DROP TABLE IF EXISTS TEST_TX; " +
             "DROP TABLE IF EXISTS public.transactions; " +

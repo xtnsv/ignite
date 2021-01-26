@@ -26,7 +26,7 @@ import java.util.List;
 import org.apache.ignite.compute.gridify.aop.spring.GridifySpringEnhancer;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * To run this test with JBoss AOP make sure of the following:

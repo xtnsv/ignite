@@ -18,14 +18,15 @@
 package org.apache.ignite.qa;
 
 import org.apache.ignite.qa.query.WarningOnBigQueryResultsTest;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 /**
  * JDBC driver test suite.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     WarningOnBigQueryResultsTest.class,
 })
 public class QaJdbcTestSuite {

@@ -50,8 +50,7 @@ import org.apache.ignite.internal.jdbc2.JdbcUtils;
 import org.apache.ignite.internal.processors.query.QueryEntityEx;
 import org.apache.ignite.internal.util.typedef.F;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.sql.Types.DATE;
 import static java.sql.Types.DECIMAL;
@@ -638,7 +637,7 @@ public class JdbcThinMetadataSelfTest extends JdbcThinAbstractSelfTest {
                     actualSystemCols.add(colDefinition);
             }
 
-            Assert.assertEquals(expectedCols, actualUserCols);
+            assertEquals(expectedCols, actualUserCols);
 
             expectedCols = new HashSet<>(Arrays.asList(
                 "SYS.BASELINE_NODES.CONSISTENT_ID.null.2147483647",
@@ -1003,7 +1002,7 @@ public class JdbcThinMetadataSelfTest extends JdbcThinAbstractSelfTest {
                 "SYS.DISTRIBUTED_METASTORAGE.VALUE.null.2147483647"
                 ));
 
-            Assert.assertEquals(expectedCols, actualSystemCols);
+            assertEquals(expectedCols, actualSystemCols);
         }
     }
 

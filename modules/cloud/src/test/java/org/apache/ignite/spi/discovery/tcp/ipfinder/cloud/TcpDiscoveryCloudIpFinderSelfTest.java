@@ -23,8 +23,8 @@ import com.google.common.collect.ImmutableList;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.TcpDiscoveryIpFinderAbstractSelfTest;
 import org.apache.ignite.testsuites.IgniteCloudTestSuite;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * TcpDiscoveryCloudIpFinder test.
@@ -62,7 +62,7 @@ public class TcpDiscoveryCloudIpFinderSelfTest extends
      *
      * @throws Exception If any error occurs.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-1585")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-1585")
     @Test
     public void testGoogleComputeEngine() throws Exception {
         testCloudProvider("google-compute-engine");
@@ -73,7 +73,7 @@ public class TcpDiscoveryCloudIpFinderSelfTest extends
      *
      * @throws Exception If any error occurs.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9444")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9444")
     @Test
     public void testRackspace() throws Exception {
         testCloudProvider("rackspace-cloudservers-us");

@@ -21,8 +21,8 @@ import java.nio.charset.StandardCharsets;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Class to test {@link SymmetricKeyEncryptionService}.
@@ -49,6 +49,6 @@ public class SymmetricKeyEncryptionServiceTest extends GridCommonAbstractTest {
         byte[] encData = encryptionSvc.encrypt(testData);
         byte[] decData = encryptionSvc.decrypt(encData);
 
-        Assert.assertArrayEquals(testData, decData);
+        Assertions.assertArrayEquals(testData, decData);
     }
 }

@@ -24,9 +24,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import org.apache.ignite.jdbc.JdbcErrorsAbstractSelfTest;
 import org.apache.ignite.lang.IgniteCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * Test SQLSTATE codes propagation with thin client driver.
@@ -104,7 +104,7 @@ public class JdbcThinErrorsSelfTest extends JdbcErrorsAbstractSelfTest {
             catch (BatchUpdateException e) {
                 assertEquals(3, e.getUpdateCounts().length);
 
-                assertArrayEquals("", new int[] {1, 1, Statement.EXECUTE_FAILED}, e.getUpdateCounts());
+                assertArrayEquals(new int[] {1, 1, Statement.EXECUTE_FAILED}, e.getUpdateCounts());
 
                 assertEquals("42000", e.getSQLState());
 

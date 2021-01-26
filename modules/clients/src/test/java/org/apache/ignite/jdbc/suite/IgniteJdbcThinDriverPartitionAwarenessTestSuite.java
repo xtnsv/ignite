@@ -25,15 +25,16 @@ import org.apache.ignite.jdbc.thin.JdbcThinPartitionAwarenessTransactionsSelfTes
 import org.apache.ignite.jdbc.thin.JdbcThinStatementSelfTest;
 import org.apache.ignite.jdbc.thin.JdbcThinTcpIoTest;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 /**
  * JDBC Thin driver test suite to run in partition awareness mode.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     JdbcThinConnectionSelfTest.class,
     JdbcThinTcpIoTest.class,
     JdbcThinStatementSelfTest.class,
@@ -45,7 +46,7 @@ public class IgniteJdbcThinDriverPartitionAwarenessTestSuite {
     /**
      * Setup partition awareness mode.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setupPartitionAwareness() {
         GridTestUtils.setFieldValue(JdbcThinAbstractSelfTest.class, "partitionAwareness", true);
     }

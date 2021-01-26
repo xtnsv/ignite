@@ -36,9 +36,9 @@ import org.apache.ignite.cache.store.cassandra.datasource.Credentials;
 import org.apache.ignite.cache.store.cassandra.datasource.DataSource;
 import org.apache.ignite.cache.store.cassandra.serializer.JavaSerializer;
 import org.apache.ignite.tests.utils.CassandraAdminCredentials;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test for datasource serialization.
@@ -120,19 +120,19 @@ public class DatasourceSerializationTest {
         ConsistencyLevel _writeCons = (ConsistencyLevel)getFieldValue(_src, "writeConsistency");
         LoadBalancingPolicy _plc = (LoadBalancingPolicy)getFieldValue(_src, "loadBalancingPlc");
 
-        assertTrue("Incorrectly serialized/deserialized credentials for Cassandra DataSource",
-            cred.getPassword().equals(_cred.getPassword()) && cred.getUser().equals(_cred.getUser()));
+        assertTrue(cred.getPassword().equals(_cred.getPassword()) && cred.getUser().equals(_cred.getUser()),
+                "Incorrectly serialized/deserialized credentials for Cassandra DataSource");
 
-        assertTrue("Incorrectly serialized/deserialized contact points for Cassandra DataSource",
-            "/127.0.0.1".equals(_points.get(0).toString()) &&
+        assertTrue("/127.0.0.1".equals(_points.get(0).toString()) &&
             "/10.0.0.2".equals(_points.get(1).toString()) &&
-            "/10.0.0.3".equals(_points.get(2).toString()));
+            "/10.0.0.3".equals(_points.get(2).toString()),
+                "Incorrectly serialized/deserialized contact points for Cassandra DataSource");
 
-        assertTrue("Incorrectly serialized/deserialized consistency levels for Cassandra DataSource",
-            ConsistencyLevel.ONE == _readCons && ConsistencyLevel.QUORUM == _writeCons);
+        assertTrue(ConsistencyLevel.ONE == _readCons && ConsistencyLevel.QUORUM == _writeCons,
+                "Incorrectly serialized/deserialized consistency levels for Cassandra DataSource");
 
-        assertTrue("Incorrectly serialized/deserialized load balancing policy for Cassandra DataSource",
-            _plc instanceof MyLoadBalancingPolicy);
+        assertTrue(_plc instanceof MyLoadBalancingPolicy,
+                "Incorrectly serialized/deserialized load balancing policy for Cassandra DataSource");
     }
 
     /**

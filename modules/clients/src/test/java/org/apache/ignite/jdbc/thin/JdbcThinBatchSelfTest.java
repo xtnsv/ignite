@@ -28,9 +28,9 @@ import java.util.concurrent.Callable;
 import org.apache.ignite.internal.processors.cache.query.IgniteQueryErrorCode;
 import org.apache.ignite.internal.processors.odbc.SqlStateCode;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * Statement test.
@@ -376,7 +376,7 @@ public class JdbcThinBatchSelfTest extends JdbcThinAbstractDmlStatementSelfTest 
         int[] updCnts = stmt.executeBatch();
 
         assertEquals("Invalid update counts size", 6, updCnts.length);
-        assertArrayEquals("Invalid update count", new int[] {1, 2, 1, 2, 1, 3}, updCnts);
+        assertArrayEquals(new int[] {1, 2, 1, 2, 1, 3}, updCnts, "Invalid update count");
     }
 
     /**
@@ -409,8 +409,8 @@ public class JdbcThinBatchSelfTest extends JdbcThinAbstractDmlStatementSelfTest 
             }
 
             assertEquals("Invalid update counts size", 6, updCnts.length);
-            assertArrayEquals("Invalid update count",
-                new int[] {1, 2, 1, Statement.EXECUTE_FAILED, 1, Statement.EXECUTE_FAILED}, updCnts);
+            assertArrayEquals(new int[] {1, 2, 1, Statement.EXECUTE_FAILED, 1, Statement.EXECUTE_FAILED}, updCnts,
+                    "Invalid update count");
         }
     }
 

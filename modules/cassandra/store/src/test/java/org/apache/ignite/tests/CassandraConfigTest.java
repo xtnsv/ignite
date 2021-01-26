@@ -20,9 +20,9 @@ package org.apache.ignite.tests;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 import org.apache.ignite.cache.store.cassandra.persistence.KeyPersistenceSettings;
 import org.apache.ignite.cache.store.cassandra.persistence.KeyValuePersistenceSettings;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Simple test for DDL generator.

@@ -32,11 +32,11 @@ import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.tests.utils.CassandraAdminCredentials;
 import org.apache.ignite.tests.utils.CassandraHelper;
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit test for Ignite caches which utilizing {@link org.apache.ignite.cache.store.cassandra.CassandraCacheStore}
@@ -47,7 +47,7 @@ public class IgnitePersistentStorePrimitiveTest {
     private static final Logger LOGGER = Logger.getLogger(IgnitePersistentStorePrimitiveTest.class.getName());
 
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
         if (CassandraHelper.useEmbeddedCassandra()) {
             try {
@@ -71,7 +71,7 @@ public class IgnitePersistentStorePrimitiveTest {
     }
 
     /** */
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
         try {
             CassandraHelper.dropTestKeyspaces();

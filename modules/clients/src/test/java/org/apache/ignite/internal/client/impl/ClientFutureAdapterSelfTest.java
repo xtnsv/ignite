@@ -24,7 +24,7 @@ import org.apache.ignite.internal.client.GridClientException;
 import org.apache.ignite.internal.client.GridClientFuture;
 import org.apache.ignite.internal.client.GridClientFutureTimeoutException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Grid client future implementation self test.

@@ -29,10 +29,10 @@ import org.apache.ignite.cache.affinity.rendezvous.RendezvousAffinityFunction;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.sqltests.SqlDataTypesCoverageTests;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.testframework.GridTestUtils.waitForCondition;
 
@@ -44,7 +44,7 @@ public class JdbcThinJdbcToCacheDataTypesCoverageTest extends SqlDataTypesCovera
     public static boolean affinityAwareness;
 
     /** URL. */
-    private String url = affinityAwareness ?
+    private static final String url = affinityAwareness ?
         "jdbc:ignite:thin://127.0.0.1:10800..10802?affinityAwareness=true" :
         "jdbc:ignite:thin://127.0.0.1?affinityAwareness=false";
 
@@ -55,8 +55,7 @@ public class JdbcThinJdbcToCacheDataTypesCoverageTest extends SqlDataTypesCovera
     private Statement stmt;
 
     /** @inheritDoc */
-    @SuppressWarnings("RedundantMethodOverride")
-    @Before
+    @BeforeEach
     @Override public void init() throws Exception {
         super.init();
 
@@ -73,7 +72,7 @@ public class JdbcThinJdbcToCacheDataTypesCoverageTest extends SqlDataTypesCovera
      *
      * @throws Exception If Failed.
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         if (stmt != null && !stmt.isClosed()) {
             stmt.close();
@@ -107,7 +106,7 @@ public class JdbcThinJdbcToCacheDataTypesCoverageTest extends SqlDataTypesCovera
     }
 
     /** {@inheritDoc} */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12326")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12326")
     @Test
     @Override public void testDateDataType() throws Exception {
         super.testDateDataType();

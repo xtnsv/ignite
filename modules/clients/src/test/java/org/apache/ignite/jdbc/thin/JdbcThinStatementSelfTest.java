@@ -33,7 +33,7 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.util.typedef.F;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.RunnableX;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
@@ -101,6 +101,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     }
 
     /** {@inheritDoc} */
+    @org.junit.jupiter.api.Test
     @Override protected void afterTest() throws Exception {
         if (stmt != null && !stmt.isClosed()) {
             stmt.close();
@@ -117,7 +118,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteQuery0() throws Exception {
         ResultSet rs = stmt.executeQuery(SQL);
 
@@ -150,7 +151,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteQuery1() throws Exception {
         final String sqlText = "select val from test";
 
@@ -177,7 +178,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecute() throws Exception {
         assertTrue(stmt.execute(SQL));
 
@@ -216,7 +217,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testMaxRows() throws Exception {
         stmt.setMaxRows(1);
 
@@ -282,7 +283,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testCloseResultSet0() throws Exception {
         ResultSet rs0 = stmt.executeQuery(SQL);
         ResultSet rs1 = stmt.executeQuery(SQL);
@@ -301,7 +302,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testCloseResultSet1() throws Exception {
         stmt.execute(SQL);
 
@@ -315,7 +316,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testCloseResultSetByConnectionClose() throws Exception {
         ResultSet rs = stmt.executeQuery(SQL);
 
@@ -328,7 +329,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testCloseOnCompletionAfterQuery() throws Exception {
         assertFalse("Invalid default closeOnCompletion", stmt.isCloseOnCompletion());
 
@@ -358,7 +359,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testCloseOnCompletionBeforeQuery() throws Exception {
         assertFalse("Invalid default closeOnCompletion", stmt.isCloseOnCompletion());
 
@@ -388,7 +389,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteQueryMultipleOnlyResultSets() throws Exception {
         assertTrue(conn.getMetaData().supportsMultipleResultSets());
 
@@ -423,7 +424,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteQueryMultipleOnlyDml() throws Exception {
         conn.setSchema(null);
 
@@ -461,7 +462,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteQueryMultipleMixed() throws Exception {
         conn.setSchema(null);
 
@@ -524,7 +525,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteUpdate() throws Exception {
         final String sqlText = "update test set val=1 where _key=1";
 
@@ -542,7 +543,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExecuteUpdateProducesResultSet() throws Exception {
         final String sqlText = "select * from test";
 
@@ -560,7 +561,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testClose() throws Exception {
         String sqlText = "select * from test";
 
@@ -583,7 +584,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetSetMaxFieldSizeUnsupported() throws Exception {
         assertEquals(0, stmt.getMaxFieldSize());
 
@@ -621,7 +622,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetSetMaxRows() throws Exception {
         assertEquals(0, stmt.getMaxRows());
 
@@ -672,8 +673,8 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-5440")
+    @org.junit.jupiter.api.Test
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-5440")
     public void testSetEscapeProcessing() throws Exception {
         stmt.setEscapeProcessing(false);
 
@@ -709,7 +710,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetSetQueryTimeout() throws Exception {
         assertEquals(0, stmt.getQueryTimeout());
 
@@ -754,7 +755,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testMaxFieldSize() throws Exception {
         assertTrue(stmt.getMaxFieldSize() >= 0);
 
@@ -780,7 +781,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testQueryTimeout() throws Exception {
         assertEquals("Default timeout invalid: " + stmt.getQueryTimeout(), 0, stmt.getQueryTimeout());
 
@@ -806,7 +807,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testWarningsOnClosedStatement() throws Exception {
         stmt.clearWarnings();
 
@@ -830,7 +831,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testCursorName() throws Exception {
         checkNotSupported(new RunnableX() {
             @Override public void runx() throws Exception {
@@ -850,7 +851,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetMoreResults() throws Exception {
         assertFalse(stmt.getMoreResults());
 
@@ -876,7 +877,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetMoreResultsKeepCurrent() throws Exception {
         assertFalse(stmt.getMoreResults(Statement.CLOSE_CURRENT_RESULT));
         assertFalse(stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT));
@@ -902,7 +903,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetMoreResultsCloseAll() throws Exception {
         assertFalse(stmt.getMoreResults(Statement.CLOSE_CURRENT_RESULT));
         assertFalse(stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT));
@@ -928,7 +929,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
      *
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testBatchEmpty() throws Exception {
         assertTrue(conn.getMetaData().supportsBatchUpdates());
 
@@ -942,7 +943,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testFetchDirection() throws Exception {
         assertEquals(ResultSet.FETCH_FORWARD, stmt.getFetchDirection());
 
@@ -976,7 +977,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testAutogenerated() throws Exception {
         GridTestUtils.assertThrows(log,
             new Callable<Object>() {
@@ -1048,7 +1049,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testStatementTypeMismatchSelectForCachedQuery() throws Exception {
         // Put query to cache.
         stmt.executeQuery("select 1;");
@@ -1070,7 +1071,7 @@ public class JdbcThinStatementSelfTest extends JdbcThinAbstractSelfTest {
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testStatementTypeMismatchUpdate() throws Exception {
         GridTestUtils.assertThrows(log,
             new Callable<Object>() {

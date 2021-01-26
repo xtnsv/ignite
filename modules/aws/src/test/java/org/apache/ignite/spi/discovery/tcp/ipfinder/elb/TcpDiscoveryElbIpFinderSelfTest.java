@@ -19,7 +19,7 @@ package org.apache.ignite.spi.discovery.tcp.ipfinder.elb;
 
 import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.TcpDiscoveryIpFinderAbstractSelfTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * TcpDiscoveryElbIpFinderSelfTest test.

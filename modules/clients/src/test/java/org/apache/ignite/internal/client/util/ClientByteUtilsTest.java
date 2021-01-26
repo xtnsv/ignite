@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.UUID;
 import org.apache.ignite.internal.util.GridClientByteUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.util.GridClientByteUtils.bytesToInt;
 import static org.apache.ignite.internal.util.GridClientByteUtils.bytesToLong;
@@ -109,13 +109,13 @@ public class ClientByteUtilsTest extends GridCommonAbstractTest {
         for (Map.Entry<String, Short> entry : map.entrySet()) {
             byte[] b = asByteArray(entry.getKey());
 
-            Assert.assertArrayEquals(b, shortToBytes(entry.getValue()));
-            Assert.assertEquals((short)entry.getValue(), bytesToShort(b, 0));
+            Assertions.assertArrayEquals(b, shortToBytes(entry.getValue()));
+            Assertions.assertEquals((short)entry.getValue(), bytesToShort(b, 0));
 
             byte[] tmp = new byte[2];
 
             shortToBytes(entry.getValue(), tmp, 0);
-            Assert.assertArrayEquals(b, tmp);
+            Assertions.assertArrayEquals(b, tmp);
         }
     }
 
@@ -134,13 +134,13 @@ public class ClientByteUtilsTest extends GridCommonAbstractTest {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             byte[] b = asByteArray(entry.getKey());
 
-            Assert.assertArrayEquals(b, intToBytes(entry.getValue()));
-            Assert.assertEquals((int)entry.getValue(), bytesToInt(b, 0));
+            Assertions.assertArrayEquals(b, intToBytes(entry.getValue()));
+            Assertions.assertEquals((int)entry.getValue(), bytesToInt(b, 0));
 
             byte[] tmp = new byte[4];
 
             intToBytes(entry.getValue(), tmp, 0);
-            Assert.assertArrayEquals(b, tmp);
+            Assertions.assertArrayEquals(b, tmp);
         }
     }
 
@@ -163,13 +163,13 @@ public class ClientByteUtilsTest extends GridCommonAbstractTest {
         for (Map.Entry<String, Long> entry : map.entrySet()) {
             byte[] b = asByteArray(entry.getKey());
 
-            Assert.assertArrayEquals(b, longToBytes(entry.getValue()));
-            Assert.assertEquals((long)entry.getValue(), bytesToLong(b, 0));
+            Assertions.assertArrayEquals(b, longToBytes(entry.getValue()));
+            Assertions.assertEquals((long)entry.getValue(), bytesToLong(b, 0));
 
             byte[] tmp = new byte[8];
 
             longToBytes(entry.getValue(), tmp, 0);
-            Assert.assertArrayEquals(b, tmp);
+            Assertions.assertArrayEquals(b, tmp);
         }
     }
 

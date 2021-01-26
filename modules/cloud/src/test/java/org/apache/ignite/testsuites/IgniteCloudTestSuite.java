@@ -20,14 +20,15 @@ package org.apache.ignite.testsuites;
 import java.util.Collection;
 import java.util.LinkedList;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.cloud.TcpDiscoveryCloudIpFinderSelfTest;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 /**
  * Ignite Cloud integration test.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({TcpDiscoveryCloudIpFinderSelfTest.class})
+@RunWith(JUnitPlatform.class)
+@SelectClasses({TcpDiscoveryCloudIpFinderSelfTest.class})
 public class IgniteCloudTestSuite {
     /**
      * <a href="http://jclouds.apache.org/guides/google/">Service Account email<a/> for GCE.

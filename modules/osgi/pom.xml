@@ -59,6 +59,12 @@
             <artifactId>pax-exam-junit4</artifactId>
             <version>4.6.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

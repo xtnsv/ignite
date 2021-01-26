@@ -24,7 +24,7 @@ import org.apache.ignite.internal.client.GridClientCompute;
 import org.apache.ignite.internal.client.GridClientNode;
 import org.apache.ignite.internal.client.GridClientPredicate;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.testframework.GridTestUtils.assertThrows;
 

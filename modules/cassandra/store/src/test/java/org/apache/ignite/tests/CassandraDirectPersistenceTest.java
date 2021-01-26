@@ -36,9 +36,9 @@ import org.apache.ignite.tests.utils.TestTransaction;
 import org.apache.ignite.tests.utils.TestsHelper;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 /**
@@ -50,7 +50,7 @@ public class CassandraDirectPersistenceTest {
     private static final Logger LOGGER = Logger.getLogger(CassandraDirectPersistenceTest.class.getName());
 
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
         if (CassandraHelper.useEmbeddedCassandra()) {
             try {
@@ -74,7 +74,7 @@ public class CassandraDirectPersistenceTest {
     }
 
     /** */
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
         try {
             CassandraHelper.dropTestKeyspaces();

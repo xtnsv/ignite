@@ -19,7 +19,7 @@ package org.apache.ignite.spi.checkpoint.s3;
 
 import org.apache.ignite.testframework.junits.spi.GridSpiAbstractConfigTest;
 import org.apache.ignite.testframework.junits.spi.GridSpiTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Grid S3 checkpoint SPI config self test.

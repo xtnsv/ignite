@@ -20,7 +20,7 @@ package org.apache.ignite.loadtests.client;
 import org.apache.ignite.IgniteException;
 import org.apache.ignite.internal.client.ClientTcpSslMultiThreadedSelfTest;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Makes a long run to ensure stability and absence of memory leaks.

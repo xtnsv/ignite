@@ -68,8 +68,8 @@ import org.apache.ignite.lang.IgniteBiInClosure;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_JETTY_PORT;
 import static org.apache.ignite.cache.CacheMode.LOCAL;
@@ -320,7 +320,6 @@ public abstract class ClientAbstractSelfTest extends GridCommonAbstractTest {
         cfg.setExecutorService(Executors.newCachedThreadPool(new ThreadFactory() {
             private AtomicInteger cntr = new AtomicInteger();
 
-            @SuppressWarnings("NullableProblems")
             @Override public Thread newThread(Runnable r) {
                 return new Thread(r, "client-worker-thread-" + cntr.getAndIncrement());
             }
@@ -407,8 +406,8 @@ public abstract class ClientAbstractSelfTest extends GridCommonAbstractTest {
 
         GridClientFactory.stop(client.id(), true);
 
-        Assert.assertEquals(17, fut.get());
-        Assert.assertEquals(17, fut2.get());
+        Assertions.assertEquals(17, fut.get());
+        Assertions.assertEquals(17, fut2.get());
     }
 
     /**
@@ -432,7 +431,7 @@ public abstract class ClientAbstractSelfTest extends GridCommonAbstractTest {
             return;
         }
 
-        Assert.fail("Expected GridClientClosedException.");
+        Assertions.fail("Expected GridClientClosedException.");
     }
 
     /**

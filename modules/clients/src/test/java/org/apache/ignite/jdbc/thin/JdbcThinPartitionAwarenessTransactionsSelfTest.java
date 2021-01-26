@@ -33,7 +33,7 @@ import org.apache.ignite.internal.processors.query.QueryHistory;
 import org.apache.ignite.internal.processors.query.h2.IgniteH2Indexing;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Jdbc thin transactional partition awareness test.

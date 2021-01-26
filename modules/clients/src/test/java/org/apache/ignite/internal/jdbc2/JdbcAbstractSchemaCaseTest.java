@@ -31,8 +31,8 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Base (for v2 and thin drivers) test for the case (in)sensitivity of schema name.
@@ -87,7 +87,7 @@ public abstract class JdbcAbstractSchemaCaseTest extends GridCommonAbstractTest 
     /**
      * Cleanup.
      */
-    @Before
+    @BeforeEach
     public void dropTables() throws Exception {
         List<String> schemas = getSchemasWithTestTable();
 

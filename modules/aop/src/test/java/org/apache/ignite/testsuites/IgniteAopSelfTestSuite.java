@@ -24,9 +24,10 @@ import org.apache.ignite.gridify.NonSpringAopSelfTest;
 import org.apache.ignite.gridify.SpringAopSelfTest;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.tools.junit.JUnitTeamcityReporter;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.test.gridify.ExternalNonSpringAopSelfTest;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_OVERRIDE_MCAST_GRP;
@@ -34,8 +35,8 @@ import static org.apache.ignite.IgniteSystemProperties.IGNITE_OVERRIDE_MCAST_GRP
 /**
  * AOP test suite.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     // Test configuration.
     BasicAopSelfTest.class,
 
@@ -47,7 +48,7 @@ import static org.apache.ignite.IgniteSystemProperties.IGNITE_OVERRIDE_MCAST_GRP
 })
 public class IgniteAopSelfTestSuite {
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         JUnitTeamcityReporter.suite = IgniteAopSelfTestSuite.class.getName();
 

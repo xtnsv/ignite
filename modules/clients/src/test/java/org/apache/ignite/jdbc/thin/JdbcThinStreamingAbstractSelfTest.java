@@ -42,9 +42,8 @@ import org.apache.ignite.internal.processors.query.h2.IgniteH2Indexing;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for streaming via thin driver.
@@ -265,7 +264,7 @@ public abstract class JdbcThinStreamingAbstractSelfTest extends JdbcStreamingSel
     }
 
     /** {@inheritDoc} */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-11795")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-11795")
     @Test
     @Override public void testStreamedInsertFailsOnReadOnlyMode() throws Exception {
         super.testStreamedInsertFailsOnReadOnlyMode();
@@ -444,11 +443,11 @@ public abstract class JdbcThinStreamingAbstractSelfTest extends JdbcStreamingSel
 
                 ResultSet rs = stmt.executeQuery();
 
-                Assert.assertTrue("Result should not be empty", rs.next());
+                assertTrue("Result should not be empty", rs.next());
 
                 Foo foo = rs.getObject(1, Foo.class);
 
-                Assert.assertEquals("Stored value not equals the expected one", testInd, foo.val);
+                assertEquals("Stored value not equals the expected one", testInd, foo.val);
             }
         }
     }

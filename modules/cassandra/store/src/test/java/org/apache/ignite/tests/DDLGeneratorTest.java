@@ -19,7 +19,7 @@ package org.apache.ignite.tests;
 
 import java.net.URL;
 import org.apache.ignite.cache.store.cassandra.utils.DDLGenerator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * DDLGenerator test.

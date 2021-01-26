@@ -27,19 +27,19 @@ import org.apache.ignite.tests.IgnitePersistentStoreTest;
 import org.apache.ignite.tests.utils.CassandraHelper;
 import org.apache.ignite.tools.junit.JUnitTeamcityReporter;
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Cache suite for Cassandra store.
  *
  * Running with -DforkMode=always is recommended
  */
-@RunWith(Suite.class)
-@SuiteClasses({
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     CassandraConfigTest.class,
     CassandraDirectPersistenceTest.class,
     CassandraSessionImplTest.class,
@@ -52,7 +52,7 @@ public class IgniteCassandraStoreTestSuite {
     private static final Logger LOGGER = Logger.getLogger(IgniteCassandraStoreTestSuite.class.getName());
 
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
         JUnitTeamcityReporter.suite = IgniteCassandraStoreTestSuite.class.getName();
 
@@ -67,7 +67,7 @@ public class IgniteCassandraStoreTestSuite {
     }
 
     /** */
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
         if (CassandraHelper.useEmbeddedCassandra()) {
             try {

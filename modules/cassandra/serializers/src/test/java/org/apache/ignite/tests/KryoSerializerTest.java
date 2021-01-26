@@ -20,9 +20,9 @@ package org.apache.ignite.tests;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import org.apache.ignite.cache.store.cassandra.serializer.KryoSerializer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Simple test for KryoSerializer.
@@ -40,7 +40,7 @@ public class KryoSerializerTest {
         ByteBuffer buff = ser.serialize(pojo1);
         MyPojo pojo2 = (MyPojo)ser.deserialize(buff);
 
-        assertEquals("Kryo simple serialization test failed", pojo1, pojo2);
+        assertEquals(pojo1, pojo2, "Kryo simple serialization test failed");
     }
 
     /**
@@ -60,9 +60,9 @@ public class KryoSerializerTest {
         MyPojo pojo3 = (MyPojo)ser.deserialize(buff1);
         MyPojo pojo4 = (MyPojo)ser.deserialize(buff2);
 
-        assertEquals("Kryo cyclic structure serialization test failed", pojo1, pojo3);
-        assertEquals("Kryo cyclic structure serialization test failed", pojo1.getRef(), pojo3.getRef());
-        assertEquals("Kryo cyclic structure serialization test failed", pojo2, pojo4);
-        assertEquals("Kryo cyclic structure serialization test failed", pojo2.getRef(), pojo4.getRef());
+        assertEquals(pojo1, pojo3, "Kryo cyclic structure serialization test failed");
+        assertEquals(pojo1.getRef(), pojo3.getRef(), "Kryo cyclic structure serialization test failed");
+        assertEquals(pojo2, pojo4, "Kryo cyclic structure serialization test failed");
+        assertEquals(pojo2.getRef(), pojo4.getRef(), "Kryo cyclic structure serialization test failed");
     }
 }

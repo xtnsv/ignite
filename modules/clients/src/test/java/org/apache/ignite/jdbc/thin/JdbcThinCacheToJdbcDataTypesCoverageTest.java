@@ -56,18 +56,18 @@ import org.apache.ignite.internal.processors.cache.GridCacheDataTypesCoverageTes
 import org.apache.ignite.internal.util.lang.GridAbsPredicateX;
 import org.apache.ignite.internal.util.lang.GridClosureException;
 import org.apache.ignite.lang.IgniteBiTuple;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.apache.ignite.testframework.GridTestUtils.waitForCondition;
 
 /**
  * Data types coverage for basic cache-put-jdbc-thin-retrieve operations.
  */
+@ExtendWith(JdbcThinCacheToJdbcDataTypesNoExpectedExceptionsExtension.class)
 public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypesCoverageTest {
     /** Signals that tests should start in affinity awareness mode. */
     public static boolean affinityAwareness;
@@ -110,21 +110,15 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     private boolean asPreparedParam;
 
     /** URL. */
-    private String url = affinityAwareness ?
+    private static final String url = affinityAwareness ?
         "jdbc:ignite:thin://127.0.0.1:10800..10802?affinityAwareness=true" :
         "jdbc:ignite:thin://127.0.0.1?affinityAwareness=false";
 
     /** Connection. */
     private Connection conn;
 
-    /** Expected ex. */
-    @Rule
-    public ExpectedException expEx = ExpectedException.none();
-
-
-
     /** @inheritDoc */
-    @Before
+    @BeforeEach
     @Override public void init() throws Exception {
         super.init();
 
@@ -136,7 +130,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
      *
      * @throws Exception If Failed.
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         if (conn != null && !conn.isClosed()) {
             conn.close();
@@ -182,7 +176,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-13231")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-13231")
     @Test
     @Override public void testCharacterDataType() throws Exception {
         checkBasicCacheOperations(
@@ -215,7 +209,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-13232")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-13232")
     @Test
     @Override public void testObjectArrayDataType() throws Exception {
         super.testObjectArrayDataType();
@@ -278,7 +272,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-13233")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-13233")
     @Test
     @Override public void testDateDataType() throws Exception {
         checkBasicCacheOperations(
@@ -291,7 +285,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12326")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12326")
     @Test
     @Override public void testSqlDateDataType() throws Exception {
         super.testSqlDateDataType();
@@ -300,7 +294,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-13238")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-13238")
     @Test
     @Override public void testInstantDataType() throws Exception {
         asPreparedParam = true;
@@ -319,7 +313,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12312, https://issues.apache.org/jira/browse/IGNITE-12326")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12312, https://issues.apache.org/jira/browse/IGNITE-12326")
     @Test
     @Override public void testLocalDateDataType() throws Exception {
         checkBasicCacheOperations(
@@ -331,7 +325,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12312")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12312")
     @Test
     @Override public void testLocalDateTimeDataType() throws Exception {
         checkBasicCacheOperations(
@@ -343,7 +337,7 @@ public class JdbcThinCacheToJdbcDataTypesCoverageTest extends GridCacheDataTypes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12312")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12312")
     @Test
     @Override public void testLocalTimeDataType() throws Exception {
         checkBasicCacheOperations(

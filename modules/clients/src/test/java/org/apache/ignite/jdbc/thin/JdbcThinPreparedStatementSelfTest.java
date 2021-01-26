@@ -47,8 +47,8 @@ import org.apache.ignite.internal.processors.odbc.jdbc.JdbcThinFeature;
 import org.apache.ignite.internal.util.typedef.internal.S;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.RunnableX;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.hamcrest.MatcherAssert;
 
 import static java.sql.Types.BIGINT;
 import static java.sql.Types.BINARY;
@@ -71,7 +71,6 @@ import static org.hamcrest.CoreMatchers.is;
 /**
  * Prepared statement test.
  */
-@SuppressWarnings("ThrowableNotThrown")
 public class JdbcThinPreparedStatementSelfTest extends JdbcThinAbstractSelfTest {
     /** URL. */
     private static final String URL = "jdbc:ignite:thin://127.0.0.1";
@@ -264,16 +263,16 @@ public class JdbcThinPreparedStatementSelfTest extends JdbcThinAbstractSelfTest 
 
             while (rs.next()) {
                 if (cnt == 0) {
-                    Assert.assertTrue("Result's value type mismatch",
+                    assertTrue("Result's value type mismatch",
                         rs.getObject("objVal") instanceof TestObjectField);
 
-                    Assert.assertEquals("Result's value mismatch", exp, rs.getObject("objVal", TestObjectField.class));
+                    assertEquals("Result's value mismatch", exp, rs.getObject("objVal", TestObjectField.class));
                 }
 
                 cnt++;
             }
 
-            Assert.assertEquals("There should be exactly 1 result", 1, cnt);
+            assertEquals("There should be exactly 1 result", 1, cnt);
         }
     }
 
@@ -300,18 +299,18 @@ public class JdbcThinPreparedStatementSelfTest extends JdbcThinAbstractSelfTest 
 
             while (rs.next()) {
                 if (cnt == 0) {
-                    Assert.assertEquals("Result's id mismatch", 1, rs.getInt("id"));
+                    assertEquals("Result's id mismatch", 1, rs.getInt("id"));
 
-                    Assert.assertTrue(rs.getObject("objVal") instanceof BinaryObject);
+                    assertTrue(rs.getObject("objVal") instanceof BinaryObject);
 
-                    Assert.assertEquals("Result's value mismatch", Integer.valueOf(100),
+                    assertEquals("Result's value mismatch", Integer.valueOf(100),
                         rs.getObject("objVal", BinaryObject.class).field("a"));
                 }
 
                 cnt++;
             }
 
-            Assert.assertEquals("There should be exactly 1 result", 1, cnt);
+            assertEquals("There should be exactly 1 result", 1, cnt);
         }
     }
 
@@ -335,19 +334,19 @@ public class JdbcThinPreparedStatementSelfTest extends JdbcThinAbstractSelfTest 
 
         while (rs.next()) {
             if (cnt == 0) {
-                Assert.assertEquals("Result's id mismatch", 1, rs.getInt("id"));
+                assertEquals("Result's id mismatch", 1, rs.getInt("id"));
 
-                Assert.assertTrue("Result's value type mismatch",
+                assertTrue("Result's value type mismatch",
                     rs.getObject("objVal") instanceof TestObjectField);
 
-                Assert.assertEquals("Result's value mismatch", 100,
+                assertEquals("Result's value mismatch", 100,
                     rs.getObject("objVal", TestObjectField.class).a);
             }
 
             cnt++;
         }
 
-        Assert.assertEquals("There should be exactly 1 result", 1, cnt);
+        assertEquals("There should be exactly 1 result", 1, cnt);
 
         stmt.setNull(1, Types.JAVA_OBJECT);
 
@@ -359,15 +358,15 @@ public class JdbcThinPreparedStatementSelfTest extends JdbcThinAbstractSelfTest 
 
         while (rs.next()) {
             if (cnt == 0) {
-                Assert.assertEquals("Result's id mismatch", 2, rs.getInt("id"));
+                assertEquals("Result's id mismatch", 2, rs.getInt("id"));
 
-                Assert.assertNull("Result's value should be null", rs.getObject("objVal"));
+                assertNull("Result's value should be null", rs.getObject("objVal"));
             }
 
             cnt++;
         }
 
-        Assert.assertEquals("There should be exactly 1 result", 1, cnt);
+        assertEquals("There should be exactly 1 result", 1, cnt);
     }
 
     /**
@@ -392,7 +391,7 @@ public class JdbcThinPreparedStatementSelfTest extends JdbcThinAbstractSelfTest 
                 SQLException.class
             );
 
-            Assert.assertThat(t.getMessage(), is(containsString("Custom objects are not supported")));
+            MatcherAssert.assertThat(t.getMessage(), is(containsString("Custom objects are not supported")));
         }
     }
 

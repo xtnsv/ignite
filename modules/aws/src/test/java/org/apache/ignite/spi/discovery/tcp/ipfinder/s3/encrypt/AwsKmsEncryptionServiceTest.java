@@ -26,8 +26,8 @@ import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -68,6 +68,6 @@ public class AwsKmsEncryptionServiceTest extends GridCommonAbstractTest {
         byte[] encData = awsKmsEncryptionSvc.encrypt(testData);
         byte[] actualOutput = awsKmsEncryptionSvc.decrypt(encData);
 
-        Assert.assertArrayEquals(testData, actualOutput);
+        Assertions.assertArrayEquals(testData, actualOutput);
     }
 }

@@ -25,7 +25,7 @@ import org.apache.ignite.compute.gridify.Gridify;
 import org.apache.ignite.compute.gridify.GridifyArgument;
 import org.apache.ignite.compute.gridify.GridifyTaskSplitAdapter;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tries to execute dummy gridified task. It should fail because grid is not started.

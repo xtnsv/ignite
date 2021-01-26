@@ -20,7 +20,7 @@ package org.apache.ignite.internal.client.impl;
 import java.util.concurrent.Callable;
 import org.apache.ignite.internal.client.GridClientData;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.testframework.GridTestUtils.assertThrows;
 

@@ -19,8 +19,8 @@ package org.apache.ignite.spi.discovery.tcp.ipfinder.s3.encrypt;
 
 import java.nio.charset.StandardCharsets;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Class to test {@link MockEncryptionService}.
@@ -44,6 +44,6 @@ public class MockEncryptionServiceTest extends GridCommonAbstractTest {
         byte[] encData = mockEncryptionSvc.encrypt(testStr);
         byte[] decData = mockEncryptionSvc.decrypt(encData);
 
-        Assert.assertArrayEquals(testStr, decData);
+        Assertions.assertArrayEquals(testStr, decData);
     }
 }

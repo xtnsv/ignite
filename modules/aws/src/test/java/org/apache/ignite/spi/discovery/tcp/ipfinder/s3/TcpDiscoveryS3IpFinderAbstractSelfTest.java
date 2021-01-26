@@ -27,8 +27,8 @@ import org.apache.ignite.spi.discovery.tcp.ipfinder.TcpDiscoveryIpFinderAbstract
 import org.apache.ignite.spi.discovery.tcp.ipfinder.s3.encrypt.EncryptionService;
 import org.apache.ignite.testsuites.IgniteS3TestSuite;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Ignore;
-import org.junit.Test;
+import ;
+import org.junit.jupiter.api.Test;
 
 /**
  * Abstract TcpDiscoveryS3IpFinder to test with different ways of setting AWS credentials.

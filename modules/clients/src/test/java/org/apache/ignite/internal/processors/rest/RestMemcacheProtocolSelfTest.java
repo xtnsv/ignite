@@ -24,8 +24,8 @@ import org.apache.ignite.configuration.ConnectorConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.LOCAL;
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
@@ -126,11 +126,11 @@ public class RestMemcacheProtocolSelfTest extends GridCommonAbstractTest {
     public void testGet() throws Exception {
         grid().cache(DEFAULT_CACHE_NAME).put("key", "val");
 
-        Assert.assertEquals("val", client.cacheGet(null, "key"));
+        Assertions.assertEquals("val", client.cacheGet(null, "key"));
 
         grid().cache(CACHE_NAME).put("key", "val");
 
-        Assert.assertEquals("val", client.cacheGet(CACHE_NAME, "key"));
+        Assertions.assertEquals("val", client.cacheGet(CACHE_NAME, "key"));
     }
 
     /**

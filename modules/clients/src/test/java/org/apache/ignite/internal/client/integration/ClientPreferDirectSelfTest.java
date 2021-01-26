@@ -37,7 +37,7 @@ import org.apache.ignite.internal.client.balancer.GridClientRandomBalancer;
 import org.apache.ignite.internal.client.balancer.GridClientRoundRobinBalancer;
 import org.apache.ignite.resources.IgniteInstanceResource;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.client.integration.ClientAbstractMultiNodeSelfTest.HOST;
 import static org.apache.ignite.internal.client.integration.ClientAbstractMultiNodeSelfTest.REST_TCP_PORT_BASE;

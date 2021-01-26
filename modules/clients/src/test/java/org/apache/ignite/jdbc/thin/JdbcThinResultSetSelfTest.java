@@ -42,8 +42,7 @@ import org.apache.ignite.cache.query.annotations.QuerySqlField;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.util.typedef.internal.S;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
@@ -698,21 +697,21 @@ public class JdbcThinResultSetSelfTest extends JdbcThinAbstractSelfTest {
 
         while (rs.next()) {
             if (cnt == 0) {
-                Assert.assertEquals("Result by column label mismatch", exp, rs.getObject("objVal"));
+                assertEquals("Result by column label mismatch", exp, rs.getObject("objVal"));
 
-                Assert.assertEquals("Result by column index mismatch", exp, rs.getObject(15));
+                assertEquals("Result by column index mismatch", exp, rs.getObject(15));
 
-                Assert.assertEquals("Result by column index with general cast mismatch",
+                assertEquals("Result by column index with general cast mismatch",
                     exp, rs.getObject(15, Object.class));
 
-                Assert.assertEquals("Result by column index with precise cast mismatch",
+                assertEquals("Result by column index with precise cast mismatch",
                     exp, rs.getObject(15, TestObjectField.class));
             }
 
             cnt++;
         }
 
-        Assert.assertEquals("Result count mismatch", 1, cnt);
+        assertEquals("Result count mismatch", 1, cnt);
     }
 
     /**

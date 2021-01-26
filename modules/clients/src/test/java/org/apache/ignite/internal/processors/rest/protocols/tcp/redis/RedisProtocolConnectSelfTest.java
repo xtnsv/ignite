@@ -17,8 +17,7 @@
 
 package org.apache.ignite.internal.processors.rest.protocols.tcp.redis;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -31,7 +30,7 @@ public class RedisProtocolConnectSelfTest extends RedisCommonAbstractTest {
     @Test
     public void testPing() throws Exception {
         try (Jedis jedis = pool.getResource()) {
-            Assert.assertEquals("PONG", jedis.ping());
+            assertEquals("PONG", jedis.ping());
         }
     }
 
@@ -41,7 +40,7 @@ public class RedisProtocolConnectSelfTest extends RedisCommonAbstractTest {
     @Test
     public void testEcho() throws Exception {
         try (Jedis jedis = pool.getResource()) {
-            Assert.assertEquals("Hello, grid!", jedis.echo("Hello, grid!"));
+            assertEquals("Hello, grid!", jedis.echo("Hello, grid!"));
         }
     }
 
@@ -53,25 +52,25 @@ public class RedisProtocolConnectSelfTest extends RedisCommonAbstractTest {
         try (Jedis jedis = pool.getResource()) {
             // connected to cache with index 0
             jedis.set("k0", "v0");
-            Assert.assertEquals("v0", jedis.get("k0"));
+            assertEquals("v0", jedis.get("k0"));
 
             // connect to cache with index 1
             jedis.select(1);
             jedis.set("k1", "v1");
-            Assert.assertEquals("v1", jedis.get("k1"));
-            Assert.assertNull(jedis.get("k0"));
+            assertEquals("v1", jedis.get("k1"));
+            assertNull(jedis.get("k0"));
 
             try (Jedis jedis2 = pool.getResource()) {
                 // connected to cache with index 0
-                Assert.assertEquals("v0", jedis2.get("k0"));
-                Assert.assertNull(jedis2.get("k1"));
+                assertEquals("v0", jedis2.get("k0"));
+                assertNull(jedis2.get("k1"));
             }
 
-            Assert.assertEquals("v1", jedis.get("k1"));
-            Assert.assertNull(jedis.get("k0"));
+            assertEquals("v1", jedis.get("k1"));
+            assertNull(jedis.get("k0"));
 
             jedis.select(0);
-            Assert.assertEquals("v0", jedis.get("k0"));
+            assertEquals("v0", jedis.get("k0"));
         }
     }
 }
