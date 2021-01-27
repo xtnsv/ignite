@@ -40,13 +40,13 @@ import org.apache.ignite.internal.visor.tx.VisorTxSortOrder;
 import org.apache.ignite.internal.visor.tx.VisorTxTaskArg;
 import org.apache.ignite.spi.tracing.Scope;
 import org.apache.ignite.testframework.GridTestUtils;
+import org.apache.ignite.testframework.junits.SystemPropertiesClassExtension;
+import org.apache.ignite.testframework.junits.SystemPropertiesMethodExtension;
 import org.apache.ignite.testframework.junits.SystemPropertiesRule;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
 import org.jetbrains.annotations.Nullable;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestRule;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -68,28 +68,25 @@ import static org.apache.ignite.internal.commandline.cache.CacheSubcommands.VALI
 import static org.apache.ignite.internal.commandline.cache.argument.ValidateIndexesCommandArg.CHECK_FIRST;
 import static org.apache.ignite.internal.commandline.cache.argument.ValidateIndexesCommandArg.CHECK_THROUGH;
 import static org.apache.ignite.testframework.GridTestUtils.assertThrows;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests Command Handler parsing arguments.
  */
 @WithSystemProperty(key = IGNITE_ENABLE_EXPERIMENTAL_COMMAND, value = "true")
+@ExtendWith(SystemPropertiesClassExtension.class)
+@ExtendWith(SystemPropertiesMethodExtension.class)
 public class CommandHandlerParsingTest {
-    /** */
-    @ClassRule public static final TestRule classRule = new SystemPropertiesRule();
 
     /** */
     private static final String INVALID_REGEX = "[]";
-
-    /** */
-    @Rule public final TestRule methodRule = new SystemPropertiesRule();
 
     /**
      * validate_indexes command arguments parsing and validation
@@ -119,9 +116,9 @@ public class CommandHandlerParsingTest {
 
             CacheValidateIndexes.Arguments arg = (CacheValidateIndexes.Arguments)subcommand.subcommand().arg();
 
-            assertEquals("nodeId parameter unexpected value", nodeId, arg.nodeId());
-            assertEquals("checkFirst parameter unexpected value", expectedCheckFirst, arg.checkFirst());
-            assertEquals("checkThrough parameter unexpected value", expectedCheckThrough, arg.checkThrough());
+            assertEquals(nodeId, arg.nodeId(), "nodeId parameter unexpected value");
+            assertEquals(expectedCheckFirst, arg.checkFirst(), "checkFirst parameter unexpected value");
+            assertEquals(expectedCheckThrough, arg.checkThrough(), "checkThrough parameter unexpected value");
         }
         catch (IllegalArgumentException e) {
             fail("Unexpected exception: " + e);
@@ -145,10 +142,10 @@ public class CommandHandlerParsingTest {
 
             CacheValidateIndexes.Arguments arg = (CacheValidateIndexes.Arguments)subcommand.subcommand().arg();
 
-            assertNull("caches weren't specified, null value expected", arg.caches());
-            assertEquals("nodeId parameter unexpected value", nodeId, arg.nodeId());
-            assertEquals("checkFirst parameter unexpected value", -1, arg.checkFirst());
-            assertEquals("checkThrough parameter unexpected value", expectedParam, arg.checkThrough());
+            assertNull(arg.caches(), "caches weren't specified, null value expected");
+            assertEquals(nodeId, arg.nodeId(), "nodeId parameter unexpected value");
+            assertEquals(-1, arg.checkFirst(), "checkFirst parameter unexpected value");
+            assertEquals(expectedParam, arg.checkThrough(), "checkThrough parameter unexpected value");
         }
         catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -182,7 +179,7 @@ public class CommandHandlerParsingTest {
             FindAndDeleteGarbage.Arguments arg = (FindAndDeleteGarbage.Arguments)subcommand.subcommand().arg();
 
             if (list.contains(nodeId))
-                assertEquals("nodeId parameter unexpected value", nodeId, arg.nodeId().toString());
+                assertEquals(nodeId, arg.nodeId().toString(), "nodeId parameter unexpected value");
             else
                 assertNull(arg.nodeId());
 
@@ -812,8 +809,8 @@ public class CommandHandlerParsingTest {
             if (requireArgs(cmd))
                 continue;
 
-            assertFalse(cmd.toString(), parseArgs(singletonList(cmd.text())).verbose());
-            assertTrue(cmd.toString(), parseArgs(asList(cmd.text(), CMD_VERBOSE)).verbose());
+            assertFalse(parseArgs(singletonList(cmd.text())).verbose(), cmd.toString());
+            assertTrue(parseArgs(asList(cmd.text(), CMD_VERBOSE)).verbose(), cmd.toString());
         }
     }
 

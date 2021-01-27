@@ -41,7 +41,7 @@ import org.apache.ignite.internal.util.GridIntList;
 import org.apache.ignite.internal.util.GridUnsafe;
 import org.apache.ignite.testframework.junits.GridTestKernalContext;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.configuration.DiskPageCompression.LZ4;
 import static org.apache.ignite.configuration.DiskPageCompression.SKIP_GARBAGE;

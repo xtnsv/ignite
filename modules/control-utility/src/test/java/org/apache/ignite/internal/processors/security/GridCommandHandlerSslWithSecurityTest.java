@@ -33,7 +33,7 @@ import org.apache.ignite.internal.commandline.NoopConsole;
 import org.apache.ignite.internal.processors.security.impl.TestSecurityPluginProvider;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cluster.ClusterState.ACTIVE;
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_OK;

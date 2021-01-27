@@ -38,7 +38,7 @@ import org.apache.ignite.internal.util.future.GridFutureAdapter;
 import org.apache.ignite.internal.util.typedef.CI1;
 import org.apache.ignite.internal.visor.cache.index.IndexRebuildStatusInfoContainer;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_OK;
 import static org.apache.ignite.testframework.GridTestUtils.assertContains;

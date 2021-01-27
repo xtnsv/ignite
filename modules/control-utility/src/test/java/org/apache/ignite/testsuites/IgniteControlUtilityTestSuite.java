@@ -44,14 +44,15 @@ import org.apache.ignite.util.GridCommandHandlerWithSSLTest;
 import org.apache.ignite.util.KillCommandsCommandShTest;
 import org.apache.ignite.util.MetricCommandTest;
 import org.apache.ignite.util.SystemViewCommandTest;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 /**
  * Test suite for control utility.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     CommandHandlerParsingTest.class,
 
     GridCommandHandlerTest.class,

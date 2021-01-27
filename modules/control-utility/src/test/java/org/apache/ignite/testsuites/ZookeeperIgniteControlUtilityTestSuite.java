@@ -20,15 +20,16 @@ package org.apache.ignite.testsuites;
 import org.apache.ignite.spi.discovery.zk.ZookeeperDiscoverySpiTestConfigurator;
 import org.apache.ignite.util.GridCommandHandlerClusterByClassTest;
 import org.apache.ignite.util.GridCommandHandlerTest;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
 /**
  * Regular Ignite tests executed with {@link org.apache.ignite.spi.discovery.zk.ZookeeperDiscoverySpi}.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@RunWith(JUnitPlatform.class)
+@SelectClasses({
     GridCommandHandlerTest.class,
     GridCommandHandlerClusterByClassTest.class
 })
@@ -36,7 +37,7 @@ public class ZookeeperIgniteControlUtilityTestSuite {
     /**
      * @throws Exception Thrown in case of the failure.
      */
-    @BeforeClass
+    @BeforeAll
     public static void init() throws Exception {
         ZookeeperDiscoverySpiTestConfigurator.initTestSuite();
     }

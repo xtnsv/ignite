@@ -121,7 +121,7 @@ public class SystemPropertiesRule implements TestRule {
      * @param testCls Current test class.
      * @return List of updated properties in reversed order.
      */
-    private List<T2<String, String>> setSystemPropertiesBeforeClass(Class<?> testCls) {
+    List<T2<String, String>> setSystemPropertiesBeforeClass(Class<?> testCls) {
         List<WithSystemProperty[]> allProps = new ArrayList<>();
 
         for (Class<?> cls = testCls; cls != null; cls = cls.getSuperclass()) {
@@ -161,7 +161,7 @@ public class SystemPropertiesRule implements TestRule {
      * @param testMtd Current test method.
      * @return List of updated properties in reversed order.
      */
-    public List<T2<String, String>> setSystemPropertiesBeforeTestMethod(Method testMtd) {
+    List<T2<String, String>> setSystemPropertiesBeforeTestMethod(Method testMtd) {
         WithSystemProperty[] allProps = null;
 
         SystemPropertiesList testProps = testMtd.getAnnotation(SystemPropertiesList.class);
@@ -197,7 +197,7 @@ public class SystemPropertiesRule implements TestRule {
      * @param sysProps List previously returned by {@link #setSystemPropertiesBeforeClass(java.lang.Class)}
      *      or {@link #setSystemPropertiesBeforeTestMethod(Method)}.
      */
-    private void clearSystemProperties(List<T2<String, String>> sysProps) {
+    void clearSystemProperties(List<T2<String, String>> sysProps) {
         for (T2<String, String> t2 : sysProps) {
             if (t2.getValue() == null)
                 System.clearProperty(t2.getKey());

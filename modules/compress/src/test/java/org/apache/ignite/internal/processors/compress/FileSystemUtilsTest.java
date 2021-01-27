@@ -25,7 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.apache.ignite.IgniteCheckedException;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.nio.file.StandardOpenOption.READ;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
@@ -34,8 +34,8 @@ import static org.apache.ignite.internal.processors.compress.CompressionProcesso
 import static org.apache.ignite.internal.processors.compress.FileSystemUtils.getFileSystemBlockSize;
 import static org.apache.ignite.internal.processors.compress.FileSystemUtils.getSparseFileSize;
 import static org.apache.ignite.internal.processors.compress.FileSystemUtils.punchHole;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  */

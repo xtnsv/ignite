@@ -43,7 +43,7 @@ import org.h2.index.Index;
 import org.h2.index.IndexType;
 import org.h2.result.SearchRow;
 import org.h2.table.IndexColumn;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_OK;
 import static org.apache.ignite.util.GridCommandHandlerIndexingUtils.CACHE_NAME;

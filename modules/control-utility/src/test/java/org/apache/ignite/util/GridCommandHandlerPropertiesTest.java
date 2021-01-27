@@ -24,9 +24,9 @@ import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.internal.processors.configuration.distributed.DistributedChangeableProperty;
 import org.apache.ignite.internal.processors.query.h2.IgniteH2Indexing;
 import org.apache.ignite.internal.util.typedef.G;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_INVALID_ARGUMENTS;
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_OK;
@@ -37,13 +37,13 @@ import static org.apache.ignite.testframework.GridTestUtils.assertContains;
  */
 public class GridCommandHandlerPropertiesTest extends GridCommandHandlerClusterByClassAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void init() {
         injectTestSystemOut();
     }
 
     /** */
-    @After
+    @AfterEach
     public void clear() {
     }
 

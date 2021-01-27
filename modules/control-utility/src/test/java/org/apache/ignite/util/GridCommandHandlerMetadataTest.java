@@ -47,8 +47,8 @@ import org.apache.ignite.internal.binary.BinarySchema;
 import org.apache.ignite.internal.binary.BinaryTypeImpl;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.jetbrains.annotations.Nullable;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_INVALID_ARGUMENTS;
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_OK;
@@ -66,7 +66,7 @@ public class GridCommandHandlerMetadataTest extends GridCommandHandlerClusterByC
     private static final int TYPES_CNT = 10;
 
     /** */
-    @After
+    @AfterEach
     public void clear() {
         crd.binary().types().stream().forEach(type -> crd.context().cacheObjects().removeType(type.typeId()));
     }

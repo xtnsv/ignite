@@ -28,7 +28,7 @@ import org.apache.ignite.internal.commandline.metric.MetricCommandArg;
 import org.apache.ignite.internal.processors.metric.MetricRegistry;
 import org.apache.ignite.internal.processors.metric.impl.HistogramMetricImpl;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.util.regex.Pattern.quote;
 import static org.apache.ignite.internal.commandline.CommandHandler.EXIT_CODE_INVALID_ARGUMENTS;
