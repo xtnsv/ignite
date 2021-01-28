@@ -22,7 +22,7 @@ import org.apache.ignite.client.ClientCache;
 import org.apache.ignite.internal.processors.cache.IgniteInternalCache;
 import org.apache.ignite.internal.processors.odbc.ClientListenerProcessor;
 import org.apache.ignite.mxbean.ClientProcessorMXBean;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test partition awareness of thin client on unstable topology.

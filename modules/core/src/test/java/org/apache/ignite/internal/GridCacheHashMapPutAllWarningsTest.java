@@ -42,8 +42,8 @@ import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test exchange manager warnings.
@@ -153,8 +153,9 @@ public class GridCacheHashMapPutAllWarningsTest extends GridCommonAbstractTest {
      */
     @Test
     public void testHashMapInvokeAllLocal() throws Exception {
-        Assume.assumeFalse( "Local transactional caches not supported by MVCC",
-            IgniteSystemProperties.getBoolean(IgniteSystemProperties.IGNITE_FORCE_MVCC_MODE_IN_TESTS, false));
+        Assumptions.assumeFalse(
+                IgniteSystemProperties.getBoolean(IgniteSystemProperties.IGNITE_FORCE_MVCC_MODE_IN_TESTS, false),
+                "Local transactional caches not supported by MVCC");
 
         List<String> messages = Collections.synchronizedList(new ArrayList<>());
 

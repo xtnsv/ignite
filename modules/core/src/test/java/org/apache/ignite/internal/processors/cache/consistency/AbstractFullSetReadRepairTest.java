@@ -27,7 +27,7 @@ import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.CacheEntry;
 import org.apache.ignite.internal.util.typedef.G;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractFullSetReadRepairTest extends AbstractReadRepairTest {
     /**

@@ -19,7 +19,7 @@ package org.apache.ignite.internal.processors.cache.persistence.standbycluster.r
 
 import java.util.concurrent.CountDownLatch;
 import org.apache.ignite.internal.IgniteEx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

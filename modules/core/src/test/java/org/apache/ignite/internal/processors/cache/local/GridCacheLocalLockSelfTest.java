@@ -31,8 +31,8 @@ import org.apache.ignite.testframework.GridTestThread;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.LOCAL;
 
@@ -51,7 +51,7 @@ public class GridCacheLocalLockSelfTest extends GridCommonAbstractTest {
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheLocalLockSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

@@ -21,10 +21,8 @@ import java.net.UnknownHostException;
 import org.apache.ignite.IgniteCheckedException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests HostAndPortRange parse method.
@@ -127,55 +125,49 @@ public class HostAndPortRangeTest extends GridCommonAbstractTest {
         assertEquals(expected, actual);
     }
 
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
-
     /**
      * Tests incorrect input address with IPv6 host (no brackets) and port.
      *
-     * @throws IgniteCheckedException on incorrect host/port
      */
     @Test
-    public void testParseIPv6IncorrectHost() throws IgniteCheckedException {
-        expectedEx.expect(IgniteCheckedException.class);
-        expectedEx.expectMessage("IPv6 is incorrect");
-        expectedEx.expectCause(IsInstanceOf.instanceOf(UnknownHostException.class));
+    public void testParseIPv6IncorrectHost() {
         String addrStr = "3ffe:2a00:100:7031";
         String errMsgPrefix = "";
         int dfltPortFrom = 18360;
         int dfltPortTo = 18362;
-        HostAndPortRange.parse(addrStr, dfltPortFrom, dfltPortTo, errMsgPrefix);
+        IgniteCheckedException exception = Assertions.assertThrows(IgniteCheckedException.class,
+                () -> HostAndPortRange.parse(addrStr, dfltPortFrom, dfltPortTo, errMsgPrefix));
+        Assertions.assertTrue(exception.getMessage().contains("IPv6 is incorrect"));
+        Assertions.assertTrue(exception.getCause() instanceof UnknownHostException);
     }
 
     /**
      * Tests empty host and port.
      *
-     * @throws IgniteCheckedException on incorrect host/port
      */
     @Test
-    public void testParseNoHost() throws IgniteCheckedException {
-        expectedEx.expect(IgniteCheckedException.class);
-        expectedEx.expectMessage("Host name is empty");
+    public void testParseNoHost() {
         String addrStr = ":8080";
         String errMsgPrefix = "";
         int dfltPortFrom = 18360;
         int dfltPortTo = 18362;
-        HostAndPortRange.parse(addrStr, dfltPortFrom, dfltPortTo, errMsgPrefix);
+        IgniteCheckedException exception = Assertions.assertThrows(IgniteCheckedException.class,
+                () -> HostAndPortRange.parse(addrStr, dfltPortFrom, dfltPortTo, errMsgPrefix));
+        Assertions.assertTrue(exception.getMessage().contains("Host name is empty"));
     }
 
     /**
      * Tests empty address string.
      *
-     * @throws IgniteCheckedException on incorrect host/port
      */
     @Test
-    public void testParseNoAddress() throws IgniteCheckedException {
-        expectedEx.expect(IgniteCheckedException.class);
-        expectedEx.expectMessage("Address is empty");
+    public void testParseNoAddress() {
         String addrStr = "";
         String errMsgPrefix = "";
         int dfltPortFrom = 18360;
         int dfltPortTo = 18362;
-        HostAndPortRange actual = HostAndPortRange.parse(addrStr, dfltPortFrom, dfltPortTo, errMsgPrefix);
+        IgniteCheckedException exception = Assertions.assertThrows(IgniteCheckedException.class,
+                () -> HostAndPortRange.parse(addrStr, dfltPortFrom, dfltPortTo, errMsgPrefix));
+        Assertions.assertTrue(exception.getMessage().contains("Address is empty"));
     }
 }

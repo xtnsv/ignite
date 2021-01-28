@@ -36,7 +36,7 @@ import org.apache.ignite.lang.IgniteCallable;
 import org.apache.ignite.lang.IgniteClosure;
 import org.apache.ignite.lang.IgniteInClosure;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 import static org.apache.ignite.internal.util.IgniteUtils.field;
 
@@ -651,8 +651,8 @@ public abstract class AbstractNodeJoinTemplate extends GridCommonAbstractTest {
                         if (ig.context().discovery().localNode().isClient())
                             return;
 
-                        Assert.assertNotNull(ig.context().cache().cache(cache4));
-                        Assert.assertNotNull(ig.context().cache().cache(cache5));
+                        Assertions.assertNotNull(ig.context().cache().cache(cache4));
+                        Assertions.assertNotNull(ig.context().cache().cache(cache5));
 
                     }
                 });
@@ -670,8 +670,8 @@ public abstract class AbstractNodeJoinTemplate extends GridCommonAbstractTest {
                         if (ig.context().discovery().localNode().isClient())
                             return;
 
-                        Assert.assertNull(ig.context().cache().cache(cache4));
-                        Assert.assertNull(ig.context().cache().cache(cache5));
+                        Assertions.assertNull(ig.context().cache().cache(cache4));
+                        Assertions.assertNull(ig.context().cache().cache(cache5));
 
                     }
                 });
@@ -750,18 +750,18 @@ public abstract class AbstractNodeJoinTemplate extends GridCommonAbstractTest {
                 @Override public void apply(IgniteEx ig) {
                     Map<String, DynamicCacheDescriptor> desc = cacheDescriptors(ig);
 
-                    Assert.assertEquals(1, desc.size());
+                    Assertions.assertEquals(1, desc.size());
 
-                    Assert.assertTrue(desc.containsKey(CU.UTILITY_CACHE_NAME));
+                    Assertions.assertTrue(desc.containsKey(CU.UTILITY_CACHE_NAME));
 
-                    Assert.assertNull(ig.context().cache().cache(cache1));
-                    Assert.assertNull(ig.context().cache().cache(cache2));
+                    Assertions.assertNull(ig.context().cache().cache(cache1));
+                    Assertions.assertNull(ig.context().cache().cache(cache2));
 
                     Map<String, GridCacheAdapter> caches = caches(ig);
 
-                    Assert.assertEquals(1, caches.size());
+                    Assertions.assertEquals(1, caches.size());
 
-                    Assert.assertTrue(caches.containsKey(CU.UTILITY_CACHE_NAME));
+                    Assertions.assertTrue(caches.containsKey(CU.UTILITY_CACHE_NAME));
                 }
             });
         }
@@ -772,14 +772,14 @@ public abstract class AbstractNodeJoinTemplate extends GridCommonAbstractTest {
         public Runnable checkCacheEmpty() {
             return onAllNode(new IgniteInClosure<IgniteEx>() {
                 @Override public void apply(IgniteEx ig) {
-                    Assert.assertNull(ig.context().cache().cache(cache1));
-                    Assert.assertNull(ig.context().cache().cache(cache2));
+                    Assertions.assertNull(ig.context().cache().cache(cache1));
+                    Assertions.assertNull(ig.context().cache().cache(cache2));
 
                     Map<String, GridCacheAdapter> caches = caches(ig);
 
                     for (GridCacheAdapter cacheAdapter : caches.values())
-                        Assert.assertTrue("Cache should be in recovery mode: " + cacheAdapter.context(),
-                            cacheAdapter.context().isRecoveryMode());
+                        Assertions.assertTrue(cacheAdapter.context().isRecoveryMode(),
+                            "Cache should be in recovery mode: " + cacheAdapter.context());
                 }
             });
         }
@@ -792,22 +792,22 @@ public abstract class AbstractNodeJoinTemplate extends GridCommonAbstractTest {
                 @Override public void apply(IgniteEx ig) {
                     Map<String, DynamicCacheDescriptor> desc = cacheDescriptors(ig);
 
-                    Assert.assertEquals(3, desc.size());
+                    Assertions.assertEquals(3, desc.size());
 
-                    Assert.assertTrue(desc.containsKey(CU.UTILITY_CACHE_NAME));
-                    Assert.assertTrue(desc.containsKey(cache1));
-                    Assert.assertTrue(desc.containsKey(cache2));
+                    Assertions.assertTrue(desc.containsKey(CU.UTILITY_CACHE_NAME));
+                    Assertions.assertTrue(desc.containsKey(cache1));
+                    Assertions.assertTrue(desc.containsKey(cache2));
 
-                    Assert.assertNotNull(ig.context().cache().cache(cache1));
-                    Assert.assertNotNull(ig.context().cache().cache(cache2));
+                    Assertions.assertNotNull(ig.context().cache().cache(cache1));
+                    Assertions.assertNotNull(ig.context().cache().cache(cache2));
 
                     Map<String, GridCacheAdapter> caches = caches(ig);
 
-                    Assert.assertEquals(3, caches.size());
+                    Assertions.assertEquals(3, caches.size());
 
-                    Assert.assertTrue(caches.containsKey(CU.UTILITY_CACHE_NAME));
-                    Assert.assertTrue(caches.containsKey(cache1));
-                    Assert.assertTrue(caches.containsKey(cache2));
+                    Assertions.assertTrue(caches.containsKey(CU.UTILITY_CACHE_NAME));
+                    Assertions.assertTrue(caches.containsKey(cache1));
+                    Assertions.assertTrue(caches.containsKey(cache2));
                 }
             });
         }

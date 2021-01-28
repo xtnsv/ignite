@@ -45,8 +45,8 @@ import org.apache.ignite.internal.processors.cache.store.GridCacheWriteBehindSto
 import org.apache.ignite.resources.CacheStoreSessionResource;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This class tests that calls of {@link CacheStoreSessionListener#onSessionStart(CacheStoreSession)}
@@ -97,7 +97,7 @@ public class CacheStoreSessionListenerWriteBehindEnabledTest extends GridCacheAb
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeCacheStoreSessionListenerWriteBehindEnabledTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
     }

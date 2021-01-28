@@ -34,9 +34,9 @@ import org.apache.ignite.services.ServiceDeploymentException;
 import org.apache.ignite.spi.discovery.tcp.TestTcpDiscoverySpi;
 import org.apache.ignite.testframework.GridTestUtils.DiscoveryHook;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.apache.ignite.testframework.GridTestUtils.assertThrowsWithCause;
@@ -101,9 +101,9 @@ public class GridServiceProxyTopologyInitializationTest extends GridCommonAbstra
     /**
      * Ignores the test in case the legacy service processor is used.
      */
-    @BeforeClass
+    @BeforeAll
     public static void checkServiceProcessorType() {
-        Assume.assumeTrue(isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(isEventDrivenServiceProcessorEnabled());
     }
 
     /** {@inheritDoc} */

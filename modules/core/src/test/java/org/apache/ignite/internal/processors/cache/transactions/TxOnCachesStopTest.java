@@ -57,8 +57,8 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionRollbackException;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.transactions.TransactionConcurrency.OPTIMISTIC;
 import static org.apache.ignite.transactions.TransactionIsolation.SERIALIZABLE;
@@ -199,7 +199,7 @@ public class TxOnCachesStopTest extends GridCommonAbstractTest {
      */
     @Test
     public void testOptimisticTxMappedOnPMETopology() throws Exception {
-        Assume.assumeFalse(MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc());
 
         startGridsMultiThreaded(1);
 
@@ -342,7 +342,7 @@ public class TxOnCachesStopTest extends GridCommonAbstractTest {
      */
     @Test
     public void testOptimisticTransactionsOnCacheDestroy() throws Exception {
-        Assume.assumeFalse(MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc());
 
         startGridsMultiThreaded(3);
 

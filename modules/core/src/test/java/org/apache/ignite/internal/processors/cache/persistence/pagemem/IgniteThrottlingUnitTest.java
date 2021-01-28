@@ -35,20 +35,19 @@ import org.apache.ignite.internal.processors.metric.GridMetricManager;
 import org.apache.ignite.lang.IgniteOutClosure;
 import org.apache.ignite.logger.NullLogger;
 import org.apache.ignite.spi.metric.noop.NoopMetricExporterSpi;
-import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.GridTestKernalContext;
 import org.apache.ignite.testframework.junits.logger.GridTestLog4jLogger;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.Timeout;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.mockito.Mockito;
 
 import static java.lang.Thread.State.TIMED_WAITING;
 import static org.apache.ignite.internal.processors.database.DataRegionMetricsSelfTest.NO_OP_METRICS;
+import static org.apache.ignite.testframework.GridTestUtils.DFLT_TEST_TIMEOUT;
 import static org.apache.ignite.testframework.GridTestUtils.waitForCondition;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -57,10 +56,9 @@ import static org.mockito.Mockito.when;
 /**
  *
  */
+@Timeout(value = DFLT_TEST_TIMEOUT, unit = TimeUnit.MILLISECONDS)
 public class IgniteThrottlingUnitTest {
     /** Per test timeout */
-    @Rule
-    public Timeout globalTimeout = new Timeout((int)GridTestUtils.DFLT_TEST_TIMEOUT);
 
     /** Logger. */
     private IgniteLogger log = new NullLogger();
@@ -283,17 +281,17 @@ public class IgniteThrottlingUnitTest {
 
             // Awaiting that all load threads are parked.
             for (Thread t : loadThreads)
-                assertTrue(t.getName(), waitForCondition(() -> t.getState() == TIMED_WAITING, 500L));
+                assertTrue(waitForCondition(() -> t.getState() == TIMED_WAITING, 500L), t.getName());
 
             // Disable throttling
             checkpointBufferPagesCount.set(50);
 
             // Awaiting that all load threads are unparked.
             for (Thread t : loadThreads)
-                assertTrue(t.getName(), waitForCondition(() -> t.getState() != TIMED_WAITING, 500L));
+                assertTrue(waitForCondition(() -> t.getState() != TIMED_WAITING, 500L), t.getName());
 
             for (Thread t : loadThreads)
-                assertNotEquals(t.getName(), TIMED_WAITING, t.getState());
+                assertNotEquals(TIMED_WAITING, t.getState(), t.getName());
         }
         finally {
             stopLoad.set(true);

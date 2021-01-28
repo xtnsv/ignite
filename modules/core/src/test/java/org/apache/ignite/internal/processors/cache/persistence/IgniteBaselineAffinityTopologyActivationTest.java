@@ -53,8 +53,8 @@ import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 
@@ -267,7 +267,7 @@ public class IgniteBaselineAffinityTopologyActivationTest extends GridCommonAbst
                 Throwable rootCause = e.getCause().getCause();
 
                 if (!(rootCause instanceof IgniteSpiException) || !rootCause.getMessage().contains("not compatible"))
-                    Assert.fail("Unexpected ignite exception was thrown: " + e);
+                    Assertions.fail("Unexpected ignite exception was thrown: " + e);
             }
             else
                 throw e;
@@ -312,7 +312,7 @@ public class IgniteBaselineAffinityTopologyActivationTest extends GridCommonAbst
                 Throwable rootCause = e.getCause().getCause();
 
                 if (!(rootCause instanceof IgniteSpiException) || !rootCause.getMessage().contains("not compatible"))
-                    Assert.fail("Unexpected ignite exception was thrown: " + e);
+                    Assertions.fail("Unexpected ignite exception was thrown: " + e);
             }
             else
                 throw e;
@@ -1020,7 +1020,7 @@ public class IgniteBaselineAffinityTopologyActivationTest extends GridCommonAbst
                 Throwable rootCause = e.getCause().getCause();
 
                 if (!(rootCause instanceof IgniteSpiException) || !rootCause.getMessage().contains("Node with set up BaselineTopology"))
-                    Assert.fail("Unexpected ignite exception was thrown: " + e);
+                    Assertions.fail("Unexpected ignite exception was thrown: " + e);
             }
             else
                 throw e;

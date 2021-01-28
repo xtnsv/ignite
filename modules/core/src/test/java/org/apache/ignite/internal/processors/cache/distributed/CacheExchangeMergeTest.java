@@ -82,9 +82,9 @@ import org.apache.ignite.thread.IgniteThreadFactory;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Objects.nonNull;
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_EXCHANGE_HISTORY_SIZE;
@@ -478,7 +478,7 @@ public class CacheExchangeMergeTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-10186")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-10186")
     @Test
     public void testMergeServerAndClientJoin1() throws Exception {
         final IgniteEx srv0 = startGrid(0);
@@ -1589,7 +1589,7 @@ public class CacheExchangeMergeTest extends GridCommonAbstractTest {
             if (!fut.isMerged() && fut.exchangeDone() && fut.firstEvent().type() != EVT_DISCOVERY_CUSTOM_EVT) {
                 AffinityTopologyVersion resVer = fut.topologyVersion();
 
-                Assert.assertNotNull(resVer);
+                Assertions.assertNotNull(resVer);
 
                 doneVers.add(resVer);
             }

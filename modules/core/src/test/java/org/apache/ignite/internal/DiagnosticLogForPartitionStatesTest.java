@@ -38,8 +38,8 @@ import org.apache.ignite.testframework.ListeningTestLogger;
 import org.apache.ignite.testframework.LogListener;
 import org.apache.ignite.testframework.junits.GridAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.cache.distributed.dht.preloader.GridDhtPartitionsExchangeFuture.PARTITION_STATE_FAILED_MSG;
 
@@ -70,7 +70,7 @@ public class DiagnosticLogForPartitionStatesTest extends GridCommonAbstractTest 
     /**
      * @throws Exception if stopAllGrid fails.
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         stopAllGrids();
         cleanPersistenceDir();

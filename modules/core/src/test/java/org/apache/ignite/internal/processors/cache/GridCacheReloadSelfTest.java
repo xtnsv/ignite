@@ -32,8 +32,8 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 
@@ -57,7 +57,7 @@ public class GridCacheReloadSelfTest extends GridCommonAbstractTest {
     private boolean nearEnabled = true;
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheReloadSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.EVICTION);

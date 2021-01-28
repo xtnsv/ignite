@@ -39,8 +39,8 @@ import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.internal.processors.cache.version.GridCacheVersion;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -101,8 +101,8 @@ public class EntryVersionConsistencyReadThroughTest extends GridCommonAbstractTe
      */
     @Test
     public void testInvokeAllMvccTxCache() throws Exception {
-        Assume.assumeTrue("https://issues.apache.org/jira/browse/IGNITE-8582",
-            MvccFeatureChecker.isSupported(MvccFeatureChecker.Feature.CACHE_STORE));
+        Assumptions.assumeTrue(MvccFeatureChecker.isSupported(MvccFeatureChecker.Feature.CACHE_STORE),
+            "https://issues.apache.org/jira/browse/IGNITE-8582");
 
         check(false, createCacheConfiguration(TRANSACTIONAL_SNAPSHOT));
     }
@@ -136,8 +136,8 @@ public class EntryVersionConsistencyReadThroughTest extends GridCommonAbstractTe
      */
     @Test
     public void testInvokeMvccTxCache() throws Exception {
-        Assume.assumeTrue("https://issues.apache.org/jira/browse/IGNITE-8582",
-            MvccFeatureChecker.isSupported(MvccFeatureChecker.Feature.CACHE_STORE));
+        Assumptions.assumeTrue(MvccFeatureChecker.isSupported(MvccFeatureChecker.Feature.CACHE_STORE),
+            "https://issues.apache.org/jira/browse/IGNITE-8582");
 
         check(true, createCacheConfiguration(TRANSACTIONAL_SNAPSHOT));
     }

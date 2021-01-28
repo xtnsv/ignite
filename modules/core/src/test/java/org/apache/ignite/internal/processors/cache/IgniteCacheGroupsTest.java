@@ -101,8 +101,8 @@ import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionRollbackException;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -351,7 +351,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9530")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9530")
     @Test
     public void testScanQueryMvccTxLocal() throws Exception {
         scanQuery(LOCAL, TRANSACTIONAL_SNAPSHOT);
@@ -376,7 +376,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7311")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7311")
     @Test
     public void testEntriesTtlMvccTxPartitioned() throws Exception {
         entriesTtl(PARTITIONED, TRANSACTIONAL_SNAPSHOT);
@@ -401,7 +401,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7311")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7311")
     @Test
     public void testEntriesTtlMvccTxReplicated() throws Exception {
         entriesTtl(REPLICATED, TRANSACTIONAL_SNAPSHOT);
@@ -426,7 +426,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9530,https://issues.apache.org/jira/browse/IGNITE-7311")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9530,https://issues.apache.org/jira/browse/IGNITE-7311")
     @Test
     public void testEntriesTtlMvccTxLocal() throws Exception {
         entriesTtl(LOCAL, TRANSACTIONAL_SNAPSHOT);
@@ -499,7 +499,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9530")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9530")
     @Test
     public void testCacheIteratorMvccTxLocal() throws Exception {
         cacheIterator(LOCAL, TRANSACTIONAL_SNAPSHOT);
@@ -596,7 +596,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9530")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9530")
     @Test
     public void testContinuousQueryMvccTxLocal() throws Exception {
         continuousQuery(LOCAL, TRANSACTIONAL_SNAPSHOT);
@@ -2036,7 +2036,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7952")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7952")
     @Test
     public void testCacheApiMvccTxPartitioned() throws Exception {
         cacheApiTest(PARTITIONED, TRANSACTIONAL_SNAPSHOT);
@@ -2053,7 +2053,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7952")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7952")
     @Test
     public void testCacheApiMvccTxReplicated() throws Exception {
         cacheApiTest(REPLICATED, TRANSACTIONAL_SNAPSHOT);
@@ -2881,7 +2881,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7954")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7954")
     @Test
     public void testLoadCacheMvccTxPartitioned() throws Exception {
         loadCache(PARTITIONED, TRANSACTIONAL_SNAPSHOT);
@@ -2898,7 +2898,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7954")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7954")
     @Test
     public void testLoadCacheMvccTxReplicated() throws Exception {
         loadCache(REPLICATED, TRANSACTIONAL_SNAPSHOT);
@@ -2923,7 +2923,7 @@ public class IgniteCacheGroupsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9530")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9530")
     @Test
     public void testLoadCacheMvccTxLocal() throws Exception {
         loadCache(LOCAL, TRANSACTIONAL_SNAPSHOT);

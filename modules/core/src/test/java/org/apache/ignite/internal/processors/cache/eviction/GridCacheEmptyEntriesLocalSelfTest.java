@@ -20,7 +20,7 @@ package org.apache.ignite.internal.processors.cache.eviction;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

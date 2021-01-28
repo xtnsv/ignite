@@ -29,10 +29,10 @@ import org.apache.ignite.internal.processors.cache.distributed.dht.preloader.Gri
 import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -41,7 +41,7 @@ public class ClientSlowDiscoveryTopologyChangeTest extends ClientSlowDiscoveryAb
     /**
      *
      */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         stopAllGrids();
 
@@ -51,7 +51,7 @@ public class ClientSlowDiscoveryTopologyChangeTest extends ClientSlowDiscoveryAb
     /**
      *
      */
-    @After
+    @AfterEach
     public void after() throws Exception {
         stopAllGrids();
 
@@ -128,7 +128,7 @@ public class ClientSlowDiscoveryTopologyChangeTest extends ClientSlowDiscoveryAb
 
         IgniteCache<Object, Object> clientCache = client.cache(CACHE_NAME);
 
-        Assert.assertNotNull("Cache should exists on client node", clientCache);
+        Assertions.assertNotNull(clientCache, "Cache should exists on client node");
 
         IgniteInternalFuture<?> cacheGet = GridTestUtils.runAsync(() -> clientCache.get(0));
 
@@ -155,6 +155,6 @@ public class ClientSlowDiscoveryTopologyChangeTest extends ClientSlowDiscoveryAb
             return topVer.equals(new AffinityTopologyVersion(4, 1));
         }, 5_000); // Reasonable timeout.
 
-        Assert.assertNull("Cache should be destroyed on client node", client.cache(CACHE_NAME));
+        Assertions.assertNull(client.cache(CACHE_NAME), "Cache should be destroyed on client node");
     }
 }

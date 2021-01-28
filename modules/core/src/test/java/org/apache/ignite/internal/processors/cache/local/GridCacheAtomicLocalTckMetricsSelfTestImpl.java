@@ -21,7 +21,7 @@ import javax.cache.processor.EntryProcessor;
 import javax.cache.processor.EntryProcessorException;
 import javax.cache.processor.MutableEntry;
 import org.apache.ignite.IgniteCache;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Local atomic cache metrics test with tck specific.

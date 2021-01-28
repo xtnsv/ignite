@@ -19,8 +19,9 @@ package org.apache.ignite.client;
 
 import org.apache.ignite.Ignition;
 import org.apache.ignite.configuration.ClientConfiguration;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checks if it can connect to a valid address from the node address list.
@@ -33,21 +34,24 @@ public class ConnectionTest {
     public static final String IPv6_HOST = "::1";
 
     /** */
-    @Test(expected = org.apache.ignite.client.ClientException.class)
+    @Test
     public void testEmptyNodeAddress() throws Exception {
-        testConnection(IPv4_HOST, "");
+        Assertions.assertThrows(org.apache.ignite.client.ClientException.class,
+                () -> testConnection(IPv4_HOST, ""));
     }
 
     /** */
-    @Test(expected = org.apache.ignite.client.ClientException.class)
+    @Test
     public void testNullNodeAddress() throws Exception {
-        testConnection(IPv4_HOST, null);
+        Assertions.assertThrows(org.apache.ignite.client.ClientException.class,
+                () -> testConnection(IPv4_HOST, null));
     }
 
     /** */
-    @Test(expected = org.apache.ignite.client.ClientException.class)
+    @Test
     public void testNullNodeAddresses() throws Exception {
-        testConnection(IPv4_HOST, null, null);
+        Assertions.assertThrows(org.apache.ignite.client.ClientException.class,
+                () -> testConnection(IPv4_HOST, null, null));
     }
 
     /** */
@@ -57,9 +61,10 @@ public class ConnectionTest {
     }
 
     /** */
-    @Test(expected = org.apache.ignite.client.ClientConnectionException.class)
+    @Test
     public void testInvalidNodeAddresses() throws Exception {
-        testConnection(IPv4_HOST, "127.0.0.1:47500", "127.0.0.1:10801");
+        Assertions.assertThrows(org.apache.ignite.client.ClientConnectionException.class,
+                () -> testConnection(IPv4_HOST, "127.0.0.1:47500", "127.0.0.1:10801"));
     }
 
     /** */
@@ -69,7 +74,7 @@ public class ConnectionTest {
     }
 
     /** */
-    @Ignore("IPv6 is not enabled by default on some systems.")
+    @Disabled("IPv6 is not enabled by default on some systems.")
     @Test
     public void testIPv6NodeAddresses() throws Exception {
         testConnection(IPv6_HOST, "[::1]:10800");

@@ -51,7 +51,6 @@ import static org.apache.ignite.plugin.security.SecurityPermissionSetBuilder.ALL
 /**
  * Common parent for security tests for thin client.
  */
-@RunWith(JUnit4.class)
 public abstract class CommonSecurityCheckTest extends AbstractSecurityTest {
     /** */
     protected final ListeningTestLogger listeningLog = new ListeningTestLogger(false, log);

@@ -18,8 +18,8 @@ package org.apache.ignite.internal.processors.cache.query.continuous;
 
 import org.apache.ignite.cache.CacheAtomicityMode;
 import org.apache.ignite.cache.CacheMode;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL_SNAPSHOT;
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
@@ -39,7 +39,7 @@ public class CacheContinuousQueryFailoverMvccTxSelfTest extends CacheContinuousQ
     }
 
     /** {@inheritDoc} */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7311")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7311")
     @Test
     @Override public void testBackupQueueEvict() throws Exception {
         // No-op.

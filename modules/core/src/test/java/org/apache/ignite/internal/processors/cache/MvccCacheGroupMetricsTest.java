@@ -17,8 +17,8 @@
 package org.apache.ignite.internal.processors.cache;
 
 import org.apache.ignite.cache.CacheAtomicityMode;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -30,7 +30,7 @@ public class MvccCacheGroupMetricsTest extends CacheGroupMetricsTest {
     }
 
     /** {@inheritDoc} */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12039")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12039")
     @Test
     @Override public void testCacheGroupMetrics() throws Exception {
         super.testCacheGroupMetrics();

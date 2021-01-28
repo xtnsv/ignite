@@ -19,8 +19,8 @@ package org.apache.ignite.internal.binary.streams;
 
 import java.util.Random;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.GridTestIoUtils.getCharByByteLE;
 import static org.apache.ignite.GridTestIoUtils.getDoubleByByteLE;
@@ -125,7 +125,7 @@ public abstract class AbstractBinaryStreamByteOrderSelfTest extends GridCommonAb
         for (int i = 0; i < ARR_LEN; i++)
             assertEquals(arr[i], getShortByByteLE(outArr, i * 2));
 
-        Assert.assertArrayEquals(arr, in.readShortArray(ARR_LEN));
+        Assertions.assertArrayEquals(arr, in.readShortArray(ARR_LEN));
     }
 
     /**
@@ -175,7 +175,7 @@ public abstract class AbstractBinaryStreamByteOrderSelfTest extends GridCommonAb
         for (int i = 0; i < ARR_LEN; i++)
             assertEquals(arr[i], getCharByByteLE(outArr, i * 2));
 
-        Assert.assertArrayEquals(arr, in.readCharArray(ARR_LEN));
+        Assertions.assertArrayEquals(arr, in.readCharArray(ARR_LEN));
     }
 
     /**
@@ -248,7 +248,7 @@ public abstract class AbstractBinaryStreamByteOrderSelfTest extends GridCommonAb
         for (int i = 0; i < ARR_LEN; i++)
             assertEquals(arr[i], getIntByByteLE(outArr, i * 4));
 
-        Assert.assertArrayEquals(arr, in.readIntArray(ARR_LEN));
+        Assertions.assertArrayEquals(arr, in.readIntArray(ARR_LEN));
     }
 
     /**
@@ -305,7 +305,7 @@ public abstract class AbstractBinaryStreamByteOrderSelfTest extends GridCommonAb
         for (int i = 0; i < ARR_LEN; i++)
             assertEquals(arr[i], getLongByByteLE(outArr, i * 8));
 
-        Assert.assertArrayEquals(arr, in.readLongArray(ARR_LEN));
+        Assertions.assertArrayEquals(arr, in.readLongArray(ARR_LEN));
     }
 
     /**
@@ -354,7 +354,7 @@ public abstract class AbstractBinaryStreamByteOrderSelfTest extends GridCommonAb
         for (int i = 0; i < ARR_LEN; i++)
             assertEquals(arr[i], getFloatByByteLE(outArr, i * 4), 0);
 
-        Assert.assertArrayEquals(arr, in.readFloatArray(ARR_LEN), 0);
+        Assertions.assertArrayEquals(arr, in.readFloatArray(ARR_LEN), 0);
     }
 
     /**
@@ -403,7 +403,7 @@ public abstract class AbstractBinaryStreamByteOrderSelfTest extends GridCommonAb
         for (int i = 0; i < ARR_LEN; i++)
             assertEquals(arr[i], getDoubleByByteLE(outArr, i * 8), 0);
 
-        Assert.assertArrayEquals(arr, in.readDoubleArray(ARR_LEN), 0);
+        Assertions.assertArrayEquals(arr, in.readDoubleArray(ARR_LEN), 0);
     }
 
     /**

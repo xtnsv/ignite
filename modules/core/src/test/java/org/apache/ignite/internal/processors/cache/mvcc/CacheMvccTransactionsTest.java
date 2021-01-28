@@ -92,8 +92,8 @@ import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
@@ -1442,7 +1442,7 @@ public class CacheMvccTransactionsTest extends CacheMvccAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9949")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9949")
     @Test
     public void testPutAllGetAll_ClientServer_Backups1_Restart_Scan() throws Exception {
         putAllGetAll(RestartMode.RESTART_RND_SRV, 4, 2, 1, 64, null, SCAN, PUT);
@@ -2031,7 +2031,7 @@ public class CacheMvccTransactionsTest extends CacheMvccAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12041")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12041")
     @Test
     public void testNodesRestartNoHang() throws Exception {
         final int srvs = 4;
@@ -3267,7 +3267,7 @@ public class CacheMvccTransactionsTest extends CacheMvccAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7311")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7311")
     @Test
     public void testExpiration() throws Exception {
         final IgniteEx node = startGrid(0);
@@ -3322,7 +3322,7 @@ public class CacheMvccTransactionsTest extends CacheMvccAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7311")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7311")
     @Test
     public void testChangeExpireTime() throws Exception {
         final IgniteEx node = startGrid(0);

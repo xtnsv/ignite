@@ -83,9 +83,9 @@ import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.fill;
 import static org.apache.ignite.events.EventType.EVT_WAL_SEGMENT_ARCHIVED;
@@ -431,8 +431,8 @@ public class IgniteWalReaderTest extends GridCommonAbstractTest {
 
             totalEntries += write;
 
-            Assert.assertTrue("Too much entries generated, but segments was not become available",
-                totalEntries < 10000);
+            Assertions.assertTrue(totalEntries < 10000,
+                "Too much entries generated, but segments was not become available");
         }
 
         String subfolderName = genDbSubfolderName(ignite, 0);
@@ -910,7 +910,7 @@ public class IgniteWalReaderTest extends GridCommonAbstractTest {
      */
     @Test
     public void testRemoveOperationPresentedForDataEntryForAtomic() throws Exception {
-        Assume.assumeFalse(MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc());
 
         runRemoveOperationTest(CacheAtomicityMode.ATOMIC);
     }
@@ -1199,13 +1199,13 @@ public class IgniteWalReaderTest extends GridCommonAbstractTest {
             "expLast=" + exp0Last + " actlLast=" + actl0Last);
 
         // +1 because bound include.
-        Assert.assertEquals(to0 - from0 + 1, records0);
+        Assertions.assertEquals(to0 - from0 + 1, records0);
 
-        Assert.assertNotNull(actl0First);
-        Assert.assertNotNull(actl0Last);
+        Assertions.assertNotNull(actl0First);
+        Assertions.assertNotNull(actl0Last);
 
-        Assert.assertEquals(exp0First, actl0First.get1());
-        Assert.assertEquals(exp0Last, actl0Last.get1());
+        Assertions.assertEquals(exp0First, actl0First.get1());
+        Assertions.assertEquals(exp0Last, actl0Last.get1());
 
         int from1 = 0;
         int to1 = rnd.nextInt(wal.size() - 3) + 1;
@@ -1241,13 +1241,13 @@ public class IgniteWalReaderTest extends GridCommonAbstractTest {
             "expLast=" + exp1Last + " actlLast=" + actl1Last);
 
         // +1 because bound include.
-        Assert.assertEquals(to1 - from1 + 1, records1);
+        Assertions.assertEquals(to1 - from1 + 1, records1);
 
-        Assert.assertNotNull(actl1First);
-        Assert.assertNotNull(actl1Last);
+        Assertions.assertNotNull(actl1First);
+        Assertions.assertNotNull(actl1Last);
 
-        Assert.assertEquals(exp1First, actl1First.get1());
-        Assert.assertEquals(exp1Last, actl1Last.get1());
+        Assertions.assertEquals(exp1First, actl1First.get1());
+        Assertions.assertEquals(exp1Last, actl1Last.get1());
 
         int from2 = rnd.nextInt(wal.size() - 2);
         int to2 = rnd.nextInt((wal.size() - 1) - from2) + from2;
@@ -1283,13 +1283,13 @@ public class IgniteWalReaderTest extends GridCommonAbstractTest {
             "expLast=" + exp2Last + " actlLast=" + actl2Last);
 
         // +1 because bound include.
-        Assert.assertEquals(to2 - from2 + 1, records2);
+        Assertions.assertEquals(to2 - from2 + 1, records2);
 
-        Assert.assertNotNull(actl2First);
-        Assert.assertNotNull(actl2Last);
+        Assertions.assertNotNull(actl2First);
+        Assertions.assertNotNull(actl2Last);
 
-        Assert.assertEquals(exp2First, actl2First.get1());
-        Assert.assertEquals(exp2Last, actl2Last.get1());
+        Assertions.assertEquals(exp2First, actl2First.get1());
+        Assertions.assertEquals(exp2Last, actl2Last.get1());
     }
 
     /**

@@ -23,7 +23,7 @@ import javax.cache.integration.CacheWriterException;
 import org.apache.ignite.cache.CacheAtomicityMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 
@@ -33,7 +33,7 @@ import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
  */
 public class IgniteCacheTxStoreSessionWriteBehindCoalescingTest extends IgniteCacheStoreSessionWriteBehindAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeIgniteCacheTxStoreSessionWriteBehindCoalescingTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
     }

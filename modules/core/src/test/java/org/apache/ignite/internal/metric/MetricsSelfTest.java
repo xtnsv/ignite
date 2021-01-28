@@ -50,15 +50,15 @@ import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.GridTestKernalContext;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toSet;
 import static org.apache.ignite.internal.processors.metric.impl.MetricUtils.fromFullName;
 import static org.apache.ignite.internal.processors.metric.impl.MetricUtils.histogramBucketNames;
 import static org.apache.ignite.testframework.GridTestUtils.runAsync;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /** */
 public class MetricsSelfTest extends GridCommonAbstractTest {
@@ -66,7 +66,7 @@ public class MetricsSelfTest extends GridCommonAbstractTest {
     private MetricRegistry mreg;
 
     /** */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         mreg = new MetricRegistry("group", name -> null, name -> null, null);
     }

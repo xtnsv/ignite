@@ -24,7 +24,7 @@ import org.apache.ignite.cluster.ClusterState;
 import org.apache.ignite.configuration.DataRegionConfiguration;
 import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checks cluster state/WAL state operations for thin client.

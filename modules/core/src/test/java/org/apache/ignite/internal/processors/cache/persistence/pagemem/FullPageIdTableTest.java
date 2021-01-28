@@ -28,10 +28,10 @@ import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.logger.java.JavaLogger;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.Timeout;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
@@ -179,8 +179,8 @@ public class FullPageIdTableTest {
                         Long checkVal = check.get(fullId);
 
                         if (checkVal != null) {
-                            assertEquals("Ret " + val + "Check " + checkVal,
-                                checkVal.longValue(), val);
+                            assertEquals(checkVal.longValue(),
+                                val, "Ret " + val + "Check " + checkVal);
                         }
                     }
 
@@ -257,18 +257,18 @@ public class FullPageIdTableTest {
         HashMap<FullPageId, Long> cp = new HashMap<>(tblSnapshot);
         check.keySet().forEach(cp::remove);
 
-        assertEquals("Size check failed, check map size " +
+        assertEquals(chkSize, foundTblSize, "Size check failed, check map size " +
             chkSize + " but found in table " + foundTblSize + " elements," +
             " table size " + tbl.size() +
-            "\n Difference: " + cp, chkSize, foundTblSize);
+            "\n Difference: " + cp);
 
         for (Map.Entry<FullPageId, Long> entry : check.entrySet()) {
             Long valCheck = entry.getValue();
             Long actual = tblSnapshot.get(entry.getKey());
 
             if (!valCheck.equals(actual))
-                assertEquals("Mapping comparison failed for key: " + entry.getKey(),
-                    valCheck, actual);
+                assertEquals(valCheck,
+                    actual, "Mapping comparison failed for key: " + entry.getKey());
         }
     }
 }

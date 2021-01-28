@@ -21,7 +21,7 @@ import java.io.File;
 import java.util.Collection;
 import org.apache.ignite.IgniteSystemProperties;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

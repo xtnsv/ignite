@@ -35,7 +35,7 @@ import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests multiple parallel jobs execution, accessing services(), while starting new nodes.

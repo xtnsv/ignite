@@ -19,7 +19,7 @@ package org.apache.ignite.internal.processors.cluster;
 
 import java.util.UUID;
 import org.apache.ignite.internal.IgniteEx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /** */
 public class BaselineAutoAdjustInMemoryTest extends BaselineAutoAdjustTest {

@@ -21,20 +21,17 @@ import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.RunnableX;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static java.lang.String.format;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Checks that assertion error will be thrown, if logging for the level disabled and log message on this level was invoked.
  */
-@RunWith(JUnit4.class)
 public class GridTestLog4jLoggerSelfTest {
     /** Logger message. */
     private static final String LOG_MESSAGE = "TEST MESSAGE";
@@ -49,13 +46,13 @@ public class GridTestLog4jLoggerSelfTest {
     private static final Level defaultRootLevel = Logger.getRootLogger().getLevel();
 
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void beforeTests() {
         Logger.getRootLogger().setLevel(Level.WARN);
     }
 
     /** */
-    @AfterClass
+    @AfterAll
     public static void afterTests() {
         Logger.getRootLogger().setLevel(defaultRootLevel);
 

@@ -26,8 +26,8 @@ import org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelo
 import org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelocktracker.PageLockTracker;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.nio.file.Paths.get;
 
@@ -67,7 +67,7 @@ public class ToFileDumpProcessorTest extends GridCommonAbstractTest {
 
         PageLockDump pageLockDump = pageLockTracker.dump();
 
-        Assert.assertNotNull(pageLockDump);
+        Assertions.assertNotNull(pageLockDump);
 
         String expDumpStr = ToStringDumpProcessor.toStringDump(pageLockDump);
 
@@ -85,7 +85,7 @@ public class ToFileDumpProcessorTest extends GridCommonAbstractTest {
             }
         }
 
-        Assert.assertTrue(found);
+        Assertions.assertTrue(found);
 
         String actDumpStr;
 
@@ -100,6 +100,6 @@ public class ToFileDumpProcessorTest extends GridCommonAbstractTest {
             actDumpStr = new String(buf.array());
         }
 
-        Assert.assertEquals(expDumpStr, actDumpStr);
+        Assertions.assertEquals(expDumpStr, actDumpStr);
     }
 }

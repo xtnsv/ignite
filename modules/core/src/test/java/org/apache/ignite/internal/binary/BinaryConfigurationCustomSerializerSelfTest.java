@@ -38,7 +38,7 @@ import org.apache.ignite.internal.visor.VisorTaskArgument;
 import org.apache.ignite.internal.visor.node.VisorNodePingTask;
 import org.apache.ignite.internal.visor.node.VisorNodePingTaskArg;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that node will start with custom binary serializer and thin client will connect to such node.

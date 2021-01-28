@@ -44,10 +44,10 @@ import org.apache.ignite.spi.discovery.tcp.TestTcpDiscoverySpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.DiscoveryHook;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.testframework.GridTestUtils.runAsync;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  *
@@ -245,7 +245,7 @@ public class BinaryMetadataUpdatesFlowTest extends GridCommonAbstractTest {
             if (desc.fieldType == FieldType.OBJECT)
                 assertTrue(errMsg, val instanceof BinaryObject);
             else if (desc.fieldType == FieldType.ARRAY)
-                assertArrayEquals(errMsg, (byte[])desc.val, (byte[])val);
+                assertArrayEquals((byte[])desc.val, (byte[])val, errMsg);
             else
                 assertEquals(errMsg, desc.val, binObj.field(desc.fieldName));
         }

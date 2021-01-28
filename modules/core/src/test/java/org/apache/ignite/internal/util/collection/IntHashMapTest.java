@@ -20,12 +20,12 @@ package org.apache.ignite.internal.util.collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.util.collection.IntHashMap.INITIAL_CAPACITY;
 import static org.apache.ignite.internal.util.collection.IntHashMap.MAXIMUM_CAPACITY;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test for the specific implementation of IntMap.
@@ -56,7 +56,7 @@ public class IntHashMapTest extends AbstractBaseIntMapTest {
 
         directPositionMap.remove(1);
 
-        Assert.assertEquals(4, directPositionMap.size());
+        Assertions.assertEquals(4, directPositionMap.size());
     }
 
     /** */

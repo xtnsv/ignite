@@ -25,10 +25,10 @@ import org.apache.ignite.IgniteLogger;
 import org.apache.ignite.marshaller.jdk.JdkMarshaller;
 import org.apache.ignite.testframework.junits.logger.GridTestLog4jLogger;
 import org.apache.ignite.thread.IgniteThread;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.metastorage.persistence.DistributedMetaStorageUtil.COMMON_KEY_PREFIX;
 import static org.apache.ignite.internal.processors.metastorage.persistence.DistributedMetaStorageUtil.cleanupGuardKey;
@@ -37,9 +37,9 @@ import static org.apache.ignite.internal.processors.metastorage.persistence.Dist
 import static org.apache.ignite.internal.processors.metastorage.persistence.DistributedMetaStorageUtil.versionKey;
 import static org.apache.ignite.internal.processors.metastorage.persistence.DistributedMetaStorageVersion.INITIAL_VERSION;
 import static org.apache.ignite.internal.processors.metastorage.persistence.DmsDataWriterWorker.DUMMY_VALUE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /** */
 public class DmsDataWriterWorkerTest {
@@ -59,7 +59,7 @@ public class DmsDataWriterWorkerTest {
     private DmsDataWriterWorker worker;
 
     /** */
-    @Before
+    @BeforeEach
     public void before() {
         testThread = Thread.currentThread();
 
@@ -78,7 +78,7 @@ public class DmsDataWriterWorkerTest {
     }
 
     /** */
-    @After
+    @AfterEach
     public void after() throws InterruptedException {
         worker.cancel(true);
     }
@@ -389,7 +389,7 @@ public class DmsDataWriterWorkerTest {
     private class MyReadWriteMetaStorageMock extends ReadWriteMetaStorageMock {
         /** {@inheritDoc} */
         @Override protected void assertLockIsHeldByWorkerThread() {
-            Assert.assertTrue(Thread.currentThread() == testThread || lock.lockCnt.get() > 0);
+            Assertions.assertTrue(Thread.currentThread() == testThread || lock.lockCnt.get() > 0);
         }
     }
 }

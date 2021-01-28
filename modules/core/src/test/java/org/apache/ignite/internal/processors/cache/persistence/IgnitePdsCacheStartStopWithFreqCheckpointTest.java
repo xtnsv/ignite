@@ -40,8 +40,8 @@ import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.SF;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -172,7 +172,7 @@ public class IgnitePdsCacheStartStopWithFreqCheckpointTest extends GridCommonAbs
             // Should succeed.
             cacheStartStopFut.get();
 
-            Assert.assertTrue("Checkpoint and exchange is probably in deadlock (see thread dump above for details).", false);
+            Assertions.assertTrue(false, "Checkpoint and exchange is probably in deadlock (see thread dump above for details).");
         }
     }
 

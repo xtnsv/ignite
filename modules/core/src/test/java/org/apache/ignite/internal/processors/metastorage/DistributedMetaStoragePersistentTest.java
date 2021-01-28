@@ -34,14 +34,14 @@ import org.apache.ignite.spi.discovery.DiscoverySpiDataExchange;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_GLOBAL_METASTORAGE_HISTORY_MAX_BYTES;
 import static org.apache.ignite.internal.GridComponent.DiscoveryDataExchangeType.META_STORAGE;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assume.assumeThat;
 
 /**
  * Test for {@link DistributedMetaStorageImpl} with enabled persistence.
@@ -190,7 +190,7 @@ public class DistributedMetaStoragePersistentTest extends DistributedMetaStorage
     /**
      * @throws Exception If failed.
      */
-    @Test @Ignore
+    @Test @Disabled
     @WithSystemProperty(key = IGNITE_GLOBAL_METASTORAGE_HISTORY_MAX_BYTES, value = "0")
     public void testJoinNodeWithoutEnoughHistory() throws Exception {
         IgniteEx ignite = startGrid(0);
@@ -483,7 +483,7 @@ public class DistributedMetaStoragePersistentTest extends DistributedMetaStorage
     /**
      * @throws Exception If failed.
      */
-    @Test @SuppressWarnings("ThrowableNotThrown")
+    @Test
     public void testConflictingData() throws Exception {
         IgniteEx igniteEx = startGrid(0);
 
@@ -515,11 +515,11 @@ public class DistributedMetaStoragePersistentTest extends DistributedMetaStorage
 
     /** */
     @Test
-    @Ignore("This optimization is not implemented yet")
+    @Disabled("This optimization is not implemented yet")
     public void testVerFromDiscoveryClusterData() throws Exception {
         startGrid(0);
 
-        assumeThat(grid(0).context().config().getDiscoverySpi(), is(instanceOf(TcpDiscoverySpi.class)));
+        Assumptions.assumeTrue(grid(0).context().config().getDiscoverySpi() instanceof TcpDiscoverySpi);
 
         startGrid(1).cluster().active(true);
 

@@ -54,10 +54,11 @@ import org.apache.ignite.testframework.junits.GridAbstractTest;
 import org.apache.ignite.testframework.junits.IgniteTestResources;
 import org.apache.ignite.testframework.junits.spi.GridSpiTestConfig.ConfigType;
 import org.jetbrains.annotations.Nullable;
-import org.junit.ClassRule;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TestRule;
-import org.junit.runners.model.Statement;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.apache.ignite.lang.IgniteProductVersion.fromString;
 
@@ -72,25 +73,9 @@ public abstract class GridSpiAbstractTest<T extends IgniteSpi> extends GridAbstr
     /** */
     private static final Map<Class<?>, TestData<?>> tests = new ConcurrentHashMap<>();
 
-    /** */
-    private static final TestRule firstLastTestRuleSpi = (base, description) -> new Statement() {
-        @Override public void evaluate() throws Throwable {
-            GridSpiAbstractTest testClsInstance = (GridSpiAbstractTest)description.getTestClass().newInstance();
-            try {
-                testClsInstance.beforeFirstTest();
-
-                base.evaluate();
-            }
-            finally {
-                testClsInstance.afterLastTest();
-            }
-        }
-    };
-
-    /** Manages first and last test execution. */
-    @SuppressWarnings({"TransientFieldInNonSerializableClass"})
-    @ClassRule public static transient RuleChain firstLastTestRule
-        = RuleChain.outerRule(firstLastTestRuleSpi).around(GridAbstractTest.firstLastTestRule);
+    @Order(0)
+    @RegisterExtension
+    public static final BeforeAndAfterAll extension = new BeforeAndAfterAll();
 
     /** */
     private final boolean autoStart;
@@ -741,6 +726,35 @@ public abstract class GridSpiAbstractTest<T extends IgniteSpi> extends GridAbstr
         /** {@inheritDoc} */
         @Nullable @Override public Collection<SecurityPermission> systemPermissions() {
             return null;
+        }
+    }
+
+    static class BeforeAndAfterAll implements BeforeAllCallback, AfterAllCallback {
+
+        private static GridSpiAbstractTest gridSpiAbstractTest;
+        /**
+         * Callback that is invoked once <em>after</em> all tests in the current
+         * container.
+         *
+         * @param context the current extension context; never {@code null}
+         */
+        @Override
+        public void afterAll(ExtensionContext context) throws Exception {
+            gridSpiAbstractTest.afterLastTest();
+        }
+
+        /**
+         * Callback that is invoked once <em>before</em> all tests in the current
+         * container.
+         *
+         * @param context the current extension context; never {@code null}
+         */
+        @Override
+        public void beforeAll(ExtensionContext context) throws Exception {
+            gridSpiAbstractTest = (GridSpiAbstractTest) context.getTestClass()
+                    .orElseThrow(IllegalArgumentException::new)
+                    .newInstance();
+            gridSpiAbstractTest.beforeFirstTest();
         }
     }
 }

@@ -23,8 +23,8 @@ import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -102,7 +102,7 @@ public class CacheGroupsPreloadTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testCachePreloadMvcc2() throws Exception {
         atomicityMode = CacheAtomicityMode.TRANSACTIONAL_SNAPSHOT;
@@ -166,7 +166,7 @@ public class CacheGroupsPreloadTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testCachePreloadMvcc6() throws Exception {
         sameGrp = false;

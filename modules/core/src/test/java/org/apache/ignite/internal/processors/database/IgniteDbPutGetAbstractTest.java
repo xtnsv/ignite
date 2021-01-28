@@ -48,9 +48,9 @@ import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.SF;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -242,7 +242,7 @@ public abstract class IgniteDbPutGetAbstractTest extends IgniteDbAbstractTest {
 
         cache.put(0, val);
 
-        Assert.assertArrayEquals(val, cache.get(0));
+        Assertions.assertArrayEquals(val, cache.get(0));
 
         final IgniteCache<Integer, LargeDbValue> cache1 = cache("large");
 
@@ -466,7 +466,7 @@ public abstract class IgniteDbPutGetAbstractTest extends IgniteDbAbstractTest {
      */
     @Test
     public void testSizeClear() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-7952", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-7952");
 
         final IgniteCache<Integer, DbValue> cache = cache(DEFAULT_CACHE_NAME);
 

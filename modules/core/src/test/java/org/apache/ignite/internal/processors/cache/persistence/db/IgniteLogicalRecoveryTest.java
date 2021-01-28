@@ -60,8 +60,8 @@ import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * A set of tests that check correctness of logical recovery performed during node start.
@@ -436,11 +436,11 @@ public class IgniteLogicalRecoveryTest extends GridCommonAbstractTest {
      * @param other Cache context.
      */
     private void checkCacheContextsConsistency(GridCacheContext one, GridCacheContext other) {
-        Assert.assertEquals(one.statisticsEnabled(), other.statisticsEnabled());
-        Assert.assertEquals(one.dynamicDeploymentId(), other.dynamicDeploymentId());
-        Assert.assertEquals(one.keepBinary(), other.keepBinary());
-        Assert.assertEquals(one.updatesAllowed(), other.updatesAllowed());
-        Assert.assertEquals(one.group().receivedFrom(), other.group().receivedFrom());
+        Assertions.assertEquals(one.statisticsEnabled(), other.statisticsEnabled());
+        Assertions.assertEquals(one.dynamicDeploymentId(), other.dynamicDeploymentId());
+        Assertions.assertEquals(one.keepBinary(), other.keepBinary());
+        Assertions.assertEquals(one.updatesAllowed(), other.updatesAllowed());
+        Assertions.assertEquals(one.group().receivedFrom(), other.group().receivedFrom());
     }
 
     /** {@inheritDoc} */
@@ -479,8 +479,8 @@ public class IgniteLogicalRecoveryTest extends GridCommonAbstractTest {
                 .distinct()
                 .collect(Collectors.toList());
 
-            Assert.assertTrue("There was unexpected rebalance for some groups" +
-                    " [node=" + node.name() + ", groups=" + rebalancedGroups + ']', rebalancedGroups.isEmpty());
+            Assertions.assertTrue(rebalancedGroups.isEmpty(), "There was unexpected rebalance for some " +
+                    "groups [node=" + node.name() + ", groups=" + rebalancedGroups + ']');
         }
     }
 
@@ -611,8 +611,8 @@ public class IgniteLogicalRecoveryTest extends GridCommonAbstractTest {
                 TestValue expectedVal = locCache.get(key);
                 TestValue actualVal = cache.get(key);
 
-                Assert.assertEquals("Consistency check failed for: " + cache.getName() + ", key=" + key,
-                    expectedVal, actualVal);
+                Assertions.assertEquals(expectedVal,
+                    actualVal, "Consistency check failed for: " + cache.getName() + ", key=" + key);
             }
         }
 

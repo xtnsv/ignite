@@ -21,7 +21,8 @@ import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.configuration.distributed.DistributedLongProperty.detachedLongProperty;
 
@@ -99,13 +100,14 @@ public abstract class DistributedConfigurationAbstractTest extends GridCommonAbs
     }
 
     /**
-     * @throws Exception If failed.
      */
-    @Test(expected = DetachedPropertyException.class)
-    public void testNotAttachedProperty() throws Exception {
-        DistributedLongProperty long0 = detachedLongProperty(TEST_PROP);
+    @Test
+    public void testNotAttachedProperty() {
+        Assertions.assertThrows(DetachedPropertyException.class, () -> {
+            DistributedLongProperty long0 = detachedLongProperty(TEST_PROP);
 
-        long0.propagate(1L);
+            long0.propagate(1L);
+        });
     }
 
     /** */

@@ -29,12 +29,12 @@ import java.util.Set;
 import org.apache.ignite.internal.processors.cache.version.GridCacheVersion;
 import org.apache.ignite.internal.util.typedef.F;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.cache.transactions.TxDeadlockDetection.findCycle;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * DFS test for search cycle in wait-for-graph.
@@ -341,7 +341,7 @@ public class DepthFirstSearchTest {
 
         for (GridCacheVersion tx : ALL) {
             if (!excl.contains(tx))
-                assertNull(tx + " could not be part of cycle", findCycle(wfg, tx));
+                assertNull(findCycle(wfg, tx), tx + " could not be part of cycle");
         }
     }
 

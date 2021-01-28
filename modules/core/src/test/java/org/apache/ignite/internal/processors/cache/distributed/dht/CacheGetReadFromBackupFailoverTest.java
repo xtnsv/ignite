@@ -44,8 +44,8 @@ import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -243,7 +243,7 @@ public class CacheGetReadFromBackupFailoverTest extends GridCommonAbstractTest {
             }
         }
 
-        Assert.assertTrue(String.valueOf(successGet.get()), successGet.get() > 50);
+        Assertions.assertTrue(successGet.get() > 50, String.valueOf(successGet.get()));
 
         Throwable e = err.get();
 

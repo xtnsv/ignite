@@ -43,8 +43,8 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
@@ -69,7 +69,7 @@ public class BinaryMetadataRegistrationInsideEntryProcessorTest extends GridComm
     }
 
     /** Stop all grids after each test. */
-    @After
+    @AfterEach
     public void stopAllGridsAfterTest() {
         stopAllGrids();
     }

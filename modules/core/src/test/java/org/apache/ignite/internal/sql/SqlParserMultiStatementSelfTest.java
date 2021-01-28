@@ -21,7 +21,7 @@ import org.apache.ignite.internal.sql.command.SqlBeginTransactionCommand;
 import org.apache.ignite.internal.sql.command.SqlCommand;
 import org.apache.ignite.internal.sql.command.SqlCommitTransactionCommand;
 import org.apache.ignite.internal.sql.command.SqlCreateIndexCommand;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Parser test for multi-statement queries.

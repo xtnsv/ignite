@@ -19,7 +19,7 @@ package org.apache.ignite.internal.processors.cache.persistence.wal;
 
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.internal.IgniteEx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checkpoint triggered WAL delta records consistency test.

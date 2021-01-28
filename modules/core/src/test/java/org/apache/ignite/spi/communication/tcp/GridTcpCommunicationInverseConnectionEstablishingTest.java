@@ -51,8 +51,8 @@ import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.ListeningTestLogger;
 import org.apache.ignite.testframework.LogListener;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
@@ -188,7 +188,7 @@ public class GridTcpCommunicationInverseConnectionEstablishingTest extends GridC
         UNREACHABLE_DESTINATION.set(UNRESOLVED_HOST);
         RESPOND_TO_INVERSE_REQUEST.set(true);
 
-        Assume.assumeThat(System.getProperty("zookeeper.forceSync"), is(nullValue()));
+        Assumptions.assumeTrue(System.getProperty("zookeeper.forceSync") == null);
 
         startGrid(0).cluster().state(ClusterState.ACTIVE);
 

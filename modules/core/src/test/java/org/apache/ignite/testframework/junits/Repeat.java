@@ -35,7 +35,10 @@ import static java.lang.annotation.ElementType.METHOD;
  *  }
  * </code>
  * </pre>
+ *
+ * With JUnit 5 transition use {@link org.junit.jupiter.api.RepeatedTest}
  */
+@Deprecated
 @Retention( RetentionPolicy.RUNTIME )
 @Target({ METHOD, ANNOTATION_TYPE })
 public @interface Repeat {

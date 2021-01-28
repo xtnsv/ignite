@@ -57,9 +57,8 @@ import org.apache.ignite.resources.LoggerResource;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.transactions.Transaction;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.TimeUnit.MICROSECONDS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -81,10 +80,6 @@ public abstract class IgniteLockAbstractSelfTest extends IgniteAtomicsAbstractTe
 
     /** */
     private static final Random RND = new Random();
-
-    /** */
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     /** {@inheritDoc} */
     @Override protected int gridCount() {
@@ -1570,20 +1565,22 @@ public abstract class IgniteLockAbstractSelfTest extends IgniteAtomicsAbstractTe
     /**
      * Tests that closed lock throws meaningful exception.
      */
-    @Test (expected = IgniteException.class)
+    @Test
     public void testClosedLockThrowsIgniteException() {
-        final String lockName = "lock";
+        Assertions.assertThrows(IgniteException.class, () -> {
+            final String lockName = "lock";
 
-        IgniteLock lock1 = grid(0).reentrantLock(lockName, false, false, true);
-        IgniteLock lock2 = grid(0).reentrantLock(lockName, false, false, true);
-        lock1.close();
-        try {
-            lock2.lock();
-        } catch (IgniteException e) {
-            String msg = String.format("Failed to find reentrant lock with given name: " + lockName);
-            assertEquals(msg, e.getMessage());
-            throw e;
-        }
+            IgniteLock lock1 = grid(0).reentrantLock(lockName, false, false, true);
+            IgniteLock lock2 = grid(0).reentrantLock(lockName, false, false, true);
+            lock1.close();
+            try {
+                lock2.lock();
+            } catch (IgniteException e) {
+                String msg = String.format("Failed to find reentrant lock with given name: " + lockName);
+                assertEquals(msg, e.getMessage());
+                throw e;
+            }
+        });
     }
 
     /**

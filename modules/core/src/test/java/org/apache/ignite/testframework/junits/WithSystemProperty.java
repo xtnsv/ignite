@@ -22,10 +22,8 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Annotation that defines a scope with specific system property configured.<br/>
@@ -62,8 +60,8 @@ import org.junit.Rule;
  *  }
  * }</pre>
  *
- * Same applies to methods with the difference that annotation translates into something like {@link Before} and
- * {@link After}. {@link Rule} must also be used instead of {@link ClassRule} in this case:
+ * Same applies to methods with the difference that annotation translates into something like {@link BeforeEach} and
+ * {@link AfterEach}.:
  * <br/><br/>
  * <pre>{@code  public class SomeTest {
  *      @Rule
@@ -106,8 +104,6 @@ import org.junit.Rule;
  * to use {@link SystemPropertiesList} directly.
  *
  * @see System#setProperty(java.lang.String, java.lang.String)
- * @see Rule
- * @see ClassRule
  * @see SystemPropertiesRule
  * @see SystemPropertiesList
  */

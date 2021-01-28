@@ -28,8 +28,8 @@ import org.apache.ignite.internal.processors.cache.distributed.dht.topology.Grid
 import org.apache.ignite.internal.util.lang.GridAbsPredicate;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_CACHE_REMOVED_ENTRIES_TTL;
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
@@ -84,7 +84,7 @@ public class CacheDeferredDeleteQueueTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testDeferredDeleteQueueMvcc() throws Exception {
         testQueue(TRANSACTIONAL_SNAPSHOT, true);

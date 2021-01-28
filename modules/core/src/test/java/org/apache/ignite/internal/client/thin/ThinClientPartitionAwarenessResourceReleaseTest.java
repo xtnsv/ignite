@@ -21,7 +21,7 @@ import java.lang.management.ThreadInfo;
 import org.apache.ignite.client.ClientCache;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test resource releasing by thin client.

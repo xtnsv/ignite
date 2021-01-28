@@ -25,7 +25,7 @@ import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteScheduler;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checks that a scheduler closure is executed inside the sandbox on a remote node.

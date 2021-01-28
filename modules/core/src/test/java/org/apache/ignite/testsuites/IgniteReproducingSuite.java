@@ -20,8 +20,8 @@ package org.apache.ignite.testsuites;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.ignite.internal.marshaller.optimized.OptimizedMarshallerPooledSelfTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
@@ -62,7 +62,7 @@ public class IgniteReproducingSuite {
     }
 
     /** IMPL NOTE execution of the (empty) test suite was failing with NPE without this stub. */
-    @Ignore
+    @Disabled
     public static class TestStub {
         /** */
         @Test

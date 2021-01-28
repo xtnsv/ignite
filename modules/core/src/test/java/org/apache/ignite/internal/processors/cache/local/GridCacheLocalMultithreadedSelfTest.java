@@ -36,8 +36,8 @@ import org.apache.ignite.testframework.GridTestThread;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.LOCAL;
 
@@ -56,7 +56,7 @@ public class GridCacheLocalMultithreadedSelfTest extends GridCommonAbstractTest 
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheLocalMultithreadedSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

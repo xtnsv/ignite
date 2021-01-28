@@ -38,8 +38,8 @@ import org.apache.ignite.internal.processors.query.GridQueryProcessor;
 import org.apache.ignite.internal.processors.query.TableInformation;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test checks whether cache initialization error on client side
@@ -163,7 +163,7 @@ public class IgniteClientCacheInitializationFailTest extends GridCommonAbstractT
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testMvccTransactionalNearCacheInitialization() throws Exception {
         checkCacheInitialization(NEAR_MVCC_TX_CACHE_NAME);

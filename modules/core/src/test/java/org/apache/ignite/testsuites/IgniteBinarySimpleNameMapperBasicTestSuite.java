@@ -18,7 +18,7 @@
 package org.apache.ignite.testsuites;
 
 import org.apache.ignite.testframework.config.GridTestProperties;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -29,7 +29,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({IgniteBasicTestSuite.class})
 public class IgniteBinarySimpleNameMapperBasicTestSuite {
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         GridTestProperties.setProperty(GridTestProperties.BINARY_MARSHALLER_USE_SIMPLE_NAME_MAPPER, "true");
     }

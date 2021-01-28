@@ -20,11 +20,11 @@ package org.apache.ignite.internal.pagemem.wal.record;
 import java.util.Arrays;
 import org.apache.ignite.internal.pagemem.wal.record.WALRecord.RecordType;
 import org.apache.ignite.testframework.wal.record.RecordUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** */
 public class WALRecordTest {
@@ -52,9 +52,9 @@ public class WALRecordTest {
 
         for (RecordType recordType : recordTypes)
             assertNotNull(
+                RecordUtils.buildWalRecord(recordType),
                 "Test's builder of WAL record with type '" + recordType + "' not found. " +
-                    "Please, add such builder to RecordUtils for test purposes.",
-                RecordUtils.buildWalRecord(recordType)
+                    "Please, add such builder to RecordUtils for test purposes."
             );
     }
 }

@@ -29,8 +29,8 @@ import org.apache.ignite.internal.binary.BinaryEnumObjectImpl;
 import org.apache.ignite.internal.binary.BinaryMarshaller;
 import org.apache.ignite.marshaller.Marshaller;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -84,7 +84,7 @@ public abstract class CacheEnumOperationsAbstractTest extends GridCommonAbstract
      */
     @Test
     public void testMvccTx() throws Exception {
-        Assume.assumeTrue("https://issues.apache.org/jira/browse/IGNITE-7187", singleNode());
+        Assumptions.assumeTrue(singleNode(), "https://issues.apache.org/jira/browse/IGNITE-7187");
 
         CacheConfiguration<Object, Object> ccfg = cacheConfiguration(PARTITIONED, 1, TRANSACTIONAL_SNAPSHOT);
 

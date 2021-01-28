@@ -25,8 +25,8 @@ import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.lang.IgniteFuture;
 import org.apache.ignite.services.Service;
 import org.apache.ignite.services.ServiceConfiguration;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Single node services test.
@@ -62,16 +62,16 @@ public class GridServiceProcessorMultiNodeSelfTest extends GridServiceProcessorA
 
         latch.await();
 
-        Assert.assertEquals(name, 1, DummyService.started(name));
-        Assert.assertEquals(name, 0, DummyService.cancelled(name));
+        Assertions.assertEquals(1, DummyService.started(name), name);
+        Assertions.assertEquals(0, DummyService.cancelled(name), name);
 
         int nodeCnt = 2;
 
         startExtraNodes(nodeCnt);
 
         try {
-            Assert.assertEquals(name, 1, DummyService.started(name));
-            Assert.assertEquals(name, 0, DummyService.cancelled(name));
+            Assertions.assertEquals(1, DummyService.started(name), name);
+            Assertions.assertEquals(0, DummyService.cancelled(name), name);
 
             info(">>> Passed checks.");
 

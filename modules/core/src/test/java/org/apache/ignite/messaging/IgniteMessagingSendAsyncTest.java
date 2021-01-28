@@ -32,8 +32,8 @@ import org.apache.ignite.IgniteMessaging;
 import org.apache.ignite.lang.IgniteBiInClosure;
 import org.apache.ignite.lang.IgniteBiPredicate;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -66,8 +66,8 @@ public class IgniteMessagingSendAsyncTest extends GridCommonAbstractTest impleme
 
         send(ignite1.message(), msgStr, new IgniteBiInClosure<String, Thread>() {
             @Override public void apply(String msg, Thread thread) {
-                Assert.assertEquals(Thread.currentThread(), thread);
-                Assert.assertEquals(msgStr, msg);
+                Assertions.assertEquals(Thread.currentThread(), thread);
+                Assertions.assertEquals(msgStr, msg);
             }
         }, false);
     }
@@ -83,8 +83,8 @@ public class IgniteMessagingSendAsyncTest extends GridCommonAbstractTest impleme
 
         send(ignite1.message(), msgStr, new IgniteBiInClosure<String, Thread>() {
             @Override public void apply(String msg, Thread thread) {
-                Assert.assertTrue(!Thread.currentThread().equals(thread));
-                Assert.assertEquals(msgStr, msg);
+                Assertions.assertTrue(!Thread.currentThread().equals(thread));
+                Assertions.assertEquals(msgStr, msg);
             }
         }, true);
     }
@@ -101,8 +101,8 @@ public class IgniteMessagingSendAsyncTest extends GridCommonAbstractTest impleme
 
         sendWith2Nodes(ignite2, ignite1.message(), msgStr, new IgniteBiInClosure<String, Thread>() {
             @Override public void apply(String msg, Thread thread) {
-                Assert.assertEquals(Thread.currentThread(), thread);
-                Assert.assertEquals(msgStr, msg);
+                Assertions.assertEquals(Thread.currentThread(), thread);
+                Assertions.assertEquals(msgStr, msg);
             }
         }, false);
     }
@@ -119,8 +119,8 @@ public class IgniteMessagingSendAsyncTest extends GridCommonAbstractTest impleme
 
         sendWith2Nodes(ignite2, ignite1.message(), msgStr, new IgniteBiInClosure<String, Thread>() {
             @Override public void apply(String msg, Thread thread) {
-                Assert.assertTrue(!Thread.currentThread().equals(thread));
-                Assert.assertEquals(msgStr, msg);
+                Assertions.assertTrue(!Thread.currentThread().equals(thread));
+                Assertions.assertEquals(msgStr, msg);
             }
         }, true);
     }
@@ -331,7 +331,7 @@ public class IgniteMessagingSendAsyncTest extends GridCommonAbstractTest impleme
 
         ignite2.message().localListen(TOPIC, new IgniteBiPredicate<UUID, String>() {
             @Override public boolean apply(UUID uuid, String msg) {
-                Assert.assertEquals(msgStr, msg);
+                Assertions.assertEquals(msgStr, msg);
 
                 latch.countDown();
 

@@ -35,8 +35,8 @@ import org.apache.ignite.internal.processors.cache.persistence.tree.util.PageLoc
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.SF;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -371,7 +371,7 @@ public class SharedPageLockTrackerTest extends AbstractPageLockTest {
 
         }
 
-        Assert.assertEquals(1, dump.structureIdToStrcutureName.size());
+        Assertions.assertEquals(1, dump.structureIdToStrcutureName.size());
 
         synchronized (sharedPageLockTracker) {
             Map<Long, Thread> threadMap0 = U.field(sharedPageLockTracker, "threadIdToThreadRef");

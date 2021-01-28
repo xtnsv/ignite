@@ -40,8 +40,8 @@ import org.apache.ignite.lang.IgnitePredicate;
 import org.apache.ignite.plugin.AbstractTestPluginProvider;
 import org.apache.ignite.plugin.IgnitePlugin;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -178,21 +178,21 @@ public class IgniteStandByClusterTest extends GridCommonAbstractTest {
 
         Map<String, GridCacheAdapter<?, ?>> caches1 = U.field(ig1.context().cache(), "caches");
 
-        Assert.assertNotNull(caches1.get(cache1));
-        Assert.assertNotNull(caches1.get(cache2));
-        Assert.assertNull(caches1.get(cache3));
+        Assertions.assertNotNull(caches1.get(cache1));
+        Assertions.assertNotNull(caches1.get(cache2));
+        Assertions.assertNull(caches1.get(cache3));
 
         Map<String, GridCacheAdapter<?, ?>> caches2 = U.field(ig2.context().cache(), "caches");
 
-        Assert.assertNull(caches2.get(cache1));
-        Assert.assertNotNull(caches2.get(cache2));
-        Assert.assertNotNull(caches2.get(cache3));
+        Assertions.assertNull(caches2.get(cache1));
+        Assertions.assertNotNull(caches2.get(cache2));
+        Assertions.assertNotNull(caches2.get(cache3));
 
         Map<String, GridCacheAdapter<?, ?>> caches3 = U.field(ig3.context().cache(), "caches");
 
-        Assert.assertNotNull(caches3.get(cache1));
-        Assert.assertNull(caches3.get(cache2));
-        Assert.assertNotNull(caches3.get(cache3));
+        Assertions.assertNotNull(caches3.get(cache1));
+        Assertions.assertNull(caches3.get(cache2));
+        Assertions.assertNotNull(caches3.get(cache3));
     }
 
     /**
@@ -235,7 +235,7 @@ public class IgniteStandByClusterTest extends GridCommonAbstractTest {
 
         Collection<ClusterNode> daemons = ig.cluster().forDaemons().nodes();
 
-        Assert.assertEquals(1, daemons.size());
+        Assertions.assertEquals(1, daemons.size());
         assertEquals(daemon.localNode().id(), daemons.iterator().next().id());
 
         daemon.close();

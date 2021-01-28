@@ -34,8 +34,8 @@ import org.apache.ignite.events.EventType;
 import org.apache.ignite.lang.IgnitePredicate;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.events.EventType.EVT_CACHE_ENTRY_EVICTED;
 import static org.apache.ignite.events.EventType.EVT_JOB_MAPPED;
@@ -47,7 +47,7 @@ import static org.apache.ignite.events.EventType.EVT_TASK_FINISHED;
  */
 public abstract class GridCacheEvictionEventAbstractTest extends GridCommonAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheEvictionEventAbstractTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.EVICTION);
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_EVENTS);

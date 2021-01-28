@@ -104,13 +104,13 @@ import org.apache.ignite.testframework.junits.GridTestKernalContext;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.ignite.internal.binary.streams.BinaryMemoryAllocator.THREAD_LOCAL;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Binary marshaller tests.
@@ -2923,7 +2923,7 @@ public class BinaryMarshallerSelfTest extends GridCommonAbstractTest {
 
         Class unmarshalledCls = marshalUnmarshal(cls, marsh);
 
-        Assert.assertEquals(cls, unmarshalledCls);
+        Assertions.assertEquals(cls, unmarshalledCls);
     }
 
     /**

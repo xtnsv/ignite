@@ -31,8 +31,8 @@ import org.apache.ignite.internal.processors.metric.MetricRegistry;
 import org.apache.ignite.spi.metric.LongMetric;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.metric.IoStatisticsCacheSelfTest.logicalReads;
 import static org.apache.ignite.internal.metric.IoStatisticsHolderCache.LOGICAL_READS;
@@ -145,15 +145,15 @@ public class IoStatisticsSelfTest extends GridCommonAbstractTest {
         long physicalReadsCnt = physicalReads(mmgr, CACHE_GROUP, DEFAULT_CACHE_NAME, null);
 
         if (isPersistent)
-            Assert.assertTrue(physicalReadsCnt > 0);
+        Assertions.assertTrue(physicalReadsCnt > 0);
         else
-            Assert.assertEquals(0, physicalReadsCnt);
+        Assertions.assertEquals(0, physicalReadsCnt);
 
         Long logicalReads = logicalReads(mmgr, HASH_INDEX, metricName(DEFAULT_CACHE_NAME, HASH_PK_IDX_NAME));
 
-        Assert.assertNotNull(logicalReads);
+        Assertions.assertNotNull(logicalReads);
 
-        Assert.assertEquals(RECORD_COUNT, logicalReads.longValue());
+        Assertions.assertEquals(RECORD_COUNT, logicalReads.longValue());
     }
 
     /**

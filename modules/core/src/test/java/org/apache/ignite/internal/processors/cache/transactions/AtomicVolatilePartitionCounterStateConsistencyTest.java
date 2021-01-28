@@ -20,7 +20,7 @@ package org.apache.ignite.internal.processors.cache.transactions;
 import java.util.Collection;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCheckedException;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 /** */
 public class AtomicVolatilePartitionCounterStateConsistencyTest extends AtomicPartitionCounterStateConsistencyTest {
@@ -35,19 +35,19 @@ public class AtomicVolatilePartitionCounterStateConsistencyTest extends AtomicPa
     }
 
     /** {@inheritDoc} */
-    @Ignore
+    @Disabled
     @Override public void testSingleThreadedUpdateOrder() throws Exception {
         // Not applicable for volatile mode.
     }
 
     /** {@inheritDoc} */
-    @Ignore
+    @Disabled
     @Override public void testPartitionConsistencyCancelledRebalanceCoordinatorIsDemander() throws Exception {
         // Not applicable for volatile mode.
     }
 
     /** {@inheritDoc} */
-    @Ignore
+    @Disabled
     @Override public void testLateAffinityChangeDuringExchange() throws Exception {
         // Not applicable for volatile mode.
     }

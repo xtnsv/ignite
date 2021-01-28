@@ -42,9 +42,9 @@ import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_PDS_WAL_REBALANCE_THRESHOLD;
 
@@ -138,7 +138,7 @@ public class IgniteWalHistoryReservationsTest extends GridCommonAbstractTest {
 
         stopGrid(initGridCnt);
 
-        Assert.assertEquals(5, ig0.context().state().clusterState().baselineTopology().consistentIds().size());
+        Assertions.assertEquals(5, ig0.context().state().clusterState().baselineTopology().consistentIds().size());
 
         long start = U.currentTimeMillis();
 
@@ -284,7 +284,7 @@ public class IgniteWalHistoryReservationsTest extends GridCommonAbstractTest {
      */
     @Test
     public void testRemovesArePreloadedIfHistoryIsAvailable() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-10551", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-10551");
 
         int entryCnt = 10_000;
 
@@ -336,7 +336,7 @@ public class IgniteWalHistoryReservationsTest extends GridCommonAbstractTest {
      */
     @Test
     public void testNodeIsClearedIfHistoryIsUnavailable() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-10551", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-10551");
 
         int entryCnt = 10_000;
 
@@ -399,7 +399,7 @@ public class IgniteWalHistoryReservationsTest extends GridCommonAbstractTest {
      */
     @Test
     public void testWalHistoryPartiallyRemoved() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-10551", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-10551");
 
         int entryCnt = 10_000;
 

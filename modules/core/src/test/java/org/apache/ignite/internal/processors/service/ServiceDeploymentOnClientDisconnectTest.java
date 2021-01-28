@@ -34,9 +34,9 @@ import org.apache.ignite.lang.IgnitePredicate;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.events.EventType.EVT_CLIENT_NODE_DISCONNECTED;
 
@@ -52,9 +52,9 @@ public class ServiceDeploymentOnClientDisconnectTest extends GridCommonAbstractT
     private static final long CLIENT_RECONNECT_WAIT_TIMEOUT = 10_000L;
 
     /** */
-    @Before
+    @BeforeEach
     public void check() {
-        Assume.assumeTrue(isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(isEventDrivenServiceProcessorEnabled());
     }
 
     /** {@inheritDoc} */

@@ -22,7 +22,7 @@ import java.util.function.Function;
 import org.apache.ignite.IgniteCheckedException;
 import org.apache.ignite.client.ClientCache;
 import org.apache.ignite.internal.processors.cache.IgniteInternalCache;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test partition awareness of thin client on stable topology.

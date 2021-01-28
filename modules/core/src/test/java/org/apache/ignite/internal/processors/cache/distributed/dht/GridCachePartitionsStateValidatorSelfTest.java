@@ -32,8 +32,8 @@ import org.apache.ignite.internal.processors.cache.distributed.dht.topology.Grid
 import org.apache.ignite.internal.util.typedef.T2;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 
@@ -131,13 +131,13 @@ public class GridCachePartitionsStateValidatorSelfTest extends GridCommonAbstrac
         Map<Integer, Map<UUID, Long>> result = validator.validatePartitionsUpdateCounters(topologyMock, messages, Sets.newHashSet(ignoreNode));
 
         // Check that validation result contains all necessary information.
-        Assert.assertEquals(2, result.size());
-        Assert.assertTrue(result.containsKey(0));
-        Assert.assertTrue(result.containsKey(2));
-        Assert.assertTrue(result.get(0).get(localNodeId) == 1L);
-        Assert.assertTrue(result.get(0).get(remoteNode) == 2L);
-        Assert.assertTrue(result.get(2).get(localNodeId) == 3L);
-        Assert.assertTrue(result.get(2).get(remoteNode) == 5L);
+        Assertions.assertEquals(2, result.size());
+        Assertions.assertTrue(result.containsKey(0));
+        Assertions.assertTrue(result.containsKey(2));
+        Assertions.assertTrue(result.get(0).get(localNodeId) == 1L);
+        Assertions.assertTrue(result.get(0).get(remoteNode) == 2L);
+        Assertions.assertTrue(result.get(2).get(localNodeId) == 3L);
+        Assertions.assertTrue(result.get(2).get(remoteNode) == 5L);
     }
 
     /**
@@ -171,12 +171,12 @@ public class GridCachePartitionsStateValidatorSelfTest extends GridCommonAbstrac
         Map<Integer, Map<UUID, Long>> result = validator.validatePartitionsSizes(topologyMock, messages, Sets.newHashSet(ignoreNode));
 
         // Check that validation result contains all necessary information.
-        Assert.assertEquals(2, result.size());
-        Assert.assertTrue(result.containsKey(0));
-        Assert.assertTrue(result.containsKey(2));
-        Assert.assertTrue(result.get(0).get(localNodeId) == 1L);
-        Assert.assertTrue(result.get(0).get(remoteNode) == 2L);
-        Assert.assertTrue(result.get(2).get(localNodeId) == 3L);
-        Assert.assertTrue(result.get(2).get(remoteNode) == 2L);
+        Assertions.assertEquals(2, result.size());
+        Assertions.assertTrue(result.containsKey(0));
+        Assertions.assertTrue(result.containsKey(2));
+        Assertions.assertTrue(result.get(0).get(localNodeId) == 1L);
+        Assertions.assertTrue(result.get(0).get(remoteNode) == 2L);
+        Assertions.assertTrue(result.get(2).get(localNodeId) == 3L);
+        Assertions.assertTrue(result.get(2).get(remoteNode) == 2L);
     }
 }

@@ -54,7 +54,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testAtomicLongRetries() throws Exception {
         final AtomicBoolean finished = new AtomicBoolean();
 
@@ -92,7 +92,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExplicitTransactionRetriesSingleValue() throws Exception {
         checkRetry(Test.TX_PUT, false, false);
     }
@@ -100,7 +100,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExplicitTransactionRetriesSingleValueStoreEnabled() throws Exception {
         checkRetry(Test.TX_PUT, false, true);
     }
@@ -108,7 +108,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExplicitTransactionRetries() throws Exception {
         explicitTransactionRetries(false, false);
     }
@@ -116,7 +116,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExplicitTransactionRetriesStoreEnabled() throws Exception {
         explicitTransactionRetries(false, true);
     }
@@ -124,7 +124,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testExplicitTransactionRetriesEvictionEnabled() throws Exception {
         explicitTransactionRetries(true, false);
     }
@@ -208,7 +208,7 @@ public class IgniteCachePutRetryTransactionalSelfTest extends IgniteCachePutRetr
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testOriginatingNodeFailureForcesOnePhaseCommitDataCleanup() throws Exception {
         ignite(0).createCache(cacheConfiguration(false, false));
 

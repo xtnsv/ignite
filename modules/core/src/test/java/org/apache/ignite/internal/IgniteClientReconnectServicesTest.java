@@ -30,8 +30,8 @@ import org.apache.ignite.resources.IgniteInstanceResource;
 import org.apache.ignite.services.Service;
 import org.apache.ignite.services.ServiceContext;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -131,7 +131,7 @@ public class IgniteClientReconnectServicesTest extends IgniteClientReconnectAbst
      */
     @Test
     public void testReconnectInDeploying() throws Exception {
-        Assume.assumeTrue(!isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(!isEventDrivenServiceProcessorEnabled());
 
         Ignite client = grid(serverCount());
 
@@ -182,7 +182,7 @@ public class IgniteClientReconnectServicesTest extends IgniteClientReconnectAbst
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     @Test
     public void testReconnectInDeployingNew() throws Exception {
-        Assume.assumeTrue(isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(isEventDrivenServiceProcessorEnabled());
 
         IgniteEx client = grid(serverCount());
 

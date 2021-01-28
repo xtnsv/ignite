@@ -26,9 +26,7 @@ import org.apache.ignite.IgniteCache;
 import org.apache.ignite.internal.processors.security.AbstractCacheOperationPermissionCheckTest;
 import org.apache.ignite.plugin.security.SecurityException;
 import org.apache.ignite.plugin.security.SecurityPermissionSetBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Collections.singletonMap;
 import static org.apache.ignite.plugin.security.SecurityPermission.CACHE_PUT;
@@ -39,7 +37,6 @@ import static org.apache.ignite.testframework.GridTestUtils.assertThrowsWithCaus
 /**
  * Test CRUD cache permissions.
  */
-@RunWith(JUnit4.class)
 public class CacheOperationPermissionCheckTest extends AbstractCacheOperationPermissionCheckTest {
     /** */
     @Test

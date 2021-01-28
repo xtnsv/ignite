@@ -21,7 +21,7 @@ import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCheckedException;
 import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.internal.util.typedef.G;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Check that cluster survives after destroy caches abruptly with disabled checkpoints.

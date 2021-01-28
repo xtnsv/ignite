@@ -24,7 +24,7 @@ import org.apache.ignite.internal.processors.cache.IgniteTxMultiThreadedAbstract
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.apache.ignite.cache.CacheMode.LOCAL;
 
@@ -36,7 +36,7 @@ public class GridCacheLocalTxMultiThreadedSelfTest extends IgniteTxMultiThreaded
     private static final boolean CACHE_DEBUG = false;
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheLocalEvictionEventSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

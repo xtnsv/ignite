@@ -23,14 +23,12 @@ import org.apache.ignite.internal.IgniteInternalFuture;
 import org.apache.ignite.internal.IgniteInterruptedCheckedException;
 import org.apache.ignite.logger.NullLogger;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test for {@link SegmentAware}.
@@ -213,7 +211,7 @@ public class SegmentAwareTest {
      * Should correct calculate next segment.
      */
     @Test
-    public void testCorrectCalculateNextSegmentIndex() throws IgniteCheckedException, InterruptedException {
+    public void testCorrectCalculateNextSegmentIndex() throws IgniteCheckedException {
         //given: thread which awaited segment.
         SegmentAware aware = new SegmentAware(10, false, new NullLogger());
 
@@ -223,7 +221,7 @@ public class SegmentAwareTest {
         long segmentIndex = aware.nextAbsoluteSegmentIndex();
 
         //then:
-        assertThat(segmentIndex, is(6L));
+        assertEquals(segmentIndex, 6L);
     }
 
     /**

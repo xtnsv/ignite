@@ -27,8 +27,8 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.configuration.NearCacheConfiguration;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -100,7 +100,7 @@ public class LruNearOnlyNearEvictionPolicySelfTest extends GridCommonAbstractTes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187,https://issues.apache.org/jira/browse/IGNITE-7956")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187,https://issues.apache.org/jira/browse/IGNITE-7956")
     @Test
     public void testPartitionedMvccTransactionalNearEvictionMaxSize() throws Exception {
         atomicityMode = TRANSACTIONAL_SNAPSHOT;
@@ -134,7 +134,7 @@ public class LruNearOnlyNearEvictionPolicySelfTest extends GridCommonAbstractTes
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187,https://issues.apache.org/jira/browse/IGNITE-7956")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187,https://issues.apache.org/jira/browse/IGNITE-7956")
     @Test
     public void testReplicatedMvccTransactionalNearEvictionMaxSize() throws Exception {
         atomicityMode = TRANSACTIONAL_SNAPSHOT;

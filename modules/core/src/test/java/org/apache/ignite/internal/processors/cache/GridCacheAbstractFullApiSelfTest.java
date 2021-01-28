@@ -102,10 +102,11 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
@@ -185,9 +186,9 @@ public abstract class GridCacheAbstractFullApiSelfTest extends GridCacheAbstract
     private static Map<String, CacheConfiguration[]> cacheCfgMap;
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheAbstractFullApiSelfTest() {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-9543", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-9543");
     }
 
     /** {@inheritDoc} */
@@ -207,7 +208,7 @@ public abstract class GridCacheAbstractFullApiSelfTest extends GridCacheAbstract
 
     /** {@inheritDoc} */
     @Override protected IgniteConfiguration getConfiguration(String igniteInstanceName) throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-9543", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-9543");
 
         IgniteConfiguration cfg = super.getConfiguration(igniteInstanceName);
 
@@ -276,7 +277,7 @@ public abstract class GridCacheAbstractFullApiSelfTest extends GridCacheAbstract
      *
      * @throws Exception if something goes bad.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-4380")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-4380")
     @Test
     public void testInvokeAllMultithreaded() throws Exception {
         final IgniteCache<String, Integer> cache = jcache();
@@ -3977,7 +3978,6 @@ public abstract class GridCacheAbstractFullApiSelfTest extends GridCacheAbstract
     /**
      * @throws Exception In case of error.
      */
-    @SuppressWarnings("BusyWait")
     @Test
     public void testLockUnlock() throws Exception {
         if (lockingEnabled()) {
@@ -4037,7 +4037,6 @@ public abstract class GridCacheAbstractFullApiSelfTest extends GridCacheAbstract
     /**
      * @throws Exception In case of error.
      */
-    @SuppressWarnings("BusyWait")
     @Test
     public void testLockUnlockAll() throws Exception {
         if (lockingEnabled()) {
@@ -4545,7 +4544,8 @@ public abstract class GridCacheAbstractFullApiSelfTest extends GridCacheAbstract
     /**
      * @throws Exception In case of error.
      */
-    @Test(timeout = 10050000)
+    @Test
+    @Timeout(value = 10050000, unit = MILLISECONDS)
     public void testLocalEvict() throws Exception {
         IgniteCache<String, Integer> cache = jcache();
 

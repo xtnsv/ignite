@@ -40,8 +40,8 @@ import org.apache.ignite.lang.IgniteInClosure;
 import org.apache.ignite.plugin.extensions.communication.Message;
 import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.TestStorageUtils.corruptDataEntry;
 
@@ -102,7 +102,7 @@ public class NoUnnecessaryRebalancesTest extends GridCommonAbstractTest {
 
         awaitPartitionMapExchange(true, true, null);
 
-        Assert.assertFalse(SpecialSpi.rebGrpIds.contains(CU.cacheId(CACHE_NAME + 0)));
+        Assertions.assertFalse(SpecialSpi.rebGrpIds.contains(CU.cacheId(CACHE_NAME + 0)));
     }
 
     /** */

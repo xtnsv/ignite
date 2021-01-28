@@ -23,16 +23,16 @@ import org.apache.ignite.services.Service;
 import org.apache.ignite.services.ServiceContext;
 import org.apache.ignite.services.ServiceDeploymentException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /** */
 public class GridServiceDeploymentExceptionPropagationTest extends GridCommonAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void check() {
-        Assume.assumeTrue(isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(isEventDrivenServiceProcessorEnabled());
     }
 
     /** */

@@ -18,8 +18,8 @@
 package org.apache.ignite.testframework.test;
 
 import org.apache.ignite.testframework.junits.IgniteConfigVariationsAbstractTest;
-import org.junit.AfterClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link IgniteConfigVariationsAbstractTest} subclasses execution.
@@ -29,7 +29,7 @@ public class ConfigVariationsExecutionTest extends IgniteConfigVariationsAbstrac
     private static boolean testExecuted;
 
     /** Executes after test class. Checks that {@link #testCheck()} method was executed indeed. */
-    @AfterClass
+    @AfterAll
     public static void validatetestExecution() {
         assertTrue(testExecuted);
     }

@@ -160,7 +160,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testPut() throws Exception {
         checkRetry(Test.PUT, false, false);
     }
@@ -168,7 +168,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testGetAndPut() throws Exception {
         checkRetry(Test.GET_AND_PUT, false, false);
     }
@@ -176,7 +176,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testPutStoreEnabled() throws Exception {
         checkRetry(Test.PUT, false, true);
     }
@@ -184,7 +184,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testPutAll() throws Exception {
         checkRetry(Test.PUT_ALL, false, false);
     }
@@ -192,7 +192,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testPutAsync() throws Exception {
         checkRetry(Test.PUT_ASYNC, false, false);
     }
@@ -200,7 +200,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testPutAsyncStoreEnabled() throws Exception {
         checkRetry(Test.PUT_ASYNC, false, true);
     }
@@ -208,7 +208,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testInvoke() throws Exception {
         checkRetry(Test.INVOKE, false, false);
     }
@@ -216,7 +216,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testInvokeAll() throws Exception {
         checkRetry(Test.INVOKE_ALL, false, false);
     }
@@ -224,7 +224,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testInvokeAllEvict() throws Exception {
         checkRetry(Test.INVOKE_ALL, true, false);
     }
@@ -468,7 +468,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testFailsWithNoRetries() throws Exception {
         checkFailsWithNoRetries(false);
     }
@@ -476,7 +476,7 @@ public abstract class IgniteCachePutRetryAbstractSelfTest extends GridCommonAbst
     /**
      * @throws Exception If failed.
      */
-    @org.junit.Test
+    @org.junit.jupiter.api.Test
     public void testFailsWithNoRetriesAsync() throws Exception {
         checkFailsWithNoRetries(true);
     }

@@ -19,7 +19,7 @@ package org.apache.ignite.cache.store.jdbc;
 
 import org.apache.ignite.internal.binary.BinaryMarshaller;
 import org.apache.ignite.marshaller.Marshaller;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link CacheJdbcPojoStore} with binary marshaller.

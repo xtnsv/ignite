@@ -64,7 +64,7 @@ import org.apache.ignite.internal.processors.security.scheduler.SchedulerRemoteS
 import org.apache.ignite.internal.processors.security.snapshot.SnapshotPermissionCheckTest;
 import org.apache.ignite.ssl.MultipleSSLContextsTest;
 import org.apache.ignite.tools.junit.JUnitTeamcityReporter;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -126,7 +126,7 @@ import org.junit.runners.Suite;
 })
 public class SecurityTestSuite {
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         JUnitTeamcityReporter.suite = SecurityTestSuite.class.getName();
     }

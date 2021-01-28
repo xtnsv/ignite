@@ -37,7 +37,7 @@ import org.apache.ignite.testframework.ListeningTestLogger;
 import org.apache.ignite.testframework.LogListener;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tets reproduces issue which can happens deploing classes to local store from difference class loaders.

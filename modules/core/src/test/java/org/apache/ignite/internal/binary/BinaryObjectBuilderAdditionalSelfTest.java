@@ -67,8 +67,8 @@ import org.apache.ignite.internal.util.lang.GridMapEntry;
 import org.apache.ignite.marshaller.MarshallerContext;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 import static org.apache.ignite.cache.CacheMode.REPLICATED;
@@ -255,7 +255,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new Date[] {new Date(22222), new Date(11111), new Date(11111)}, res.dateArr);
+        Assertions.assertArrayEquals(new Date[] {new Date(22222), new Date(11111), new Date(11111)}, res.dateArr);
     }
 
     /**
@@ -274,7 +274,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new Timestamp[] {new Timestamp(333444555), new Timestamp(222333444)}, res.tsArr);
+        Assertions.assertArrayEquals(new Timestamp[] {new Timestamp(333444555), new Timestamp(222333444)}, res.tsArr);
     }
 
     /**
@@ -293,7 +293,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new UUID[] {new UUID(2, 2), new UUID(1, 1), new UUID(1, 1)}, res.uuidArr);
+        Assertions.assertArrayEquals(new UUID[] {new UUID(2, 2), new UUID(1, 1), new UUID(1, 1)}, res.uuidArr);
     }
 
     /**
@@ -312,7 +312,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new BigDecimal[] {new BigDecimal(1000), new BigDecimal(1000), new BigDecimal(1000)},
+        Assertions.assertArrayEquals(new BigDecimal[] {new BigDecimal(1000), new BigDecimal(1000), new BigDecimal(1000)},
             res.bdArr);
     }
 
@@ -356,7 +356,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new char[] {'b', 'a', 'a'}, res.cArr);
+        Assertions.assertArrayEquals(new char[] {'b', 'a', 'a'}, res.cArr);
     }
 
     /**
@@ -375,7 +375,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new double[] {2.0, 1.0, 1.0}, res.dArr, 0);
+        Assertions.assertArrayEquals(new double[] {2.0, 1.0, 1.0}, res.dArr, 0);
     }
 
     /**
@@ -396,7 +396,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = resBinary.deserialize();
 
-        Assert.assertArrayEquals(new float[] {2.0f, 1.0f, 1.0f}, res.fArr, 0);
+        Assertions.assertArrayEquals(new float[] {2.0f, 1.0f, 1.0f}, res.fArr, 0);
     }
 
     /**
@@ -415,7 +415,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new long[] {2, 1, 1}, res.lArr);
+        Assertions.assertArrayEquals(new long[] {2, 1, 1}, res.lArr);
     }
 
     /**
@@ -434,7 +434,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new int[] {2, 1, 1}, res.iArr);
+        Assertions.assertArrayEquals(new int[] {2, 1, 1}, res.iArr);
     }
 
     /**
@@ -453,7 +453,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new short[] {2, 1, 1}, res.sArr);
+        Assertions.assertArrayEquals(new short[] {2, 1, 1}, res.sArr);
     }
 
     /**
@@ -472,7 +472,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new byte[] {2, 1, 1}, res.bArr);
+        Assertions.assertArrayEquals(new byte[] {2, 1, 1}, res.bArr);
     }
 
     /**
@@ -491,7 +491,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new String[] {"b", "a", "a"}, res.strArr);
+        Assertions.assertArrayEquals(new String[] {"b", "a", "a"}, res.strArr);
     }
 
     /**
@@ -506,13 +506,13 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         Object[] arr = mutObj.getField("foo");
 
-        Assert.assertArrayEquals(new Object[] {"a"}, arr);
+        Assertions.assertArrayEquals(new Object[] {"a"}, arr);
 
         arr[0] = "b";
 
         GridBinaryTestClasses.TestObjectContainer res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new Object[] {"b"}, (Object[])res.foo);
+        Assertions.assertArrayEquals(new Object[] {"b"}, (Object[])res.foo);
     }
 
     /**
@@ -636,7 +636,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         list.clear();
 
-        Assert.assertEquals(Collections.emptyList(), mutObj.build().<GridBinaryTestClasses.TestObjectContainer>deserialize().foo);
+        Assertions.assertEquals(Collections.emptyList(), mutObj.build().<GridBinaryTestClasses.TestObjectContainer>deserialize().foo);
     }
 
     /**
@@ -902,7 +902,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         GridBinaryTestClasses.TestObjectAllTypes res = mutObj.build().deserialize();
 
-        Assert.assertArrayEquals(new GridBinaryTestClasses.TestObjectEnum[] {GridBinaryTestClasses.TestObjectEnum.A, GridBinaryTestClasses.TestObjectEnum.B}, res.enumArr);
+        Assertions.assertArrayEquals(new GridBinaryTestClasses.TestObjectEnum[] {GridBinaryTestClasses.TestObjectEnum.A, GridBinaryTestClasses.TestObjectEnum.B}, res.enumArr);
     }
 
     /**
@@ -1360,7 +1360,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         wrapper.removeField("str");
 
-        Assert.assertNull(wrapper.build().<GridBinaryTestClasses.TestObjectAllTypes>deserialize().str);
+        Assertions.assertNull(wrapper.build().<GridBinaryTestClasses.TestObjectAllTypes>deserialize().str);
     }
 
     /**
@@ -1375,7 +1375,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
         wrapper.removeField("str");
 
-        Assert.assertNull(wrapper.build().<GridBinaryTestClasses.TestObjectAllTypes>deserialize().str);
+        Assertions.assertNull(wrapper.build().<GridBinaryTestClasses.TestObjectAllTypes>deserialize().str);
     }
 
     /**
@@ -1604,14 +1604,14 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
         BinaryObject extObj = builder.setField("extVal", exp).setField("extArr", expArr).build();
 
         assertEquals(exp, extObj.field("extVal"));
-        Assert.assertArrayEquals(expArr, (Object[])extObj.field("extArr"));
+        Assertions.assertArrayEquals(expArr, (Object[])extObj.field("extArr"));
 
         builder = extObj.toBuilder();
 
         extObj = builder.setField("intVal", 10).build();
 
         assertEquals(exp, extObj.field("extVal"));
-        Assert.assertArrayEquals(expArr, (Object[])extObj.field("extArr"));
+        Assertions.assertArrayEquals(expArr, (Object[])extObj.field("extArr"));
         assertEquals(Integer.valueOf(10), extObj.field("intVal"));
 
         builder = extObj.toBuilder();
@@ -1619,7 +1619,7 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
         extObj = builder.setField("strVal", "some string").build();
 
         assertEquals(exp, extObj.field("extVal"));
-        Assert.assertArrayEquals(expArr, (Object[])extObj.field("extArr"));
+        Assertions.assertArrayEquals(expArr, (Object[])extObj.field("extArr"));
         assertEquals(Integer.valueOf(10), extObj.field("intVal"));
         assertEquals("some string", extObj.field("strVal"));
     }
@@ -1640,13 +1640,13 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
                 .setField("testEnumArr", expArr)
                 .build();
 
-            Assert.assertSame(TestEnum.A, ((BinaryObject)enumObj.field("testEnumA")).deserialize());
-            Assert.assertSame(TestEnum.B, ((BinaryObject)enumObj.field("testEnumB")).deserialize());
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertSame(TestEnum.A, ((BinaryObject)enumObj.field("testEnumA")).deserialize());
+            Assertions.assertSame(TestEnum.B, ((BinaryObject)enumObj.field("testEnumB")).deserialize());
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
 
-            Assert.assertSame(TestEnum.A, ((TestClsWithEnum)enumObj.deserialize()).testEnumA);
-            Assert.assertSame(TestEnum.B, ((TestClsWithEnum)enumObj.deserialize()).testEnumB);
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertSame(TestEnum.A, ((TestClsWithEnum)enumObj.deserialize()).testEnumA);
+            Assertions.assertSame(TestEnum.B, ((TestClsWithEnum)enumObj.deserialize()).testEnumB);
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
 
             builder = newWrapper(enumObj.type().typeName());
 
@@ -1656,13 +1656,13 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
                 .setField("testEnumArr", (Object)enumObj.field("testEnumArr"))
                 .build();
 
-            Assert.assertSame(TestEnum.A, ((BinaryObject)enumObj.field("testEnumA")).deserialize());
-            Assert.assertSame(TestEnum.B, ((BinaryObject)enumObj.field("testEnumB")).deserialize());
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertSame(TestEnum.A, ((BinaryObject)enumObj.field("testEnumA")).deserialize());
+            Assertions.assertSame(TestEnum.B, ((BinaryObject)enumObj.field("testEnumB")).deserialize());
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
 
-            Assert.assertSame(TestEnum.A, ((TestClsWithEnum)enumObj.deserialize()).testEnumA);
-            Assert.assertSame(TestEnum.B, ((TestClsWithEnum)enumObj.deserialize()).testEnumB);
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertSame(TestEnum.A, ((TestClsWithEnum)enumObj.deserialize()).testEnumA);
+            Assertions.assertSame(TestEnum.B, ((TestClsWithEnum)enumObj.deserialize()).testEnumB);
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
 
             builder = newWrapper(enumObj.type().typeName());
 
@@ -1670,13 +1670,13 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
             enumObj = builder.setField("testEnumArr", expArr).build();
 
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
 
             enumObj = builder.setField("testEnumArr", (Object)enumObj.field("testEnumArr")).build();
 
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
         }
         finally {
             clearBinaryMeta();
@@ -1693,15 +1693,15 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
             BinaryObject enumObj = builder.setField("testEnumArr", expArr).build();
 
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
 
             builder = newWrapper(enumObj.type().typeName());
 
             enumObj = builder.setField("testEnumArr", (Object)enumObj.field("testEnumArr")).build();
 
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
 
             expArr = new TestEnum[] {TestEnum.A, TestEnum.B};
 
@@ -1709,15 +1709,15 @@ public class BinaryObjectBuilderAdditionalSelfTest extends GridCommonAbstractTes
 
             enumObj = builder.setField("testEnumArr", expArr).build();
 
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
 
             builder = newWrapper(enumObj.type().typeName());
 
             enumObj = builder.setField("testEnumArr", (Object)enumObj.field("testEnumArr")).build();
 
-            Assert.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
-            Assert.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
+            Assertions.assertArrayEquals(expArr, deserializeEnumBinaryArray(enumObj.field("testEnumArr")));
+            Assertions.assertArrayEquals(expArr, ((TestClsWithEnum)enumObj.deserialize()).testEnumArr);
         }
         finally {
             clearBinaryMeta();

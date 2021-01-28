@@ -34,9 +34,9 @@ import org.apache.ignite.lang.IgnitePredicate;
 import org.apache.ignite.marshaller.MarshallerUtils;
 import org.apache.ignite.marshaller.jdk.JdkMarshaller;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runners.Parameterized;
 
 /**
@@ -65,7 +65,7 @@ public class CacheConfigurationSerializationAbstractTest extends GridCommonAbstr
     /**
      *
      */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         stopAllGrids();
 
@@ -75,7 +75,7 @@ public class CacheConfigurationSerializationAbstractTest extends GridCommonAbstr
     /**
      *
      */
-    @After
+    @AfterEach
     public void after() throws Exception {
         stopAllGrids();
 
@@ -164,22 +164,22 @@ public class CacheConfigurationSerializationAbstractTest extends GridCommonAbstr
             IgniteInternalCache cache = cacheProc.cache(cacheDesc.cacheName());
 
             if (affNode) {
-                Assert.assertNotNull("Cache is not started " + cacheDesc.cacheName() + ", node " + node.name(), cache);
+                Assertions.assertNotNull(cache, "Cache is not started " + cacheDesc.cacheName() + ", node " + node.name());
 
                 CacheConfiguration ccfg = cache.configuration();
 
-                Assert.assertNotNull("Cache store factory is null " + cacheDesc.cacheName() + ", node " + node.name(),
-                        ccfg.getCacheStoreFactory());
+                Assertions.assertNotNull(ccfg.getCacheStoreFactory(),
+                        "Cache store factory is null " + cacheDesc.cacheName() + ", node " + node.name());
             }
             else {
-                Assert.assertTrue("Cache is started " + cacheDesc.cacheName() + ", node " + node.name(),
-                        cache == null || !cache.context().affinityNode());
+                Assertions.assertTrue(cache == null || !cache.context().affinityNode(),
+                        "Cache is started " + cacheDesc.cacheName() + ", node " + node.name());
 
                 if (cache == null) {
-                    Assert.assertFalse("Cache configuration is enriched " + cacheDesc.cacheName() + ", node " + node.name(),
-                            cacheDesc.isConfigurationEnriched());
-                    Assert.assertNull("Cache store factory is not null " + cacheDesc.cacheName() + ", node " + node.name(),
-                            cacheDesc.cacheConfiguration().getCacheStoreFactory());
+                    Assertions.assertFalse(cacheDesc.isConfigurationEnriched(),
+                            "Cache configuration is enriched " + cacheDesc.cacheName() + ", node " + node.name());
+                    Assertions.assertNull(cacheDesc.cacheConfiguration().getCacheStoreFactory(),
+                            "Cache store factory is not null " + cacheDesc.cacheName() + ", node " + node.name());
                 }
             }
 
@@ -189,8 +189,8 @@ public class CacheConfigurationSerializationAbstractTest extends GridCommonAbstr
 
                 byte[] data = enrichment.getFieldSerializedValue("storeFactory");
 
-                Assert.assertNotNull("storeFactory is null for cache: " + cacheDesc.cacheName(),
-                        marsh.unmarshal(data, getClass().getClassLoader()));
+                Assertions.assertNotNull(marsh.unmarshal(data, getClass().getClassLoader()),
+                        "storeFactory is null for cache: " + cacheDesc.cacheName());
             }
         }
     }

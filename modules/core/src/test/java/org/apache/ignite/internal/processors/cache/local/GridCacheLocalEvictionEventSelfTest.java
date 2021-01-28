@@ -22,7 +22,7 @@ import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.processors.cache.GridCacheEvictionEventAbstractTest;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 
@@ -31,7 +31,7 @@ import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
  */
 public class GridCacheLocalEvictionEventSelfTest extends GridCacheEvictionEventAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheLocalEvictionEventSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

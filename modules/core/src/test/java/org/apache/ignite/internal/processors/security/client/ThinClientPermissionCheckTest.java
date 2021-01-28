@@ -41,9 +41,7 @@ import org.apache.ignite.internal.processors.security.impl.TestSecurityPluginPro
 import org.apache.ignite.internal.util.typedef.G;
 import org.apache.ignite.lang.IgniteBiTuple;
 import org.apache.ignite.plugin.security.SecurityPermissionSetBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Collections.singletonMap;
 import static org.apache.ignite.internal.util.lang.GridFunc.t;
@@ -59,7 +57,6 @@ import static org.apache.ignite.testframework.GridTestUtils.assertThrowsWithCaus
 /**
  * Security tests for thin client.
  */
-@RunWith(JUnit4.class)
 public class ThinClientPermissionCheckTest extends AbstractSecurityTest {
     /** Client. */
     private static final String CLIENT = "client";

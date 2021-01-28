@@ -22,98 +22,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.apache.ignite.internal.util.typedef.T2;
-import org.apache.ignite.internal.util.typedef.internal.S;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
 
 /**
- * JUnit rule that manages usage of {@link WithSystemProperty} annotations.<br/>
- * Can be used as both {@link Rule} and {@link ClassRule}.
- *
- * @see WithSystemProperty
- * @see Rule
- * @see ClassRule
+ * Utility class that manages usage of {@link WithSystemProperty} annotations.<br/>
  */
-public class SystemPropertiesRule implements TestRule {
-    /**
-     * {@inheritDoc}
-     *
-     * @throws NoSuchMethodError If test method wasn't found for some reason.
-     */
-    @Override public Statement apply(Statement base, Description desc) {
-        Class<?> testCls = desc.getTestClass();
-
-        String testName = desc.getMethodName();
-
-        if (testName == null)
-            return classStatement(testCls, base);
-        else
-            return methodStatement(getTestMethod(testCls, testName), base);
-    }
-
-    /**
-     * Searches for public method with no parameter by the class and methods name.
-     *
-     * @param testCls Class to search method in.
-     * @param testName Method name.
-     * @return Non-null method object.
-     * @throws NoSuchMethodError If test method wasn't found.
-     */
-    private Method getTestMethod(Class<?> testCls, String testName) {
-        // Remove custom parameters from "@Parameterized" test.
-        int bracketIdx = testName.indexOf('[');
-
-        String testMtdName = bracketIdx >= 0 ? testName.substring(0, bracketIdx) : testName;
-
-        Method testMtd;
-        try {
-            testMtd = testCls.getMethod(testMtdName);
-
-        }
-        catch (NoSuchMethodException e) {
-            throw new NoSuchMethodError(S.toString("Test method wasn't found",
-                "testClass", testCls.getSimpleName(), false,
-                "methodName", testName, false,
-                "testMtdName", testMtdName, false
-            ));
-        }
-        return testMtd;
-    }
-
-    /**
-     * @return Statement that sets all required system properties before class and cleans them after.
-     */
-    private Statement classStatement(Class<?> testCls, Statement base) {
-        return DelegatingJUnitStatement.wrap(() -> {
-            List<T2<String, String>> clsSysProps = setSystemPropertiesBeforeClass(testCls);
-
-            try {
-                base.evaluate();
-            }
-            finally {
-                clearSystemProperties(clsSysProps);
-            }
-        });
-    }
-
-    /**
-     * @return Statement that sets all required system properties before test method and cleans them after.
-     */
-    private Statement methodStatement(Method testMtd, Statement base) {
-        return DelegatingJUnitStatement.wrap(() -> {
-            List<T2<String, String>> testSysProps = setSystemPropertiesBeforeTestMethod(testMtd);
-
-            try {
-                base.evaluate();
-            }
-            finally {
-                clearSystemProperties(testSysProps);
-            }
-        });
-    }
+public class SystemPropertiesRule {
 
     /**
      * Set system properties before class.

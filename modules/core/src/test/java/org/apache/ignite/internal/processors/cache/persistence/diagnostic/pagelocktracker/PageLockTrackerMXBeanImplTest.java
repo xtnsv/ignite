@@ -20,8 +20,8 @@ package org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagel
 import org.apache.ignite.Ignite;
 import org.apache.ignite.internal.processors.cache.CacheDiagnosticManager;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link PageLockTrackerMXBean} test.
@@ -54,6 +54,6 @@ public class PageLockTrackerMXBeanImplTest extends GridCommonAbstractTest {
             CacheDiagnosticManager.MBEAN_GROUP,
             PageLockTrackerMXBean.MBEAN_NAME, PageLockTrackerMXBean.class);
 
-        Assert.assertNotNull(pageLockTrackerMXBean);
+        Assertions.assertNotNull(pageLockTrackerMXBean);
     }
 }

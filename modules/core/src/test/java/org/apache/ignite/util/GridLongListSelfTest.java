@@ -22,15 +22,15 @@ import org.apache.ignite.internal.direct.DirectMessageWriter;
 import org.apache.ignite.internal.managers.communication.GridIoManager;
 import org.apache.ignite.internal.util.GridLongList;
 import org.apache.ignite.plugin.extensions.communication.MessageWriter;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.util.GridLongList.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -202,9 +202,9 @@ public class GridLongListSelfTest {
         GridLongList ll = new GridLongList();
 
         {
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -214,9 +214,9 @@ public class GridLongListSelfTest {
             ll.add(2L);
             ll.add(4L);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 17 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 17 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -225,9 +225,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 9 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 9 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -236,9 +236,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -248,11 +248,11 @@ public class GridLongListSelfTest {
             for (int i = 0; i < 300; i++)
                 ll.add(i);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(300, ll.size());
+            Assertions.assertEquals(300, ll.size());
 
-            Assert.assertEquals(HEADER_SIZE + 2402 /* array */ + 2 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 2402 /* array */ + 2 /* index */, buf.position());
         }
 
         {
@@ -261,9 +261,9 @@ public class GridLongListSelfTest {
 
             ll.clear();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
     }
 
@@ -277,9 +277,9 @@ public class GridLongListSelfTest {
         GridLongList ll = new GridLongList(5);
 
         {
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -289,9 +289,9 @@ public class GridLongListSelfTest {
             ll.add(2L);
             ll.add(4L);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 17 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 17 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -300,9 +300,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 9 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 9 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -311,9 +311,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -323,11 +323,11 @@ public class GridLongListSelfTest {
             for (int i = 0; i < 300; i++)
                 ll.add(i);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(300, ll.size());
+            Assertions.assertEquals(300, ll.size());
 
-            Assert.assertEquals(HEADER_SIZE + 2402 /* array */ + 2 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 2402 /* array */ + 2 /* index */, buf.position());
         }
 
         {
@@ -336,14 +336,14 @@ public class GridLongListSelfTest {
 
             ll.clear();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
     }
 
     /** */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-12678")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-12678")
     @Test
     public void testSerializationConstructorWithZeroSize() {
         MessageWriter writer = new DirectMessageWriter(GridIoManager.DIRECT_PROTO_VER);
@@ -353,9 +353,9 @@ public class GridLongListSelfTest {
         GridLongList ll = new GridLongList(0);
 
         {
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -365,9 +365,9 @@ public class GridLongListSelfTest {
             ll.add(2L);
             ll.add(4L);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 17 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 17 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -376,9 +376,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 9 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 9 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -387,9 +387,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -399,11 +399,11 @@ public class GridLongListSelfTest {
             for (int i = 0; i < 300; i++)
                 ll.add(i);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(300, ll.size());
+            Assertions.assertEquals(300, ll.size());
 
-            Assert.assertEquals(HEADER_SIZE + 2402 /* array */ + 2 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 2402 /* array */ + 2 /* index */, buf.position());
         }
 
         {
@@ -412,9 +412,9 @@ public class GridLongListSelfTest {
 
             ll.clear();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
     }
 
@@ -428,9 +428,9 @@ public class GridLongListSelfTest {
         GridLongList ll = new GridLongList(new long[]{1L, 2L, 3L});
 
         {
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 25 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 25 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -440,9 +440,9 @@ public class GridLongListSelfTest {
             ll.add(2L);
             ll.add(4L);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 41 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 41 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -451,9 +451,9 @@ public class GridLongListSelfTest {
 
             ll.remove();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 33 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 33 /* array */ + 1 /* index */, buf.position());
         }
 
         {
@@ -463,9 +463,9 @@ public class GridLongListSelfTest {
             for (int i = 0; i < 300; i++)
                 ll.add(i);
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 2434 /* array */ + 2 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 2434 /* array */ + 2 /* index */, buf.position());
         }
 
         {
@@ -474,9 +474,9 @@ public class GridLongListSelfTest {
 
             ll.clear();
 
-            Assert.assertTrue(ll.writeTo(buf, writer));
+            Assertions.assertTrue(ll.writeTo(buf, writer));
 
-            Assert.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
+            Assertions.assertEquals(HEADER_SIZE + 1 /* array */ + 1 /* index */, buf.position());
         }
     }
 
@@ -489,8 +489,8 @@ public class GridLongListSelfTest {
 
         GridLongList ll = new GridLongList(new long[]{1L, 2L, 3L});
 
-        Assert.assertFalse(ll.writeTo(buf, writer));
+        Assertions.assertFalse(ll.writeTo(buf, writer));
 
-        Assert.assertEquals(10, buf.position());
+        Assertions.assertEquals(10, buf.position());
     }
 }

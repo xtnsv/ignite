@@ -25,9 +25,9 @@ import org.apache.ignite.services.ServiceContext;
 import org.apache.ignite.testframework.ListeningTestLogger;
 import org.apache.ignite.testframework.LogListener;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /** */
 public class ServiceDeploymentNonSerializableStaticConfigurationTest extends GridCommonAbstractTest {
@@ -38,9 +38,9 @@ public class ServiceDeploymentNonSerializableStaticConfigurationTest extends Gri
     private final ListeningTestLogger log = new ListeningTestLogger(false, super.log);
 
     /** */
-    @Before
+    @BeforeEach
     public void check() {
-        Assume.assumeTrue(isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(isEventDrivenServiceProcessorEnabled());
     }
 
     /** {@inheritDoc} */

@@ -134,18 +134,18 @@ import org.apache.log4j.Priority;
 import org.apache.log4j.RollingFileAppender;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.AssumptionViolatedException;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TestName;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.InvocationInterceptor;
+import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.opentest4j.TestAbortedException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -175,8 +175,7 @@ import static org.apache.ignite.testframework.config.GridTestProperties.IGNITE_C
  */
 @SuppressWarnings({
     "ExtendsUtilityClass",
-    "ProhibitedExceptionDeclared",
-    "TransientFieldInNonSerializableClass"
+    "ProhibitedExceptionDeclared"
 })
 public abstract class GridAbstractTest extends JUnitAssertAware {
     /**************************************************************
@@ -212,31 +211,17 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
     /** */
     protected static final String DEFAULT_CACHE_NAME = "default";
 
-    /** Sustains {@link #beforeTestsStarted()} and {@link #afterTestsStopped()} methods execution.*/
-    @ClassRule public static final TestRule firstLastTestRule = RuleChain
-        .outerRule(new SystemPropertiesRule())
-        .around(new BeforeFirstAndAfterLastTestRule());
-
-    /** Manages test execution and reporting. */
-    private transient TestRule runRule = (base, desc) -> new Statement() {
-        @Override public void evaluate() throws Throwable {
-            assert getName() != null : "getName returned null";
-
-            runTest(base);
-        }
-    };
-
     /** Classes for which you want to clear the static log. */
     private static final Collection<Class<?>> clearStaticLogClasses = newSetFromMap(new ConcurrentHashMap<>());
 
-    /** Allows easy repeating for test. */
-    @Rule public transient RepeatRule repeatRule = new RepeatRule();
+    @Order(3)
+    @RegisterExtension
+    public static final SystemPropertiesClassExtension systemPropsExtension = new SystemPropertiesClassExtension();
 
-    /**
-     * Supports obtaining test name for JUnit4 framework in a way that makes it available for methods invoked
-     * from {@code runTest(Statement)}.
-     */
-    private transient TestName nameRule = new TestName();
+    @Order(6)
+    @RegisterExtension
+    public static final GridAbstractTest.BeforeFirstAndAfterLastTestExtension wrappedExtension =
+            new GridAbstractTest.BeforeFirstAndAfterLastTestExtension();
 
     /**
      * Gets the name of the currently executed test case.
@@ -244,17 +229,21 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
      * @return Name of the currently executed test case.
      */
     public String getName() {
-        return nameRule.getMethodName();
+        return nameExtension.getMethodName();
     }
 
-    /**
-     * Provides the order of JUnit TestRules. Because of JUnit framework specifics {@link #nameRule} must be invoked
-     * first.
-     */
-    @Rule public transient RuleChain nameAndRunRulesChain = RuleChain
-        .outerRule(new SystemPropertiesRule())
-        .around(nameRule)
-        .around(runRule);
+    @Order(3)
+    @RegisterExtension
+    @SuppressWarnings("unused")
+    public final SystemPropertiesMethodExtension methodExtension = new SystemPropertiesMethodExtension();
+
+    @Order(6)
+    @RegisterExtension
+    public final TestNameExtension nameExtension = new TestNameExtension();
+
+    @Order(9)
+    @RegisterExtension
+    public final TestInvocationExtension interceptor = new TestInvocationExtension();
 
     /** */
     private static transient boolean startGrid;
@@ -326,7 +315,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
     /**
      * Called before execution of every test method in class.
      * <p>
-     * Do not annotate with {@link Before} in overriding methods.</p>
+     * Do not annotate with {@link BeforeEach} in overriding methods.</p>
      *
      * @throws Exception If failed. {@link #afterTest()} will be called anyway.
      */
@@ -338,7 +327,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
      * Called after execution of every test method in class or if {@link #beforeTest()} failed without test method
      * execution.
      * <p>
-     * Do not annotate with {@link After} in overriding methods.</p>
+     * Do not annotate with {@link AfterEach} in overriding methods.</p>
      *
      * @throws Exception If failed.
      */
@@ -355,7 +344,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
     /**
      * Called before execution of all test methods in class.
      * <p>
-     * Do not annotate with {@link BeforeClass} in overriding methods.</p>
+     * Do not annotate with {@link BeforeAll} in overriding methods.</p>
      *
      * @throws Exception If failed. {@link #afterTestsStopped()} will be called in this case.
      */
@@ -368,7 +357,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
      * Called after execution of all test methods in class or if {@link #beforeTestsStarted()} failed without
      * execution of any test methods.
      * <p>
-     * Do not annotate with {@link AfterClass} in overriding methods.</p>
+     * Do not annotate with {@link AfterAll} in overriding methods.</p>
      *
      * @throws Exception If failed.
      */
@@ -2363,7 +2352,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
     }
 
     /** Runs test with the provided scenario. */
-    private void runTest(Statement testRoutine) throws Throwable {
+    private void runTest(InvocationInterceptor.Invocation<Void> testRoutine) throws Throwable {
         prepareTestEnviroment();
 
         try {
@@ -2372,7 +2361,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
             Thread runner = new IgniteThread(getTestIgniteInstanceName(), "test-runner", new Runnable() {
                 @Override public void run() {
                     try {
-                        testRoutine.evaluate();
+                        testRoutine.proceed();
                     }
                     catch (Throwable e) {
                         IgniteClosure<Throwable, Throwable> hnd = errorHandler();
@@ -2413,7 +2402,7 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
             Throwable t = ex.get();
 
             if (t != null) {
-                if (t instanceof AssumptionViolatedException)
+                if (t instanceof TestAbortedException)
                     U.quietAndInfo(log,"Test ignored [test=" + testDescription() + ", msg=" + t.getMessage() + "]");
                 else {
                     U.error(log, "Test failed [test=" + testDescription() +
@@ -2893,54 +2882,49 @@ public abstract class GridAbstractTest extends JUnitAssertAware {
      *  <p>
      *  Processes {@link WithSystemProperty} annotations as well.
      */
-    private static class BeforeFirstAndAfterLastTestRule implements TestRule {
-        /** {@inheritDoc} */
-        @Override public Statement apply(Statement base, Description desc) {
-            return new Statement() {
-                @Override public void evaluate() throws Throwable {
-                    Constructor<?> testConstructor = desc.getTestClass().getDeclaredConstructor();
+    static class BeforeFirstAndAfterLastTestExtension implements AfterAllCallback, BeforeAllCallback {
 
-                    testConstructor.setAccessible(true);
+        private static GridAbstractTest gridAbstractTest;
 
-                    GridAbstractTest fixtureInstance = (GridAbstractTest)testConstructor.newInstance();
+        /**
+         * Callback that is invoked once <em>after</em> all tests in the current
+         * container.
+         *
+         * @param context the current extension context; never {@code null}
+         */
+        @Override
+        public void afterAll(ExtensionContext context) throws Exception {
+                gridAbstractTest.afterLastTest();
+        }
 
-                    fixtureInstance.evaluateInsideFixture(base);
-                }
-            };
+        /**
+         * Callback that is invoked once <em>before</em> all tests in the current
+         * container.
+         *
+         * @param context the current extension context; never {@code null}
+         */
+        @Override
+        public void beforeAll(ExtensionContext context) throws Exception {
+            Constructor<?> testConstructor = context.getTestClass()
+                    .orElseThrow(IllegalArgumentException::new).getDeclaredConstructor();
+
+            testConstructor.setAccessible(true);
+
+            gridAbstractTest = (GridAbstractTest) testConstructor.newInstance();
+
+            gridAbstractTest.beforeFirstTest();
         }
     }
 
-    /**
-     * Executes a statement inside a fixture calling GridAbstractTest specific methods which
-     * should be executed before and after a test class execution.
-     *
-     * @param stmt Statement to execute.
-     * @throws Throwable In case of failure.
-     */
-    @SuppressWarnings("ThrowFromFinallyBlock")
-    private void evaluateInsideFixture(Statement stmt) throws Throwable {
-        Throwable suppressed = null;
+    class TestInvocationExtension implements InvocationInterceptor {
 
-        try {
-            beforeFirstTest();
+        @Override
+        public void interceptTestMethod(Invocation<Void> invocation,
+                                        ReflectiveInvocationContext<Method> invocationContext,
+                                        ExtensionContext extensionContext) throws Throwable {
+            assert getName() != null : "getName returned null";
 
-            stmt.evaluate();
-        }
-        catch (Throwable t) {
-            suppressed = t;
-
-            throw t;
-        }
-        finally {
-            try {
-                afterLastTest();
-            }
-            catch (Throwable t) {
-                if (suppressed != null)
-                    t.addSuppressed(suppressed);
-
-                throw t;
-            }
+            runTest(invocation);
         }
     }
 

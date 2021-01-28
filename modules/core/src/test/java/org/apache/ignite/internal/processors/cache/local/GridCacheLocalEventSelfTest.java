@@ -21,7 +21,7 @@ import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.internal.processors.cache.distributed.GridCacheEventAbstractTest;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.apache.ignite.cache.CacheMode.LOCAL;
 
@@ -30,7 +30,7 @@ import static org.apache.ignite.cache.CacheMode.LOCAL;
  */
 public class GridCacheLocalEventSelfTest extends GridCacheEventAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheLocalEventSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_EVENTS);

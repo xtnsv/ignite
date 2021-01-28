@@ -32,8 +32,8 @@ import org.apache.ignite.internal.processors.cache.mvcc.txlog.TxLog;
 import org.apache.ignite.internal.util.worker.GridWorker;
 import org.apache.ignite.lang.IgnitePredicate;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 
@@ -165,7 +165,7 @@ public class CacheMvccVacuumTest extends CacheMvccAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8414")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8414")
     @Test
     public void testVacuumNotStartedOnNonBaselineNode() throws Exception {
         persistence = true;
@@ -198,7 +198,7 @@ public class CacheMvccVacuumTest extends CacheMvccAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8717")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8717")
     @Test
     public void testVacuumNotStartedOnNonBaselineNode2() throws Exception {
         persistence = true;

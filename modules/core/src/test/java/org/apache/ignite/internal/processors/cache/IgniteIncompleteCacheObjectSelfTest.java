@@ -24,8 +24,8 @@ import org.apache.ignite.plugin.extensions.communication.MessageReader;
 import org.apache.ignite.plugin.extensions.communication.MessageWriter;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Simple test for arbitrary CacheObject reading/writing.
@@ -82,7 +82,7 @@ public class IgniteIncompleteCacheObjectSelfTest extends GridCommonAbstractTest 
 
         // Check that cache object data assembled correctly.
         assertEquals(obj.cacheObjectType(), incompleteObj.type());
-        Assert.assertArrayEquals(data, incompleteObj.data());
+        Assertions.assertArrayEquals(data, incompleteObj.data());
     }
 
     /**

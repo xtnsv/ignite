@@ -26,8 +26,8 @@ import org.apache.ignite.internal.IgniteInternalFuture;
 import org.apache.ignite.internal.processors.cache.CacheGroupContext;
 import org.apache.ignite.internal.processors.cache.IgniteCacheOffheapManager;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.apache.ignite.testframework.GridTestUtils.runAsync;
@@ -73,7 +73,7 @@ public class IgnitePdsDestroyCacheTest extends IgnitePdsDestroyCacheAbstractTest
      *
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8717")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8717")
     @Test
     public void testDestroyCachesAbruptly() throws Exception {
         Ignite ignite = startGrids(NODES);
@@ -90,7 +90,7 @@ public class IgnitePdsDestroyCacheTest extends IgnitePdsDestroyCacheAbstractTest
      *
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8717")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8717")
     @Test
     public void testDestroyGroupCachesAbruptly() throws Exception {
         Ignite ignite = startGrids(NODES);

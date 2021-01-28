@@ -85,8 +85,8 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionRollbackException;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static java.lang.Thread.interrupted;
 import static java.lang.Thread.yield;
@@ -204,7 +204,7 @@ public class TxRollbackAsyncTest extends GridCommonAbstractTest {
      */
     @Test
     public void testRollbackSimple() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-7952", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-7952");
 
         startClient();
 
@@ -476,7 +476,7 @@ public class TxRollbackAsyncTest extends GridCommonAbstractTest {
      */
     @Test
     public void testEnlistManyReadOptimistic() throws Exception {
-        Assume.assumeFalse(MvccFeatureChecker.forcedMvcc()); // Optimistic transactions are not supported by MVCC.
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc()); // Optimistic transactions are not supported by MVCC.
 
         testEnlistMany(false, SERIALIZABLE, OPTIMISTIC);
     }
@@ -486,7 +486,7 @@ public class TxRollbackAsyncTest extends GridCommonAbstractTest {
      */
     @Test
     public void testEnlistManyWriteOptimistic() throws Exception {
-        Assume.assumeFalse(MvccFeatureChecker.forcedMvcc()); // Optimistic transactions are not supported by MVCC.
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc()); // Optimistic transactions are not supported by MVCC.
 
         testEnlistMany(true, SERIALIZABLE, OPTIMISTIC);
     }

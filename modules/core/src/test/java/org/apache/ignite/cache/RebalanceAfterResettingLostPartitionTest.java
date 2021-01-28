@@ -35,9 +35,9 @@ import org.apache.ignite.internal.util.typedef.internal.CU;
 import org.apache.ignite.lang.IgniteBiPredicate;
 import org.apache.ignite.plugin.extensions.communication.Message;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -50,7 +50,7 @@ public class RebalanceAfterResettingLostPartitionTest extends GridCommonAbstract
     public static final int CACHE_SIZE = 10_000;
 
     /** Stop all grids and cleanup persistence directory. */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         stopAllGrids();
 
@@ -58,7 +58,7 @@ public class RebalanceAfterResettingLostPartitionTest extends GridCommonAbstract
     }
 
     /** Stop all grids and cleanup persistence directory. */
-    @After
+    @AfterEach
     public void after() throws Exception {
         stopAllGrids();
 
@@ -98,7 +98,6 @@ public class RebalanceAfterResettingLostPartitionTest extends GridCommonAbstract
      *
      * @throws Exception if fail.
      */
-    @SuppressWarnings("unchecked")
     @Test
     public void testRebalanceAfterPartitionsWereLost() throws Exception {
         startGrids(2);

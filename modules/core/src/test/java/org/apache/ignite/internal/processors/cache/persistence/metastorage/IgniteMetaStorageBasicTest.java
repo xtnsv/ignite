@@ -40,8 +40,8 @@ import org.apache.ignite.lang.IgniteBiTuple;
 import org.apache.ignite.marshaller.jdk.JdkMarshaller;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Single place to add for basic MetaStorage tests.
@@ -268,7 +268,7 @@ public class IgniteMetaStorageBasicTest extends GridCommonAbstractTest {
                 for (IgniteBiTuple<String, byte[]> r : read) {
                     byte[] test = testData.get(r.get1());
 
-                    Assert.assertArrayEquals(r.get2(), test);
+                    Assertions.assertArrayEquals(r.get2(), test);
 
                     cnt++;
                 }
@@ -340,7 +340,7 @@ public class IgniteMetaStorageBasicTest extends GridCommonAbstractTest {
                 for (IgniteBiTuple<String, byte[]> r : read) {
                     byte[] test = testData.get(r.get1());
 
-                    Assert.assertArrayEquals(r.get2(), test);
+                    Assertions.assertArrayEquals(r.get2(), test);
 
                     cnt++;
                 }
@@ -404,7 +404,7 @@ public class IgniteMetaStorageBasicTest extends GridCommonAbstractTest {
      */
     private static void compare(Iterator<IgniteBiTuple<String, byte[]>> it, Iterator<IgniteBiTuple<String, byte[]>> it1) {
         while (true) {
-            Assert.assertEquals(it.hasNext(), it1.hasNext());
+            Assertions.assertEquals(it.hasNext(), it1.hasNext());
 
             if (!it.hasNext())
                 break;
@@ -412,9 +412,9 @@ public class IgniteMetaStorageBasicTest extends GridCommonAbstractTest {
             IgniteBiTuple<String, byte[]> i = it.next();
             IgniteBiTuple<String, byte[]> i1 = it1.next();
 
-            Assert.assertEquals(i.get1(), i.get1());
+            Assertions.assertEquals(i.get1(), i.get1());
 
-            Assert.assertArrayEquals(i.get2(), i1.get2());
+            Assertions.assertArrayEquals(i.get2(), i1.get2());
         }
     }
 
@@ -576,7 +576,7 @@ public class IgniteMetaStorageBasicTest extends GridCommonAbstractTest {
         for (byte i = 0; i < keysCnt; i++) {
             Serializable val = metaStorage.read(keyPrefix + i);
 
-            Assert.assertEquals(valPrefix + i, val);
+            Assertions.assertEquals(valPrefix + i, val);
         }
     }
 

@@ -36,8 +36,8 @@ import org.apache.ignite.cluster.ClusterNode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.internal.processors.cache.IgniteCacheAbstractTest;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link Cache#loadAll(Set, boolean, CompletionListener)}.
@@ -66,7 +66,7 @@ public abstract class IgniteCacheLoadAllAbstractTest extends IgniteCacheAbstract
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeIgniteCacheLoadAllAbstractTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
     }

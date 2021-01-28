@@ -32,8 +32,8 @@ import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 import static org.apache.ignite.transactions.TransactionConcurrency.OPTIMISTIC;
@@ -77,7 +77,7 @@ public class IgniteCacheSystemTransactionsSelfTest extends GridCommonAbstractTes
      */
     @Test
     public void testSystemTxInsideUserTx() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-10473", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-10473");
 
         IgniteKernal ignite = (IgniteKernal)grid(0);
 

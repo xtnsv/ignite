@@ -37,7 +37,8 @@ import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.spi.communication.CommunicationSpi;
 import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
@@ -66,7 +67,8 @@ public class CacheContinuousQueryLongP2PTest extends CacheContinuousQueryOperati
      *
      * @throws Exception If failed.
      */
-    @Test(timeout = 60_000)
+    @Test
+    @Timeout(value = 60_000, unit = TimeUnit.MILLISECONDS)
     public void testLongP2PClassLoadingDoesntBlockNodeStart() throws Exception {
         delay = 3_000;
 

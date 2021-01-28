@@ -27,9 +27,9 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.lang.IgniteCallable;
 import org.apache.ignite.spi.deployment.local.LocalDeploymentSpi;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.security.SecurityUtils.IGNITE_INTERNAL_PACKAGE;
 import static org.apache.ignite.plugin.security.SecurityPermissionSetBuilder.ALLOW_ALL;
@@ -121,13 +121,13 @@ public class AccessToClassesInsideInternalPackageTest extends AbstractSandboxTes
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         srcTmpDir = Files.createTempDirectory(getClass().getSimpleName());
     }
 
     /** */
-    @After
+    @AfterEach
     public void tearDown() {
         U.delete(srcTmpDir);
     }

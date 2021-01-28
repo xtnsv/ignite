@@ -31,8 +31,8 @@ import org.apache.ignite.internal.util.typedef.F;
 import org.apache.ignite.internal.util.typedef.G;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 import static org.apache.ignite.cache.CacheMode.REPLICATED;
@@ -53,7 +53,7 @@ public abstract class GridCacheClientModesAbstractSelfTest extends GridCacheAbst
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeCacheStoreListenerRWThroughDisabledTransactionalCacheTest() {
         if (nearEnabled())
             MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.NEAR_CACHE);

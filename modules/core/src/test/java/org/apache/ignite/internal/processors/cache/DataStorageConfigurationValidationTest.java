@@ -20,9 +20,9 @@ package org.apache.ignite.internal.processors.cache;
 import java.util.concurrent.Callable;
 import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests assertions in DataStorageConfiguration.

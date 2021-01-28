@@ -29,8 +29,8 @@ import org.apache.ignite.cache.store.CacheStoreAdapter;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.DataPageEvictionMode;
 import org.apache.ignite.configuration.IgniteConfiguration;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -76,7 +76,7 @@ public class PageEvictionReadThroughTest extends PageEvictionAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8582,https://issues.apache.org/jira/browse/IGNITE-7956")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8582,https://issues.apache.org/jira/browse/IGNITE-7956")
     @Test
     public void testEvictionWithReadThroughMvccTxReplicated() throws Exception {
         testEvictionWithReadThrough(CacheAtomicityMode.TRANSACTIONAL_SNAPSHOT, CacheMode.REPLICATED);
@@ -85,7 +85,7 @@ public class PageEvictionReadThroughTest extends PageEvictionAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8582,https://issues.apache.org/jira/browse/IGNITE-7956")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8582,https://issues.apache.org/jira/browse/IGNITE-7956")
     @Test
     public void testEvictionWithReadThroughMvccTxPartitioned() throws Exception {
         testEvictionWithReadThrough(CacheAtomicityMode.TRANSACTIONAL_SNAPSHOT, CacheMode.PARTITIONED);
@@ -94,7 +94,7 @@ public class PageEvictionReadThroughTest extends PageEvictionAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8582,https://issues.apache.org/jira/browse/IGNITE-7956,"
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8582,https://issues.apache.org/jira/browse/IGNITE-7956,"
         + "https://issues.apache.org/jira/browse/IGNITE-9530")
     @Test
     public void testEvictionWithReadThroughMvccTxLocal() throws Exception {

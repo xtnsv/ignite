@@ -23,10 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -70,16 +68,18 @@ public class BitSetIntSetTest extends GridCommonAbstractTest {
         testIterator(1024);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void shouldThrowExceptionIfHasNotNextElement() {
-        IntSet intSet = new BitSetIntSet(2);
-        intSet.add(1);
-        intSet.add(2);
-        Iterator<Integer> iterator = intSet.iterator();
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            IntSet intSet = new BitSetIntSet(2);
+            intSet.add(1);
+            intSet.add(2);
+            Iterator<Integer> iterator = intSet.iterator();
 
-        iterator.next();
-        iterator.next();
-        iterator.next();
+            iterator.next();
+            iterator.next();
+            iterator.next();
+        });
     }
 
     @Test
@@ -106,14 +106,14 @@ public class BitSetIntSetTest extends GridCommonAbstractTest {
     public void toIntArray() {
         IntSet emptySet = new BitSetIntSet();
         int[] emptyArr = emptySet.toIntArray();
-        assertThat(emptyArr.length, is(0));
+        assertEquals(emptyArr.length, 0);
 
         IntSet withGapsSet = new BitSetIntSet(100, Arrays.asList(43, 23, 53));
         int[] arr = withGapsSet.toIntArray();
-        assertThat(arr.length, is(3));
-        assertThat(arr[0], is(23));
-        assertThat(arr[1], is(43));
-        assertThat(arr[2], is(53));
+        assertEquals(arr.length, 3);
+        assertEquals(arr[0], 23);
+        assertEquals(arr[1], 43);
+        assertEquals(arr[2], 53);
     }
 
     /** */

@@ -21,14 +21,15 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.ignite.internal.cluster.graph.FullyConnectedComponentSearcher;
 import org.apache.ignite.internal.util.typedef.internal.A;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.Timeout;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -36,10 +37,8 @@ import org.junit.runners.Parameterized;
  * Class to test correctness of fully-connected component searching algorithm.
  */
 @RunWith(Parameterized.class)
+@Timeout(value = GridTestUtils.DFLT_TEST_TIMEOUT, unit = TimeUnit.MILLISECONDS)
 public class FullyConnectedComponentSearcherTest {
-    /** Per test timeout */
-    @Rule
-    public Timeout globalTimeout = new Timeout((int) GridTestUtils.DFLT_TEST_TIMEOUT);
 
     /** Adjacency matrix provider for each test. */
     private AdjacencyMatrixProvider provider;
@@ -74,8 +73,8 @@ public class FullyConnectedComponentSearcherTest {
         BitSet res = searcher.findLargest(all);
         int size = res.cardinality();
 
-        Assert.assertTrue("Actual = " + size + ", Expected = " + minAcceptableRes,
-            size >= minAcceptableRes);
+        Assertions.assertTrue(size >= minAcceptableRes,
+                "Actual = " + size + ", Expected = " + minAcceptableRes);
     }
 
     /**

@@ -42,7 +42,7 @@ import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Check that near cache is updated when entry loaded from store.

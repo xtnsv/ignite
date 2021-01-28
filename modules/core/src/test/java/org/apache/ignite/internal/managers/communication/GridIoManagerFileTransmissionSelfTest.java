@@ -67,10 +67,7 @@ import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 import static org.apache.ignite.internal.processors.cache.persistence.file.FilePageStoreManager.FILE_SUFFIX;
 import static org.apache.ignite.internal.util.IgniteUtils.fileCount;
@@ -114,7 +111,7 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     private boolean enablePersistence;
 
     /** Called before tests started. */
-    @BeforeClass
+    @BeforeAll
     public static void beforeAll() {
         topic = GridTopic.TOPIC_CACHE.topic("test", 0);
 
@@ -128,7 +125,7 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     /**
      * @throws Exception if failed.
      */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         cleanPersistenceDir();
 
@@ -136,7 +133,7 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     }
 
     /** Called after test run. */
-    @After
+    @AfterEach
     public void after() {
         try {
             ensureResourcesFree(snd);
@@ -253,85 +250,93 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteCheckedException.class)
-    public void testFileHandlerFilePathThrowsEx() throws Exception {
-        final String exTestMessage = "Test exception. Handler initialization failed at onBegin.";
+    @Test
+    public void testFileHandlerFilePathThrowsEx() {
+        Assertions.assertThrows(IgniteCheckedException.class, () -> {
+            final String exTestMessage = "Test exception. Handler initialization failed at onBegin.";
 
-        snd = startGrid(0);
-        rcv = startGrid(1);
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        File fileToSend = createFileRandomData("1Mb", 1024 * 1024);
+            File fileToSend = createFileRandomData("1Mb", 1024 * 1024);
 
-        rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
-            @Override public String filePath(UUID nodeId, TransmissionMeta fileMeta) {
-                throw new IgniteException(exTestMessage);
-            }
+            rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
+                @Override
+                public String filePath(UUID nodeId, TransmissionMeta fileMeta) {
+                    throw new IgniteException(exTestMessage);
+                }
 
-            @Override public Consumer<File> fileHandler(UUID nodeId, TransmissionMeta initMeta) {
-                fail("fileHandler must never be called");
+                @Override
+                public Consumer<File> fileHandler(UUID nodeId, TransmissionMeta initMeta) {
+                    fail("fileHandler must never be called");
 
-                return super.fileHandler(nodeId, initMeta);
-            }
+                    return super.fileHandler(nodeId, initMeta);
+                }
 
-            @Override public Consumer<ByteBuffer> chunkHandler(UUID nodeId, TransmissionMeta initMeta) {
-                fail("chunkHandler must never be called");
+                @Override
+                public Consumer<ByteBuffer> chunkHandler(UUID nodeId, TransmissionMeta initMeta) {
+                    fail("chunkHandler must never be called");
 
-                return super.chunkHandler(nodeId, initMeta);
-            }
+                    return super.chunkHandler(nodeId, initMeta);
+                }
 
-            @Override public void onException(UUID nodeId, Throwable err) {
-                assertEquals(exTestMessage, err.getMessage());
+                @Override
+                public void onException(UUID nodeId, Throwable err) {
+                    assertEquals(exTestMessage, err.getMessage());
+                }
+            });
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(fileToSend, TransmissionPolicy.FILE);
             }
         });
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(fileToSend, TransmissionPolicy.FILE);
-        }
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteCheckedException.class)
-    public void testFileHandlerOnReceiverLeft() throws Exception {
-        final int fileSizeBytes = 5 * 1024 * 1024;
-        final AtomicInteger chunksCnt = new AtomicInteger();
+    @Test
+    public void testFileHandlerOnReceiverLeft() {
+        Assertions.assertThrows(IgniteCheckedException.class, () -> {
+            final int fileSizeBytes = 5 * 1024 * 1024;
+            final AtomicInteger chunksCnt = new AtomicInteger();
 
-        snd = startGrid(0);
-        rcv = startGrid(1);
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        File fileToSend = createFileRandomData("testFile", fileSizeBytes);
+            File fileToSend = createFileRandomData("testFile", fileSizeBytes);
 
-        transmissionFileIoFactory(snd, new FileIOFactory() {
-            @Override public FileIO create(File file, OpenOption... modes) throws IOException {
-                FileIO fileIo = IO_FACTORY.create(file, modes);
+            transmissionFileIoFactory(snd, new FileIOFactory() {
+                @Override
+                public FileIO create(File file, OpenOption... modes) throws IOException {
+                    FileIO fileIo = IO_FACTORY.create(file, modes);
 
-                // Blocking writer and stopping node FileIo.
-                return new FileIODecorator(fileIo) {
-                    /** {@inheritDoc} */
-                    @Override public long transferTo(long position, long count, WritableByteChannel target)
-                        throws IOException {
-                        // Send 5 chunks than stop the rcv.
-                        if (chunksCnt.incrementAndGet() == 5)
-                            stopGrid(rcv.name(), true);
+                    // Blocking writer and stopping node FileIo.
+                    return new FileIODecorator(fileIo) {
+                        /** {@inheritDoc} */
+                        @Override
+                        public long transferTo(long position, long count, WritableByteChannel target)
+                                throws IOException {
+                            // Send 5 chunks than stop the rcv.
+                            if (chunksCnt.incrementAndGet() == 5)
+                                stopGrid(rcv.name(), true);
 
-                        return super.transferTo(position, count, target);
-                    }
-                };
+                            return super.transferTo(position, count, target);
+                        }
+                    };
+                }
+            });
+
+            rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore));
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(fileToSend, TransmissionPolicy.FILE);
             }
         });
-
-        rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore));
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(fileToSend, TransmissionPolicy.FILE);
-        }
     }
 
     /**
@@ -452,80 +457,86 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteCheckedException.class)
-    public void testFileHandlerReconnectOnReadFail() throws Exception {
-        final String chunkDownloadExMsg = "Test exception. Chunk processing error.";
+    @Test
+    public void testFileHandlerReconnectOnReadFail() {
+        Assertions.assertThrows(IgniteCheckedException.class, () -> {
+            final String chunkDownloadExMsg = "Test exception. Chunk processing error.";
 
-        snd = startGrid(0);
-        rcv = startGrid(1);
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        File fileToSend = createFileRandomData("testFile", 5 * 1024 * 1024);
-        final AtomicInteger readChunks = new AtomicInteger();
+            File fileToSend = createFileRandomData("testFile", 5 * 1024 * 1024);
+            final AtomicInteger readChunks = new AtomicInteger();
 
-        transmissionFileIoFactory(rcv, new FileIOFactory() {
-            @Override public FileIO create(File file, OpenOption... modes) throws IOException {
-                fileIo[0] = IO_FACTORY.create(file, modes);
+            transmissionFileIoFactory(rcv, new FileIOFactory() {
+                @Override
+                public FileIO create(File file, OpenOption... modes) throws IOException {
+                    fileIo[0] = IO_FACTORY.create(file, modes);
 
-                // Blocking writer and stopping node FileIo.
-                return new FileIODecorator(fileIo[0]) {
-                    @Override public long transferFrom(ReadableByteChannel src, long position, long count)
-                        throws IOException {
-                        // Read 4 chunks than throw an exception to emulate error processing.
-                        if (readChunks.incrementAndGet() == 4)
-                            throw new IgniteException(chunkDownloadExMsg);
+                    // Blocking writer and stopping node FileIo.
+                    return new FileIODecorator(fileIo[0]) {
+                        @Override
+                        public long transferFrom(ReadableByteChannel src, long position, long count)
+                                throws IOException {
+                            // Read 4 chunks than throw an exception to emulate error processing.
+                            if (readChunks.incrementAndGet() == 4)
+                                throw new IgniteException(chunkDownloadExMsg);
 
-                        return super.transferFrom(src, position, count);
-                    }
-                };
+                            return super.transferFrom(src, position, count);
+                        }
+                    };
+                }
+            });
+
+            rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
+                @Override
+                public void onException(UUID nodeId, Throwable err) {
+                    assertEquals(chunkDownloadExMsg, err.getMessage());
+                }
+            });
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(fileToSend, TransmissionPolicy.FILE);
             }
         });
-
-        rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
-            @Override public void onException(UUID nodeId, Throwable err) {
-                assertEquals(chunkDownloadExMsg, err.getMessage());
-            }
-        });
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(fileToSend, TransmissionPolicy.FILE);
-        }
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteCheckedException.class)
-    public void testFileHandlerSenderStoppedIfReceiverInitFail() throws Exception {
-        final int fileSizeBytes = 5 * 1024 * 1024;
-        final AtomicBoolean throwFirstTime = new AtomicBoolean();
+    @Test
+    public void testFileHandlerSenderStoppedIfReceiverInitFail() {
+        Assertions.assertThrows(IgniteCheckedException.class, () -> {
+            final int fileSizeBytes = 5 * 1024 * 1024;
+            final AtomicBoolean throwFirstTime = new AtomicBoolean();
 
-        snd = startGrid(0);
-        rcv = startGrid(1);
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        File fileToSend = createFileRandomData("testFile", fileSizeBytes);
-        File rcvFile = new File(tempStore, "testFile" + "_" + rcv.localNode().id());
+            File fileToSend = createFileRandomData("testFile", fileSizeBytes);
+            File rcvFile = new File(tempStore, "testFile" + "_" + rcv.localNode().id());
 
-        rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
-            @Override public String filePath(UUID nodeId, TransmissionMeta fileMeta) {
-                if (throwFirstTime.compareAndSet(false, true))
-                    throw new IgniteException("Test exception. Initialization fail.");
+            rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
+                @Override
+                public String filePath(UUID nodeId, TransmissionMeta fileMeta) {
+                    if (throwFirstTime.compareAndSet(false, true))
+                        throw new IgniteException("Test exception. Initialization fail.");
 
-                return rcvFile.getAbsolutePath();
+                    return rcvFile.getAbsolutePath();
+                }
+            });
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(fileToSend, TransmissionPolicy.FILE);
             }
+
+            assertEquals(fileToSend.length(), rcvFile.length());
+            assertCrcEquals(fileToSend, rcvFile);
         });
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(fileToSend, TransmissionPolicy.FILE);
-        }
-
-        assertEquals(fileToSend.length(), rcvFile.length());
-        assertCrcEquals(fileToSend, rcvFile);
     }
 
     /**
@@ -581,90 +592,89 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteException.class)
-    public void testFileHandlerSendToNullTopic() throws Exception {
-        snd = startGrid(0);
-        rcv = startGrid(1);
+    @Test
+    public void testFileHandlerSendToNullTopic() {
+        Assertions.assertThrows(IgniteException.class, () -> {
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        // Ensure topic handler is empty.
-        rcv.context().io().removeTransmissionHandler(topic);
+            // Ensure topic handler is empty.
+            rcv.context().io().removeTransmissionHandler(topic);
 
-        // Open next writer on removed topic.
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(createFileRandomData("File_1MB", 1024 * 1024), TransmissionPolicy.FILE);
-        }
+            // Open next writer on removed topic.
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(createFileRandomData("File_1MB", 1024 * 1024), TransmissionPolicy.FILE);
+            }
+        });
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteCheckedException.class)
-    public void testFileHandlerChannelCloseIfAnotherOpened() throws Exception {
-        final int fileSizeBytes = 5 * 1024 * 1024;
-        final CountDownLatch waitLatch = new CountDownLatch(2);
-        final CountDownLatch completionWait = new CountDownLatch(2);
+    @Test
+    public void testFileHandlerChannelCloseIfAnotherOpened() {
+        Assertions.assertThrows(IgniteCheckedException.class, () -> {
+            final int fileSizeBytes = 5 * 1024 * 1024;
+            final CountDownLatch waitLatch = new CountDownLatch(2);
+            final CountDownLatch completionWait = new CountDownLatch(2);
 
-        snd = startGrid(0);
-        rcv = startGrid(1);
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        File fileToSend = createFileRandomData("file5MBSize", fileSizeBytes);
+            File fileToSend = createFileRandomData("file5MBSize", fileSizeBytes);
 
-        rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
-            @Override public String filePath(UUID nodeId, TransmissionMeta fileMeta) {
-                waitLatch.countDown();
+            rcv.context().io().addTransmissionHandler(topic, new DefaultTransmissionHandler(rcv, fileToSend, tempStore) {
+                @Override
+                public String filePath(UUID nodeId, TransmissionMeta fileMeta) {
+                    waitLatch.countDown();
 
-                return super.filePath(nodeId, fileMeta);
+                    return super.filePath(nodeId, fileMeta);
+                }
+            });
+
+            Exception[] errs = new Exception[1];
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic);
+
+                 GridIoManager.TransmissionSender anotherSender = snd.context()
+                         .io()
+                         .openTransmissionSender(rcv.localNode().id(), topic)) {
+                // Will connect on write attempt.
+                GridTestUtils.runAsync(() -> {
+                    try {
+                        sender.send(fileToSend, TransmissionPolicy.FILE);
+                    } catch (IgniteCheckedException | IOException | InterruptedException e) {
+                        errs[0] = e;
+                    } finally {
+                        completionWait.countDown();
+                    }
+                });
+
+                GridTestUtils.runAsync(() -> {
+                    try {
+                        anotherSender.send(fileToSend, TransmissionPolicy.FILE);
+                    } catch (IgniteCheckedException | IOException | InterruptedException e) {
+                        errs[0] = e;
+                    } finally {
+                        completionWait.countDown();
+                    }
+                });
+
+                waitLatch.await(5, TimeUnit.SECONDS);
+
+                // Expected that one of the writers will throw exception.
+                assertFalse("An error must be thrown if connected to the same topic during processing",
+                        errs[0] == null);
+
+                completionWait.await(5, TimeUnit.SECONDS);
+
+                throw errs[0];
             }
         });
-
-        Exception[] errs = new Exception[1];
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic);
-
-             GridIoManager.TransmissionSender anotherSender = snd.context()
-                 .io()
-                 .openTransmissionSender(rcv.localNode().id(), topic)) {
-            // Will connect on write attempt.
-            GridTestUtils.runAsync(() -> {
-                try {
-                    sender.send(fileToSend, TransmissionPolicy.FILE);
-                }
-                catch (IgniteCheckedException | IOException | InterruptedException e) {
-                    errs[0] = e;
-                }
-                finally {
-                    completionWait.countDown();
-                }
-            });
-
-            GridTestUtils.runAsync(() -> {
-                try {
-                    anotherSender.send(fileToSend, TransmissionPolicy.FILE);
-                }
-                catch (IgniteCheckedException | IOException | InterruptedException e) {
-                    errs[0] = e;
-                }
-                finally {
-                    completionWait.countDown();
-                }
-            });
-
-            waitLatch.await(5, TimeUnit.SECONDS);
-
-            // Expected that one of the writers will throw exception.
-            assertFalse("An error must be thrown if connected to the same topic during processing",
-                errs[0] == null);
-
-            completionWait.await(5, TimeUnit.SECONDS);
-
-            throw errs[0];
-        }
     }
 
     /**
@@ -762,62 +772,70 @@ public class GridIoManagerFileTransmissionSelfTest extends GridCommonAbstractTes
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = IgniteCheckedException.class)
-    public void testChunkHandlerInitSizeFail() throws Exception {
-        snd = startGrid(0);
-        rcv = startGrid(1);
+    @Test
+    public void testChunkHandlerInitSizeFail() {
+        Assertions.assertThrows(IgniteCheckedException.class, () -> {
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        File fileToSend = createFileRandomData("testFile", 1024 * 1024);
+            File fileToSend = createFileRandomData("testFile", 1024 * 1024);
 
-        rcv.context().io().addTransmissionHandler(topic, new TransmissionHandlerAdapter() {
-            /** {@inheritDoc} */
-            @Override public Consumer<ByteBuffer> chunkHandler(UUID nodeId, TransmissionMeta initMeta) {
-                throw new IgniteException("Test exception. Initialization failed");
+            rcv.context().io().addTransmissionHandler(topic, new TransmissionHandlerAdapter() {
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                public Consumer<ByteBuffer> chunkHandler(UUID nodeId, TransmissionMeta initMeta) {
+                    throw new IgniteException("Test exception. Initialization failed");
+                }
+            });
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(fileToSend, TransmissionPolicy.CHUNK);
             }
         });
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(fileToSend, TransmissionPolicy.CHUNK);
-        }
     }
 
     /**
-     * @throws Exception If fails.
      */
-    @Test(expected = TransmissionCancelledException.class)
-    public void testChunkHandlerCancelTransmission() throws Exception {
-        snd = startGrid(0);
-        rcv = startGrid(1);
+    @Test
+    public void testChunkHandlerCancelTransmission() {
+        Assertions.assertThrows(TransmissionCancelledException.class, () -> {
+            snd = startGrid(0);
+            rcv = startGrid(1);
 
-        snd.cluster().active(true);
+            snd.cluster().active(true);
 
-        File fileToSend = createFileRandomData("testFile", 1024 * 1024);
+            File fileToSend = createFileRandomData("testFile", 1024 * 1024);
 
-        rcv.context().io().addTransmissionHandler(topic, new TransmissionHandlerAdapter() {
-            /** {@inheritDoc} */
-            @Override public Consumer<ByteBuffer> chunkHandler(UUID nodeId, TransmissionMeta initMeta) {
-                return new Consumer<ByteBuffer>() {
-                    @Override public void accept(ByteBuffer buffer) {
-                        throw new TransmissionCancelledException("Operation cancelled by the user");
-                    }
-                };
+            rcv.context().io().addTransmissionHandler(topic, new TransmissionHandlerAdapter() {
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                public Consumer<ByteBuffer> chunkHandler(UUID nodeId, TransmissionMeta initMeta) {
+                    return new Consumer<ByteBuffer>() {
+                        @Override
+                        public void accept(ByteBuffer buffer) {
+                            throw new TransmissionCancelledException("Operation cancelled by the user");
+                        }
+                    };
+                }
+            });
+
+            try (GridIoManager.TransmissionSender sender = snd.context()
+                    .io()
+                    .openTransmissionSender(rcv.localNode().id(), topic)) {
+                sender.send(fileToSend, TransmissionPolicy.CHUNK);
+            } catch (TransmissionCancelledException e) {
+                log.warning("Transmission cancelled", e);
+
+                throw e;
             }
         });
-
-        try (GridIoManager.TransmissionSender sender = snd.context()
-            .io()
-            .openTransmissionSender(rcv.localNode().id(), topic)) {
-            sender.send(fileToSend, TransmissionPolicy.CHUNK);
-        }
-        catch (TransmissionCancelledException e) {
-            log.warning("Transmission cancelled", e);
-
-            throw e;
-        }
     }
 
     /**

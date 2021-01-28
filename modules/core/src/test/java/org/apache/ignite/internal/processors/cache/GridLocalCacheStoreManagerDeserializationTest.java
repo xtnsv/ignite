@@ -26,7 +26,7 @@ import org.apache.ignite.binary.BinaryObject;
 import org.apache.ignite.binary.BinaryObjectBuilder;
 import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.internal.processors.cache.version.GridCacheVersion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checks whether storing to local store doesn't cause binary objects unmarshalling,

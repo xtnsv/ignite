@@ -34,14 +34,14 @@ import org.apache.ignite.lang.IgniteBiInClosure;
 import org.apache.ignite.resources.CacheStoreSessionResource;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.h2.jdbcx.JdbcConnectionPool;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for {@link CacheJdbcStoreSessionListener}.
  */
 public class CacheJdbcStoreSessionListenerSelfTest extends CacheStoreSessionListenerAbstractSelfTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeCacheJdbcStoreSessionListenerSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
     }

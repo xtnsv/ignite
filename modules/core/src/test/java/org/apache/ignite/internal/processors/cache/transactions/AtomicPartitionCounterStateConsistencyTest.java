@@ -33,7 +33,7 @@ import org.apache.ignite.internal.IgniteInternalFuture;
 import org.apache.ignite.internal.cluster.ClusterTopologyCheckedException;
 import org.apache.ignite.internal.processors.cache.CacheInvalidStateException;
 import org.apache.ignite.internal.util.typedef.X;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import static java.util.stream.Collectors.toMap;
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
@@ -48,19 +48,19 @@ public class AtomicPartitionCounterStateConsistencyTest extends TxPartitionCount
     }
 
     /** {@inheritDoc} */
-    @Ignore
+    @Disabled
     @Override public void testPartitionConsistencyDuringRebalanceAndConcurrentUpdates_SameAffinityPME() throws Exception {
         // No-op.
     }
 
     /** {@inheritDoc} */
-    @Ignore
+    @Disabled
     @Override public void testPartitionConsistencyDuringRebalanceAndConcurrentUpdates_TxDuringPME() throws Exception {
         // No-op.
     }
 
     /** {@inheritDoc} */
-    @Ignore
+    @Disabled
     @Override public void testPartitionConsistencyDuringRebalanceAndConcurrentUpdates_LateAffinitySwitch() throws Exception {
         // No-op.
     }

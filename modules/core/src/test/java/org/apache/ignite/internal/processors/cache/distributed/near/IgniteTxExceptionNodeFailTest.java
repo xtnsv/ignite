@@ -35,10 +35,9 @@ import org.apache.ignite.internal.processors.cache.CacheInvalidStateException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionHeuristicException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.springframework.util.Assert;
 
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.PRIMARY_SYNC;
@@ -175,9 +174,9 @@ public class IgniteTxExceptionNodeFailTest extends GridCommonAbstractTest {
             catch (Throwable e) {
                 String msg = e.getMessage();
 
-                Assert.isTrue(e.getCause() instanceof CacheInvalidStateException);
+            assertTrue(e.getCause() instanceof CacheInvalidStateException);
 
-                Assert.isTrue(msg.contains(ALL_PARTITION_OWNERS_LEFT_GRID_MSG));
+            assertTrue(msg.contains(ALL_PARTITION_OWNERS_LEFT_GRID_MSG));
 
                 if (!mvccEnabled(grid1.context())) {
                     Pattern msgPtrn = Pattern.compile(" \\[cacheName=cache, partition=\\d+, " + "key=KeyCacheObjectImpl \\[part=\\d+, val=" + key0 +
@@ -185,13 +184,13 @@ public class IgniteTxExceptionNodeFailTest extends GridCommonAbstractTest {
 
                     Matcher matcher = msgPtrn.matcher(msg);
 
-                    Assert.isTrue(matcher.find());
+            assertTrue(matcher.find());
                 }
 
                 passed = true;
             }
 
-            Assert.isTrue(passed);
+            assertTrue(passed);
         }
     }
 }

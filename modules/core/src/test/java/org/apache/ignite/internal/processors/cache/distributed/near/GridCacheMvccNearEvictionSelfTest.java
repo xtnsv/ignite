@@ -17,14 +17,14 @@
 package org.apache.ignite.internal.processors.cache.distributed.near;
 
 import org.apache.ignite.cache.CacheAtomicityMode;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL_SNAPSHOT;
 
 /**
  * Test for mvcc cache.
  */
-@Ignore("https://issues.apache.org/jira/browse/IGNITE-7187,https://issues.apache.org/jira/browse/IGNITE-7956")
+@Disabled("https://issues.apache.org/jira/browse/IGNITE-7187,https://issues.apache.org/jira/browse/IGNITE-7956")
 public class GridCacheMvccNearEvictionSelfTest extends GridCacheNearEvictionSelfTest {
     /** {@inheritDoc} */
     @Override protected CacheAtomicityMode atomicityMode() {

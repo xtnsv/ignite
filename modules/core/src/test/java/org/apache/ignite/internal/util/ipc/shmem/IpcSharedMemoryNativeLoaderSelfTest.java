@@ -23,9 +23,9 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import org.apache.ignite.internal.util.GridJavaProcess;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test shared memory native loader.
@@ -56,7 +56,7 @@ public class IpcSharedMemoryNativeLoaderSelfTest {
 
         int code = ps.waitFor();
 
-        assertEquals("Returned code have to be 0.", 0, code);
+        assertEquals(0, code, "Returned code have to be 0.");
     }
 
     /**

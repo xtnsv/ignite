@@ -33,8 +33,8 @@ import org.apache.ignite.internal.util.typedef.F;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
@@ -53,7 +53,7 @@ public class GridCachePartitionedBasicStoreMultiNodeSelfTest extends GridCommonA
     private static List<GridCacheTestStore> stores;
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCachePartitionedBasicStoreMultiNodeSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
 

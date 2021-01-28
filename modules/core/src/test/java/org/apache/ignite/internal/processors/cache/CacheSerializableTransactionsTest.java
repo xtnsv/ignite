@@ -74,8 +74,8 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionOptimisticException;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -2824,7 +2824,7 @@ public class CacheSerializableTransactionsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9226")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9226")
     @Test
     public void testReadWriteTransactionsNoDeadlock() throws Exception {
         checkReadWriteTransactionsNoDeadlock(false);
@@ -2833,7 +2833,7 @@ public class CacheSerializableTransactionsTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9226")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9226")
     @Test
     public void testReadWriteTransactionsNoDeadlockMultinode() throws Exception {
         checkReadWriteTransactionsNoDeadlock(true);

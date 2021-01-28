@@ -42,9 +42,9 @@ import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.events.EventType.EVT_CACHE_OBJECT_PUT;
 import static org.apache.ignite.events.EventType.EVT_CACHE_OBJECT_READ;
@@ -111,7 +111,7 @@ public class CacheEventWithTxLabelTest extends GridCommonAbstractTest {
 
     /** {@inheritDoc} */
     @Override protected void beforeTest() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-10270", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-10270");
     }
 
     /**
@@ -159,9 +159,9 @@ public class CacheEventWithTxLabelTest extends GridCommonAbstractTest {
 
         String listOfFailedTests = String.join(",\n", errors);
 
-        Assert.assertTrue("Have been received " + prevErrCnt + " cache events with incorrect txlabel.\n" +
-                "Failed tests:" + listOfFailedTests,
-            errors.isEmpty());
+        Assertions.assertTrue(errors.isEmpty(),
+            "Have been received " + prevErrCnt + " cache events with incorrect txlabel.\n" +
+                "Failed tests:" + listOfFailedTests);
     }
 
     /**

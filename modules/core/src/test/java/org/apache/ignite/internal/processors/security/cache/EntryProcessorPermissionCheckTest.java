@@ -28,21 +28,16 @@ import org.apache.ignite.internal.processors.security.AbstractCacheOperationPerm
 import org.apache.ignite.internal.util.typedef.T2;
 import org.apache.ignite.plugin.security.SecurityException;
 import org.apache.ignite.plugin.security.SecurityPermissionSetBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Collections.singleton;
 import static org.apache.ignite.plugin.security.SecurityPermission.CACHE_PUT;
 import static org.apache.ignite.plugin.security.SecurityPermission.CACHE_READ;
 import static org.apache.ignite.testframework.GridTestUtils.assertThrowsWithCause;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * Test cache permission for Entry processor.
  */
-@RunWith(JUnit4.class)
 public class EntryProcessorPermissionCheckTest extends AbstractCacheOperationPermissionCheckTest {
     /** */
     @Test
@@ -79,7 +74,7 @@ public class EntryProcessorPermissionCheckTest extends AbstractCacheOperationPer
 
         c.accept(CACHE_NAME, entry);
 
-        assertThat(verifierNode.<String, Integer>cache(CACHE_NAME).get(entry.getKey()), is(entry.getValue()));
+        assertEquals(verifierNode.<String, Integer>cache(CACHE_NAME).get(entry.getKey()), entry.getValue());
     }
 
     /** */

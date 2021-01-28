@@ -69,7 +69,7 @@ import org.apache.ignite.resources.IgniteInstanceResource;
 import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.lang.Boolean.TRUE;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;

@@ -18,13 +18,15 @@
 package org.apache.ignite.internal.util.collection;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
-import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test for immutable int set wrapper
@@ -45,7 +47,7 @@ public class ImmutableIntSetTest {
         ImmutableIntSet emptySet = ImmutableIntSet.emptySet();
 
         assertTrue(emptySet.isEmpty());
-        assertThat(emptySet.size(), is(0));
+        assertEquals(emptySet.size(), 0);
     }
 
     /** */
@@ -53,13 +55,13 @@ public class ImmutableIntSetTest {
     public void toIntArray() {
         IntSet hashSet = ImmutableIntSet.wrap(new HashSet<>(Arrays.asList(2)));
         int[] fromHash = hashSet.toIntArray();
-        assertThat(fromHash.length, is(1));
-        assertThat(fromHash[0], is(2));
+        assertEquals(fromHash.length, 1);
+        assertEquals(fromHash[0], 2);
 
         IntSet bitSet = ImmutableIntSet.wrap(new BitSetIntSet(2, Arrays.asList(2)));
         int[] fromBit = bitSet.toIntArray();
-        assertThat(fromBit.length, is(1));
-        assertThat(fromBit[0], is(2));
+        assertEquals(fromBit.length, 1);
+        assertEquals(fromBit[0], 2);
     }
 
     /** */
@@ -67,7 +69,7 @@ public class ImmutableIntSetTest {
     public void contains() {
         IntSet immutableSet = ImmutableIntSet.wrap(new BitSetIntSet(2, Arrays.asList(2)));
 
-        assertThat(immutableSet.size(), is(1));
+        assertEquals(immutableSet.size(), 1);
         assertFalse(immutableSet.isEmpty());
 
         assertTrue(immutableSet.contains(2));
@@ -75,18 +77,22 @@ public class ImmutableIntSetTest {
     }
 
     /** */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void throwExceptionForAddOperation() {
-        IntSet immutableSet = ImmutableIntSet.wrap(new BitSetIntSet(4));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            IntSet immutableSet = ImmutableIntSet.wrap(new BitSetIntSet(4));
 
-        immutableSet.add(1);
+            immutableSet.add(1);
+        });
     }
 
     /** */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void throwExceptionForRemoveOperation() {
-        IntSet immutableSet = ImmutableIntSet.wrap(new BitSetIntSet(2, Arrays.asList(2)));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            IntSet immutableSet = ImmutableIntSet.wrap(new BitSetIntSet(2, Collections.singletonList(2)));
 
-        immutableSet.remove(2);
+            immutableSet.remove(2);
+        });
     }
 }

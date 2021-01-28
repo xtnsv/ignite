@@ -39,9 +39,9 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test covering semantics of {@link PartitionsExchangeAware} interface for components.
@@ -111,7 +111,7 @@ public class PartitionsExchangeAwareTest extends GridCommonAbstractTest {
     /**
      * Init before test.
      */
-    @Before
+    @BeforeEach
     public void init() {
         initBeforeLockReachedLatch = new CountDownLatch(NODES_CNT);
         initBeforeLockWaitLatch = new CountDownLatch(1);
@@ -131,7 +131,7 @@ public class PartitionsExchangeAwareTest extends GridCommonAbstractTest {
     /**
      * Cleanup after test.
      */
-    @After
+    @AfterEach
     public void cleanUp() {
         initBeforeLockWaitLatch.countDown();
         initAfterLockWaitLatch.countDown();

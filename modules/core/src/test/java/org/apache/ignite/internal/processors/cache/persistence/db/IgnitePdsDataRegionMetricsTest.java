@@ -45,8 +45,8 @@ import org.apache.ignite.internal.util.future.GridFutureAdapter;
 import org.apache.ignite.internal.util.typedef.T2;
 import org.apache.ignite.internal.util.typedef.internal.CU;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.nio.file.Files.newDirectoryStream;
 import static org.apache.ignite.configuration.DataStorageConfiguration.DFLT_DATA_REG_DEFAULT_NAME;
@@ -249,8 +249,8 @@ public class IgnitePdsDataRegionMetricsTest extends GridCommonAbstractTest {
         DataRegionMetricsImpl regionMetrics = ig.cachex(DEFAULT_CACHE_NAME)
             .context().group().dataRegion().memoryMetrics();
 
-        Assert.assertTrue(regionMetrics.getCheckpointBufferSize() != 0);
-        Assert.assertTrue(regionMetrics.getCheckpointBufferSize() <= MAX_REGION_SIZE);
+        Assertions.assertTrue(regionMetrics.getCheckpointBufferSize() != 0);
+        Assertions.assertTrue(regionMetrics.getCheckpointBufferSize() <= MAX_REGION_SIZE);
     }
 
     /**
@@ -267,8 +267,8 @@ public class IgnitePdsDataRegionMetricsTest extends GridCommonAbstractTest {
         final DataRegionMetricsImpl regionMetrics = ig.cachex(DEFAULT_CACHE_NAME)
             .context().group().dataRegion().memoryMetrics();
 
-        Assert.assertEquals(0, regionMetrics.getUsedCheckpointBufferPages());
-        Assert.assertEquals(0, regionMetrics.getUsedCheckpointBufferSize());
+        Assertions.assertEquals(0, regionMetrics.getUsedCheckpointBufferPages());
+        Assertions.assertEquals(0, regionMetrics.getUsedCheckpointBufferSize());
 
         load(ig);
 
@@ -289,8 +289,8 @@ public class IgnitePdsDataRegionMetricsTest extends GridCommonAbstractTest {
 
         metricsResult.get();
 
-        Assert.assertTrue(metricsResult.get().get1() > 0);
-        Assert.assertTrue(metricsResult.get().get2() > 0);
+        Assertions.assertTrue(metricsResult.get().get1() > 0);
+        Assertions.assertTrue(metricsResult.get().get2() > 0);
     }
 
     /**

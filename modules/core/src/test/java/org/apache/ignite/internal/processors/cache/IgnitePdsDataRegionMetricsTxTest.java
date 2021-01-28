@@ -21,8 +21,8 @@ import org.apache.ignite.cache.CacheAtomicityMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.processors.cache.persistence.db.IgnitePdsDataRegionMetricsTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -40,7 +40,7 @@ public class IgnitePdsDataRegionMetricsTxTest extends IgnitePdsDataRegionMetrics
     }
 
     /** {@inheritDoc} */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-10662")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-10662")
     @Test
     @Override public void testMemoryUsageMultipleNodes() throws Exception {
         super.testMemoryUsageMultipleNodes();

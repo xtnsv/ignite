@@ -40,10 +40,10 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionTimeoutException;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.internal.util.collections.Sets;
@@ -324,11 +324,11 @@ public class ClientSlowDiscoveryTransactionRemapTest extends ClientSlowDiscovery
         public void consistencyCheck() {
             for (Map.Entry<K, Object> entry : map.entrySet()) {
                 if (entry.getValue() == RMV)
-                    Assert.assertNull("Value is not null for key: " + entry.getKey(), cache.get(entry.getKey()));
+                    Assertions.assertNull(cache.get(entry.getKey()), "Value is not null for key: " + entry.getKey());
                 else
-                    Assert.assertEquals("Values are different for key: " + entry.getKey(),
-                        entry.getValue(),
-                        cache.get(entry.getKey())
+                    Assertions.assertEquals(entry.getValue(),
+                        cache.get(entry.getKey()),
+                        "Values are different for key: " + entry.getKey()
                     );
             }
         }
@@ -369,7 +369,7 @@ public class ClientSlowDiscoveryTransactionRemapTest extends ClientSlowDiscovery
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         NodeJoinInterceptingDiscoverySpi clientDiscoSpi = new NodeJoinInterceptingDiscoverySpi();
 
@@ -394,7 +394,7 @@ public class ClientSlowDiscoveryTransactionRemapTest extends ClientSlowDiscovery
     }
 
     /** */
-    @After
+    @AfterEach
     public void after() throws Exception {
         // Stop client nodes.
         stopGrid(1);
@@ -460,7 +460,8 @@ public class ClientSlowDiscoveryTransactionRemapTest extends ClientSlowDiscovery
 
             // Check that initial data is not changed by rollbacked transaction.
             for (int k = 0; k < KEYS_SET; k++)
-                Assert.assertEquals("Cache consistency is broken for key: " + k, 0, clnt.cache(CACHE_NAME).get(k));
+                Assertions.assertEquals(clnt.cache(CACHE_NAME).get(k), 0,
+                        "Cache consistency is broken for key: " + k);
         }
         else {
             txFut.get();

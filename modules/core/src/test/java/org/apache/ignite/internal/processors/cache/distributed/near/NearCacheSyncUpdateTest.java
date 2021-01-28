@@ -27,8 +27,8 @@ import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.NearCacheConfiguration;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -66,7 +66,7 @@ public class NearCacheSyncUpdateTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testNearCacheSyncUpdateMvccTx() throws Exception {
         nearCacheSyncUpdateTx(TRANSACTIONAL_SNAPSHOT);

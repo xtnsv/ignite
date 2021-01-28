@@ -27,14 +27,14 @@ import org.apache.ignite.internal.GridKernalContext;
 import org.apache.ignite.internal.processors.metric.GridMetricManager;
 import org.apache.ignite.spi.metric.noop.NoopMetricExporterSpi;
 import org.jetbrains.annotations.NotNull;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
@@ -53,7 +53,7 @@ public class GridManagerMxBeanIllegalArgumentHandleTest {
     private boolean correctSetupOfTestPerformed;
 
     /** Changes field to always failing mock. */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         try {
             final MemoryMXBean memoryMXBean = createAlwaysFailingMxBean();
@@ -98,7 +98,7 @@ public class GridManagerMxBeanIllegalArgumentHandleTest {
      *
      * @throws Exception if field set failed
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         if (correctSetupOfTestPerformed)
             memMxBeanField.set(null, mxBeanToRestore);

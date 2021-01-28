@@ -19,9 +19,9 @@ package org.apache.ignite.internal.processors.cache.persistence.pagemem;
 import org.apache.ignite.configuration.DataRegionConfiguration;
 import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * TotalUsedPages metric persistence tests.
@@ -52,7 +52,7 @@ public class UsedPagesMetricTestPersistence extends UsedPagesMetricAbstractTest 
     /**
      *
      */
-    @Before
+    @BeforeEach
     public void cleanBeforeStart() throws Exception {
         cleanPersistenceDir();
     }
@@ -60,7 +60,7 @@ public class UsedPagesMetricTestPersistence extends UsedPagesMetricAbstractTest 
     /**
      *
      */
-    @After
+    @AfterEach
     public void stopAndClean() throws Exception {
         stopAllGrids();
 

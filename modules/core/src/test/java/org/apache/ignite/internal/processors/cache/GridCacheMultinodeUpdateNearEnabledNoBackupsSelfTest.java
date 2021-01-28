@@ -19,8 +19,8 @@ package org.apache.ignite.internal.processors.cache;
 
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -43,7 +43,7 @@ public class GridCacheMultinodeUpdateNearEnabledNoBackupsSelfTest extends GridCa
     /** {@inheritDoc} */
     @Test
     @Override public void testInvoke() throws Exception {
-        Assume.assumeTrue("https://issues.apache.org/jira/browse/IGNITE-809", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeTrue(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-809");
 
         super.testInvoke();
     }

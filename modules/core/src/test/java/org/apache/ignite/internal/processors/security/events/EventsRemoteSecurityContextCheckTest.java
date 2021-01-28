@@ -39,7 +39,7 @@ import org.apache.ignite.events.Event;
 import org.apache.ignite.events.EventType;
 import org.apache.ignite.internal.processors.security.AbstractRemoteSecurityContextCheckTest;
 import org.apache.ignite.lang.IgnitePredicate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing operation security context when the remote filter of IgniteEvents is executed on remote nodes.

@@ -32,8 +32,8 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionOptimisticException;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL_SNAPSHOT;
@@ -221,7 +221,7 @@ public class GridCacheNearMultiGetSelfTest extends GridCommonAbstractTest {
     }
 
     /** @throws Exception If failed. */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testMvccPessimisticRepeatableReadNoPut() throws Exception {
         atomicityMode = TRANSACTIONAL_SNAPSHOT;
@@ -230,7 +230,7 @@ public class GridCacheNearMultiGetSelfTest extends GridCommonAbstractTest {
     }
 
     /** @throws Exception If failed. */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7187")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7187")
     @Test
     public void testMvccPessimisticRepeatableReadWithPut() throws Exception {
         atomicityMode = TRANSACTIONAL_SNAPSHOT;

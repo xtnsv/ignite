@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.lang.IgniteRunnable;
 import org.apache.ignite.lang.IgniteUuid;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.performancestatistics.OperationType.cacheStartRecordSize;
 import static org.apache.ignite.internal.processors.performancestatistics.OperationType.jobRecordSize;

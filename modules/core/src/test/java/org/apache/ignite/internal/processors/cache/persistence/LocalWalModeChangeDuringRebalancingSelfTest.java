@@ -67,8 +67,8 @@ import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cluster.ClusterState.ACTIVE;
 import static org.apache.ignite.internal.processors.cache.persistence.file.FilePageStoreManager.CORRUPTED_DATA_FILES_MNTC_TASK_NAME;
@@ -489,7 +489,7 @@ public class LocalWalModeChangeDuringRebalancingSelfTest extends GridCommonAbstr
             IgniteCache<Integer, Integer> cache0 = grid(nodeIdx).cache(REPL_CACHE);
 
             for (int k = 0; k < keyCnt; k++)
-                Assert.assertEquals("nodeIdx=" + nodeIdx + ", key=" + k, (Integer)(2 * k), cache0.get(k));
+                Assertions.assertEquals((Integer)(2 * k), cache0.get(k), "nodeIdx=" + nodeIdx + ", key=" + k);
         }
     }
 

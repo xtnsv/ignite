@@ -26,7 +26,7 @@ import org.apache.ignite.internal.cluster.ClusterTopologyCheckedException;
 import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.lang.IgniteClosure;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for local cache.

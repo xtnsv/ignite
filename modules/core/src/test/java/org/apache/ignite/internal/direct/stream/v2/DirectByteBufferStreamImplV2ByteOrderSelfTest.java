@@ -29,8 +29,8 @@ import org.apache.ignite.internal.util.GridUnsafe;
 import org.apache.ignite.plugin.extensions.communication.Message;
 import org.apache.ignite.plugin.extensions.communication.MessageFactory;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.GridTestIoUtils.getCharByByteLE;
 import static org.apache.ignite.GridTestIoUtils.getDoubleByByteLE;
@@ -38,11 +38,11 @@ import static org.apache.ignite.GridTestIoUtils.getFloatByByteLE;
 import static org.apache.ignite.GridTestIoUtils.getIntByByteLE;
 import static org.apache.ignite.GridTestIoUtils.getLongByByteLE;
 import static org.apache.ignite.GridTestIoUtils.getShortByByteLE;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * {@link DirectByteBufferStreamImplV2} byte order sanity tests.
@@ -67,7 +67,7 @@ public class DirectByteBufferStreamImplV2ByteOrderSelfTest {
     private byte[] outArr;
 
     /** */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         outArr = new byte[ARR_LEN * 8 + LEN_BYTES];
 

@@ -42,8 +42,8 @@ import org.apache.ignite.internal.util.typedef.G;
 import org.apache.ignite.lang.IgniteBiPredicate;
 import org.apache.ignite.plugin.extensions.communication.Message;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.PartitionLossPolicy.READ_WRITE_SAFE;
 
@@ -136,7 +136,7 @@ public class CachePartitionLossWithPersistenceTest extends GridCommonAbstractTes
      *
      */
     @Test
-    @Ignore("https://ggsystems.atlassian.net/browse/GG-28521")
+    @Disabled("https://ggsystems.atlassian.net/browse/GG-28521")
     public void testConsistencyAfterResettingLostPartitions_1() throws Exception {
         doTestConsistencyAfterResettingLostPartitions(0, false);
     }

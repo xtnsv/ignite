@@ -21,7 +21,7 @@ import org.apache.ignite.cache.CacheAtomicityMode;
 import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -43,7 +43,7 @@ public class CacheVersionedEntryLocalTransactionalSelfTest extends CacheVersione
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeCacheVersionedEntryLocalTransactionalSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

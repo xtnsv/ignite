@@ -20,6 +20,7 @@ package org.apache.ignite.client;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteBinary;
@@ -32,21 +33,18 @@ import org.apache.ignite.configuration.BinaryConfiguration;
 import org.apache.ignite.configuration.ClientConfiguration;
 import org.apache.ignite.internal.binary.BinaryObjectImpl;
 import org.apache.ignite.internal.binary.GridBinaryMarshaller;
-import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.Timeout;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.apache.ignite.testframework.GridTestUtils.DFLT_TEST_TIMEOUT;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Ignite {@link BinaryObject} API system tests.
  */
+@Timeout(value = DFLT_TEST_TIMEOUT, unit = TimeUnit.MILLISECONDS)
 public class IgniteBinaryTest {
-    /** Per test timeout */
-    @Rule
-    public Timeout globalTimeout = new Timeout((int) GridTestUtils.DFLT_TEST_TIMEOUT);
 
     /**
      * Unmarshalling schema-less Ignite binary objects into Java static types.

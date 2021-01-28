@@ -76,8 +76,8 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.jetbrains.annotations.NotNull;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import static java.nio.file.Files.newDirectoryStream;
 import static org.apache.ignite.cluster.ClusterState.ACTIVE;
@@ -135,7 +135,7 @@ public abstract class AbstractSnapshotSelfTest extends GridCommonAbstractTest {
     }
 
     /** @throws Exception If fails. */
-    @Before
+    @BeforeEach
     public void beforeTestSnapshot() throws Exception {
         cleanPersistenceDir();
 
@@ -144,7 +144,7 @@ public abstract class AbstractSnapshotSelfTest extends GridCommonAbstractTest {
     }
 
     /** @throws Exception If fails. */
-    @After
+    @AfterEach
     public void afterTestSnapshot() throws Exception {
         try {
             for (Ignite ig : G.allGrids()) {

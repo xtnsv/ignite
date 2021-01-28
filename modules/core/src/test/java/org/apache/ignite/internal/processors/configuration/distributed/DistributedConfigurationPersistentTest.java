@@ -19,10 +19,10 @@ package org.apache.ignite.internal.processors.configuration.distributed;
 
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.ignite.internal.IgniteEx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.configuration.distributed.DistributedLongProperty.detachedLongProperty;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /** */
 public class DistributedConfigurationPersistentTest extends DistributedConfigurationAbstractTest {

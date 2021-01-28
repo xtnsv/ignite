@@ -87,8 +87,8 @@ import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_PDS_WAL_REBALANCE_THRESHOLD;
@@ -329,7 +329,7 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
         Set<Long> topVers = ((WalRebalanceCheckingCommunicationSpi) ignite.configuration().getCommunicationSpi())
             .walRebalanceVersions(grpId);
 
-        Assert.assertTrue(topVers.contains(ignite.cluster().topologyVersion()));
+        Assertions.assertTrue(topVers.contains(ignite.cluster().topologyVersion()));
 
         // Rewrite some data.
         for (int k = 0; k < entryCnt; k++) {
@@ -355,7 +355,7 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
         topVers = ((WalRebalanceCheckingCommunicationSpi) ignite.configuration().getCommunicationSpi())
             .walRebalanceVersions(grpId);
 
-        Assert.assertFalse(topVers.contains(ignite.cluster().topologyVersion()));
+        Assertions.assertFalse(topVers.contains(ignite.cluster().topologyVersion()));
 
         // Check data consistency.
         for (Ignite ig : G.allGrids()) {
@@ -429,7 +429,7 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
         Set<Long> topVers = ((WalRebalanceCheckingCommunicationSpi) ignite.configuration().getCommunicationSpi())
             .walRebalanceVersions(grpId);
 
-        Assert.assertFalse(topVers.contains(ignite.cluster().topologyVersion()));
+        Assertions.assertFalse(topVers.contains(ignite.cluster().topologyVersion()));
 
         stopGrid(2);
 
@@ -447,7 +447,7 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
         topVers = ((WalRebalanceCheckingCommunicationSpi) ignite.configuration().getCommunicationSpi())
             .walRebalanceVersions(grpId);
 
-        Assert.assertTrue(topVers.contains(ignite.cluster().topologyVersion()));
+        Assertions.assertTrue(topVers.contains(ignite.cluster().topologyVersion()));
 
         // Check data consistency.
         for (Ignite ig : G.allGrids()) {
@@ -531,7 +531,7 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
         // Wait till rebalance will be failed and cancelled.
         Boolean res = preloader.rebalanceFuture().get();
 
-        Assert.assertEquals("Rebalance should be cancelled on demander node: " + preloader.rebalanceFuture(), false, res);
+        Assertions.assertEquals(false, res, "Rebalance should be cancelled on demander node: " + preloader.rebalanceFuture());
 
         // Stop blocking messages and fail WAL during read.
         blockMsgPred = null;
@@ -662,10 +662,10 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
             "Rebalance future was not cancelled [fut=" + preloadFut + ']',
             GridTestUtils.waitForCondition(preloadFut::isDone, getTestTimeout()));
 
-        Assert.assertEquals(
-            "Rebalance should be cancelled on demander node: " + preloadFut,
+        Assertions.assertEquals(
             false,
-            preloadFut.get());
+            preloadFut.get(),
+            "Rebalance should be cancelled on demander node: " + preloadFut);
 
         awaitPartitionMapExchange(true, true, null);
 
@@ -922,14 +922,14 @@ public class IgniteWalRebalanceTest extends GridCommonAbstractTest {
         // Wait until rebalancing will be cancelled for both suppliers.
         GridTestUtils.waitForCondition(() -> preloadFut1.isDone() && preloadFut2.isDone(), getTestTimeout());
 
-        Assert.assertEquals(
-            "Rebalance should be cancelled on demander node: " + preloadFut1,
+        Assertions.assertEquals(
             false,
-            preloadFut1.get());
-        Assert.assertEquals(
-            "Rebalance should be cancelled on demander node: " + preloadFut2,
+            preloadFut1.get(),
+            "Rebalance should be cancelled on demander node: " + preloadFut1);
+        Assertions.assertEquals(
             false,
-            preloadFut2.get());
+            preloadFut2.get(),
+            "Rebalance should be cancelled on demander node: " + preloadFut2);
 
         // Unblock supply messages from supplier2
         supplierSpi2.stopBlock();

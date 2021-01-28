@@ -41,7 +41,7 @@ import org.apache.ignite.internal.processors.cache.multijvm.GridCacheReplicatedM
 import org.apache.ignite.internal.processors.cache.multijvm.GridCacheReplicatedMultiJvmP2PDisabledFullApiSelfTest;
 import org.apache.ignite.internal.processors.cache.multijvm.GridCacheReplicatedNearOnlyMultiJvmFullApiSelfTest;
 import org.apache.ignite.internal.processors.cache.multijvm.GridCacheReplicatedOnheapMultiJvmFullApiSelfTest;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -83,7 +83,7 @@ import org.junit.runners.Suite;
 })
 public class IgniteCacheFullApiMultiJvmSelfTestSuite {
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         System.setProperty("H2_JDBC_CONNECTIONS", "500");
     }

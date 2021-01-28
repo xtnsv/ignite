@@ -83,8 +83,8 @@ import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
 import org.apache.ignite.thread.IgniteThreadFactory;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static java.util.Objects.nonNull;
@@ -95,7 +95,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.joining;
 import static org.apache.ignite.testframework.GridTestUtils.assertThrows;
 import static org.apache.ignite.testframework.GridTestUtils.readResource;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * Grid utils tests.
@@ -1154,10 +1154,10 @@ public class IgniteUtilsSelfTest extends GridCommonAbstractTest {
                 }
             });
 
-        Assert.assertEquals(curThreadCnt.get() + poolThreadCnt.get(), data.size());
-        Assert.assertEquals(5, curThreadCnt.get());
-        Assert.assertEquals(5, poolThreadCnt.get());
-        Assert.assertEquals(asList(0, -1, -2, -3, -4, -5, -6, -7, -8, -9), res);
+            Assertions.assertEquals(curThreadCnt.get() + poolThreadCnt.get(), data.size());
+            Assertions.assertEquals(5, curThreadCnt.get());
+            Assertions.assertEquals(5, poolThreadCnt.get());
+            Assertions.assertEquals(asList(0, -1, -2, -3, -4, -5, -6, -7, -8, -9), res);
     }
 
     /**
@@ -1225,8 +1225,8 @@ public class IgniteUtilsSelfTest extends GridCommonAbstractTest {
             throw new IgniteException(e);
         }
 
-        Assert.assertTrue(curThreadCnt.get() > 0);
-        Assert.assertEquals(asList(0, -1, -2, -3, -4, -5, -6, -7, -8, -9), res);
+        Assertions.assertTrue(curThreadCnt.get() > 0);
+        Assertions.assertEquals(asList(0, -1, -2, -3, -4, -5, -6, -7, -8, -9), res);
     }
 
     /**

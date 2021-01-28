@@ -43,7 +43,8 @@ import org.apache.ignite.internal.processors.cache.persistence.wal.serializer.Se
 import org.apache.ignite.internal.util.typedef.T2;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.diagnostic.DiagnosticProcessor.DEFAULT_TARGET_FOLDER;
 import static org.apache.ignite.internal.processors.diagnostic.DiagnosticProcessor.DiagnosticAction.PRINT_TO_FILE;
@@ -237,13 +238,13 @@ public class DiagnosticProcessorTest extends GridCommonAbstractTest {
     }
 
     /**
-     * @throws IgniteCheckedException If failed.
      */
-    @Test(expected = NullPointerException.class)
-    public void throwExceptionBecauseNotAnyActionsWasSet() throws IgniteCheckedException {
-        diagnosticProcessor.dumpPageHistory(new PageHistoryDiagnoster.DiagnosticPageBuilder()
-            .pageIds(expectedPageId)
-        );
+    @Test
+    public void throwExceptionBecauseNotAnyActionsWasSet() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> diagnosticProcessor.dumpPageHistory(new PageHistoryDiagnoster.DiagnosticPageBuilder()
+                .pageIds(expectedPageId)
+        ));
     }
 
     /**

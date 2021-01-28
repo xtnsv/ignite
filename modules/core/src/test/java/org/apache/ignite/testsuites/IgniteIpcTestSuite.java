@@ -17,8 +17,8 @@
 package org.apache.ignite.testsuites;
 
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.junit.Assume;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -29,8 +29,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({IgniteIpcSharedMemorySelfTestSuite.class})
 public class IgniteIpcTestSuite {
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void init() {
-        Assume.assumeTrue("Test is intended to run only on Linux and macOS.", U.isLinux() || U.isMacOs());
+        Assumptions.assumeTrue(U.isLinux() || U.isMacOs(), "Test is intended to run only on Linux and macOS.");
     }
 }

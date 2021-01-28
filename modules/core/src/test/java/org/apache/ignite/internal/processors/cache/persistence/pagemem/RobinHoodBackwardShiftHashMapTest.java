@@ -29,13 +29,14 @@ import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.Timeout;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_LONG_LONG_HASH_MAP_LOAD_FACTOR;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests of {@link RobinHoodBackwardShiftHashMap} implementation.
@@ -105,24 +106,23 @@ public class RobinHoodBackwardShiftHashMapTest {
     }
 
     /**
-     * @throws Exception If failed.
      */
-    @Test(expected = IgniteOutOfMemoryException.class)
-    public void testSimplestOverflow() throws Exception {
-        withMap(map -> {
-                for (int i = 0; i < 10; i++) {
-                    int grpId = i + 1;
-                    int val = grpId * grpId;
-                    assertSizeChanged("Unique put should be successful [" + grpId + "]", map, () -> map.put(grpId, 1, val, 1));
+    @Test
+    public void testSimplestOverflow() {
+        Assertions.assertThrows(IgniteOutOfMemoryException.class, () -> withMap(map -> {
+            for (int i = 0; i < 10; i++) {
+                int grpId = i + 1;
+                int val = grpId * grpId;
+                assertSizeChanged("Unique put should be successful [" + grpId + "]", map, () -> map.put(grpId, 1, val, 1));
 
-                    assertEquals(val, map.get(grpId, 1, 0, -1, -2));
+                assertEquals(val, map.get(grpId, 1, 0, -1, -2));
 
-                    assertSizeNotChanged("Duplicate put for " + grpId, map, () -> map.put(grpId, 1, 1, 1));
-                    assertEquals(1, map.get(grpId, 1, 0, -1, -2));
-                }
+                assertSizeNotChanged("Duplicate put for " + grpId, map, () -> map.put(grpId, 1, 1, 1));
+                assertEquals(1, map.get(grpId, 1, 0, -1, -2));
+            }
 
-                map.put(11, 1, 11, 1);
-            }, 10);
+            map.put(11, 1, 11, 1);
+        }, 10));
     }
 
     /**
@@ -135,7 +135,7 @@ public class RobinHoodBackwardShiftHashMapTest {
         act.run();
         int newSize = map.size();
 
-        assertNotEquals(msg, size, newSize);
+        assertNotEquals(size, newSize, msg);
     }
 
     /**
@@ -148,7 +148,7 @@ public class RobinHoodBackwardShiftHashMapTest {
         act.run();
         int newSize = map.size();
 
-        assertEquals(msg, size, newSize);
+        assertEquals(size, newSize, msg);
     }
 
     /**
@@ -263,10 +263,10 @@ public class RobinHoodBackwardShiftHashMapTest {
                         Long checkVal = check.get(fullId);
 
                         if (checkVal != null) {
-                            assertEquals("Ret." +
+                            assertEquals(checkVal.longValue(),
+                                val, "Ret." +
                                     getPageString(fullId) +
-                                    " tbl: " + val + " Check " + checkVal,
-                                checkVal.longValue(), val);
+                                    " tbl: " + val + " Check " + checkVal);
                         }
                     }
                 }

@@ -20,14 +20,14 @@ package org.apache.ignite.internal.processors.cache.store;
 import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests {@link org.apache.ignite.internal.processors.cache.store.GridCacheWriteBehindStore} in grid configuration.
  */
 public class GridCacheWriteBehindStoreLocalTest extends GridCacheWriteBehindStoreAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheWriteBehindStoreLocalTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

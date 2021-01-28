@@ -43,7 +43,7 @@ import org.apache.ignite.testframework.configvariations.ConfigVariationsFactory;
 import org.apache.ignite.testframework.configvariations.ConfigVariationsTestSuiteBuilder;
 import org.apache.ignite.testframework.configvariations.VariationsTestsConfig;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Common abstract test for Ignite tests based on configurations variations.
@@ -87,7 +87,7 @@ public abstract class IgniteConfigVariationsAbstractTest extends GridCommonAbstr
     }
 
     /** Check that test name is not null. */
-    @Before
+    @BeforeEach
     public void checkTestName() {
         assert getName() != null : "getName returned null";
     }

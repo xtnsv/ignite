@@ -29,7 +29,7 @@ import org.apache.ignite.internal.util.typedef.P2;
 import org.apache.ignite.messaging.MessagingListenActor;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link org.apache.ignite.IgniteCluster}.

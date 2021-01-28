@@ -27,10 +27,11 @@ import org.apache.ignite.plugin.extensions.communication.MessageFactoryProvider;
 import org.apache.ignite.plugin.extensions.communication.MessageReader;
 import org.apache.ignite.plugin.extensions.communication.MessageWriter;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for default implementation of {@link IgniteMessageFactory} interface.
@@ -51,13 +52,15 @@ public class IgniteMessageFactoryImplTest {
     /**
      * Tests that impossible register new message after initialization.
      */
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testReadOnly() {
-        MessageFactory[] factories = {new TestMessageFactoryPovider(), new TestMessageFactory()};
+        assertThrows(IllegalStateException.class, () -> {
+            MessageFactory[] factories = {new TestMessageFactoryPovider(), new TestMessageFactory()};
 
-        IgniteMessageFactory msgFactory = new IgniteMessageFactoryImpl(factories);
+            IgniteMessageFactory msgFactory = new IgniteMessageFactoryImpl(factories);
 
-        msgFactory.register((short)0, () -> null);
+            msgFactory.register((short) 0, () -> null);
+        });
     }
 
     /**
@@ -88,28 +91,32 @@ public class IgniteMessageFactoryImplTest {
     /**
      * Tests that exception will be thrown for unknown message direct type.
      */
-    @Test(expected = IgniteException.class)
+    @Test
     public void testCreate_UnknownMessageType() {
-        MessageFactory[] factories = {new TestMessageFactoryPovider(), new TestMessageFactory()};
+        assertThrows(IgniteException.class, () -> {
+            MessageFactory[] factories = {new TestMessageFactoryPovider(), new TestMessageFactory()};
 
-        IgniteMessageFactory msgFactory = new IgniteMessageFactoryImpl(factories);
+            IgniteMessageFactory msgFactory = new IgniteMessageFactoryImpl(factories);
 
-        msgFactory.create(UNKNOWN_MSG_TYPE);
+            msgFactory.create(UNKNOWN_MSG_TYPE);
+        });
     }
 
     /**
      * Tests attemption of registration message with already registered message type.
      */
-    @Test(expected = IgniteException.class)
+    @Test
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void testRegisterTheSameType() {
-        MessageFactory[] factories = {
-                new TestMessageFactoryPovider(),
-                new TestMessageFactory(),
-                new TestMessageFactoryPoviderWithTheSameDirectType()
-        };
+        assertThrows(IgniteException.class, () -> {
+            MessageFactory[] factories = {
+                    new TestMessageFactoryPovider(),
+                    new TestMessageFactory(),
+                    new TestMessageFactoryPoviderWithTheSameDirectType()
+            };
 
-        new IgniteMessageFactoryImpl(factories);
+            new IgniteMessageFactoryImpl(factories);
+        });
     }
 
     /**

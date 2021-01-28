@@ -43,9 +43,9 @@ import org.apache.ignite.internal.processors.cache.persistence.filename.PdsFolde
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -113,8 +113,8 @@ public class IgniteNodeStoppedDuringDisableWALTest extends GridCommonAbstractTes
      */
     @Test
     public void test() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-12040",
-            MvccFeatureChecker.forcedMvcc() && nodeStopPoint == NodeStopPoint.AFTER_DISABLE_WAL);
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc() && nodeStopPoint == NodeStopPoint.AFTER_DISABLE_WAL,
+            "https://issues.apache.org/jira/browse/IGNITE-12040");
 
         testStopNodeWithDisableWAL(nodeStopPoint);
 
@@ -203,7 +203,7 @@ public class IgniteNodeStoppedDuringDisableWALTest extends GridCommonAbstractTes
                 fail = true;
         }
 
-        Assert.assertEquals(nodeStopPoint.needCleanUp, fail);
+        Assertions.assertEquals(nodeStopPoint.needCleanUp, fail);
 
         Ignite ig1 = startGrid(0);
 

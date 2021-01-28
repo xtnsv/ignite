@@ -594,7 +594,6 @@ public abstract class GridCommonAbstractTest extends GridAbstractTest {
      * @param printPartState If {@code true} will print partition state if evictions not happened.
      * @throws InterruptedException If interrupted.
      */
-    @SuppressWarnings("BusyWait")
     protected void awaitPartitionMapExchange(
         boolean waitEvicts,
         boolean waitNode2PartUpdate,

@@ -58,7 +58,8 @@ import org.apache.ignite.internal.util.typedef.T2;
 import org.apache.ignite.mxbean.ClientProcessorMXBean;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * Checks compute grid funtionality of thin client.
@@ -135,12 +136,14 @@ public class ComputeTaskTest extends AbstractThinClientTest {
     /**
      *
      */
-    @Test(expected = ClientException.class)
-    public void testComputeDisabled() throws Exception {
-        // Only grid(0) and grid(1) is allowed to execute thin client compute tasks.
-        try (IgniteClient client = startClient(2)) {
-            client.compute().execute(TestTask.class.getName(), null);
-        }
+    @Test
+    public void testComputeDisabled() {
+        Assertions.assertThrows(ClientException.class, () -> {
+            // Only grid(0) and grid(1) is allowed to execute thin client compute tasks.
+            try (IgniteClient client = startClient(2)) {
+                client.compute().execute(TestTask.class.getName(), null);
+            }
+        });
     }
 
     /**
@@ -234,67 +237,71 @@ public class ComputeTaskTest extends AbstractThinClientTest {
     /**
      *
      */
-    @Test(expected = CancellationException.class)
-    public void testTaskCancellation() throws Exception {
-        try (IgniteClient client = startClient(0)) {
-            Future<T2<UUID, List<UUID>>> fut = client.compute().executeAsync(TestTask.class.getName(), TIMEOUT);
+    public void testTaskCancellation() {
+        Assertions.assertThrows(CancellationException.class, () -> {
+            try (IgniteClient client = startClient(0)) {
+                Future<T2<UUID, List<UUID>>> fut = client.compute().executeAsync(TestTask.class.getName(), TIMEOUT);
 
-            assertFalse(fut.isCancelled());
-            assertFalse(fut.isDone());
+                assertFalse(fut.isCancelled());
+                assertFalse(fut.isDone());
 
-            assertTrue(fut.cancel(true));
+                assertTrue(fut.cancel(true));
 
-            assertTrue(GridTestUtils.waitForCondition(
-                () -> ((ClientComputeImpl)client.compute()).activeTaskFutures().isEmpty(), TIMEOUT));
+                assertTrue(GridTestUtils.waitForCondition(
+                        () -> ((ClientComputeImpl) client.compute()).activeTaskFutures().isEmpty(), TIMEOUT));
 
-            assertTrue(fut.isCancelled());
-            assertTrue(fut.isDone());
+                assertTrue(fut.isCancelled());
+                assertTrue(fut.isDone());
 
-            fut.get();
-        }
+                fut.get();
+            }
+        });
     }
 
     /**
      *
      */
-    @Test(expected = CancellationException.class)
-    public void testTaskCancellation2() throws Exception {
-        try (IgniteClient client = startClient(0)) {
-            IgniteClientFuture<T2<UUID, List<UUID>>> fut = client.compute().executeAsync2(TestTask.class.getName(), TIMEOUT);
+    public void testTaskCancellation2() {
+        Assertions.assertThrows(CancellationException.class, () -> {
+            try (IgniteClient client = startClient(0)) {
+                IgniteClientFuture<T2<UUID, List<UUID>>> fut = client.compute().executeAsync2(TestTask.class.getName(), TIMEOUT);
 
-            assertFalse(fut.isCancelled());
-            assertFalse(fut.isDone());
+                assertFalse(fut.isCancelled());
+                assertFalse(fut.isDone());
 
-            AtomicReference<Throwable> handledErr = new AtomicReference<>();
-            CompletionStage<T2<UUID, List<UUID>>> handledFut = fut.handle((r, err) -> {
-                handledErr.set(err);
-                return r;
-            });
+                AtomicReference<Throwable> handledErr = new AtomicReference<>();
+                CompletionStage<T2<UUID, List<UUID>>> handledFut = fut.handle((r, err) -> {
+                    handledErr.set(err);
+                    return r;
+                });
 
-            fut.cancel(true);
+                fut.cancel(true);
 
-            assertTrue(GridTestUtils.waitForCondition(
-                () -> ((ClientComputeImpl)client.compute()).activeTaskFutures().isEmpty(), TIMEOUT));
+                assertTrue(GridTestUtils.waitForCondition(
+                        () -> ((ClientComputeImpl) client.compute()).activeTaskFutures().isEmpty(), TIMEOUT));
 
-            assertTrue(fut.isCancelled());
-            assertTrue(fut.isDone());
+                assertTrue(fut.isCancelled());
+                assertTrue(fut.isDone());
 
-            assertNotNull(handledErr.get());
-            assertTrue(handledErr.get() instanceof CancellationException);
-            assertNull(handledFut.toCompletableFuture().get());
+                assertNotNull(handledErr.get());
+                assertTrue(handledErr.get() instanceof CancellationException);
+                assertNull(handledFut.toCompletableFuture().get());
 
-            fut.get();
-        }
+                fut.get();
+            }
+        });
     }
 
     /**
      *
      */
-    @Test(expected = ClientException.class)
-    public void testTaskWithTimeout() throws Exception {
-        try (IgniteClient client = startClient(0)) {
-            client.compute().withTimeout(TIMEOUT / 5).execute(TestTask.class.getName(), TIMEOUT);
-        }
+    @Test
+    public void testTaskWithTimeout() {
+        Assertions.assertThrows(ClientException.class, () -> {
+            try (IgniteClient client = startClient(0)) {
+                client.compute().withTimeout(TIMEOUT / 5).execute(TestTask.class.getName(), TIMEOUT);
+            }
+        });
     }
 
     /**
@@ -359,13 +366,15 @@ public class ComputeTaskTest extends AbstractThinClientTest {
     /**
      *
      */
-    @Test(expected = ClientException.class)
-    public void testExecuteTaskOnEmptyClusterGroup() throws Exception {
-        try (IgniteClient client = startClient(0)) {
-            ClientClusterGroup grp = client.cluster().forNodeIds(Collections.emptyList());
+    @Test
+    public void testExecuteTaskOnEmptyClusterGroup() {
+        Assertions.assertThrows(ClientException.class, () -> {
+            try (IgniteClient client = startClient(0)) {
+                ClientClusterGroup grp = client.cluster().forNodeIds(Collections.emptyList());
 
-            client.compute(grp).execute(TestTask.class.getName(), null);
-        }
+                client.compute(grp).execute(TestTask.class.getName(), null);
+            }
+        });
     }
 
     /**
@@ -398,11 +407,13 @@ public class ComputeTaskTest extends AbstractThinClientTest {
     /**
      *
      */
-    @Test(expected = ClientException.class)
-    public void testExecuteUnknownTask() throws Exception {
-        try (IgniteClient client = startClient(0)) {
-            client.compute().execute("NoSuchTask", null);
-        }
+    @Test
+    public void testExecuteUnknownTask() {
+        Assertions.assertThrows(ClientException.class, () -> {
+            try (IgniteClient client = startClient(0)) {
+                client.compute().execute("NoSuchTask", null);
+            }
+        });
     }
 
     /**

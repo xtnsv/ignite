@@ -38,8 +38,8 @@ import org.apache.ignite.internal.util.typedef.G;
 import org.apache.ignite.testframework.GridTestUtils.SF;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_PDS_MAX_CHECKPOINT_MEMORY_HISTORY_SIZE;
 
@@ -174,7 +174,7 @@ public class GridCacheRebalancingWithAsyncClearingTest extends GridCommonAbstrac
 
         fut1.get();
 
-        Assert.assertEquals(topVer + 1, fut1.topologyVersion().topologyVersion());
+        Assertions.assertEquals(topVer + 1, fut1.topologyVersion().topologyVersion());
 
         // Check that additional exchange didn't influence on asynchronous partitions eviction.
         boolean asyncClearingIsRunning = false;
@@ -186,7 +186,7 @@ public class GridCacheRebalancingWithAsyncClearingTest extends GridCommonAbstrac
             }
         }
 
-        Assert.assertTrue("Async clearing is not running at the moment", asyncClearingIsRunning);
+        Assertions.assertTrue(asyncClearingIsRunning, "Async clearing is not running at the moment");
 
         // Check that stopping & starting node didn't break rebalance process.
         stopGrid(1);
@@ -201,9 +201,9 @@ public class GridCacheRebalancingWithAsyncClearingTest extends GridCommonAbstrac
         for (int k = 1; k <= keysCnt; k++) {
             Integer val = cache.get(k);
 
-            Assert.assertNotNull("Value for " + k + " is null", val);
+            Assertions.assertNotNull(val, "Value for " + k + " is null");
 
-            Assert.assertEquals("Check failed for " + k + " " + val, 2 * k, (int)val);
+            Assertions.assertEquals(2 * k, (int)val, "Check failed for " + k + " " + val);
         }
     }
 
@@ -256,8 +256,8 @@ public class GridCacheRebalancingWithAsyncClearingTest extends GridCommonAbstrac
         // Check no data loss.
         for (int k = 1; k <= keysCnt; k++) {
             Integer val = (Integer) ignite.cache(CACHE_NAME).get(k);
-            Assert.assertNotNull("Value for " + k + " is null", val);
-            Assert.assertEquals("Check failed for " + k + " = " + val, k, (int)val);
+            Assertions.assertNotNull(val, "Value for " + k + " is null");
+            Assertions.assertEquals(k, (int)val, "Check failed for " + k + " = " + val);
         }
     }
 }

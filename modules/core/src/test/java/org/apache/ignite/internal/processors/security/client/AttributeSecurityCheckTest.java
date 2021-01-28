@@ -27,16 +27,12 @@ import org.apache.ignite.internal.client.GridClientFactory;
 import org.apache.ignite.internal.processors.security.UserAttributesFactory;
 import org.apache.ignite.internal.processors.security.impl.TestAuthenticationContextSecurityPluginProvider;
 import org.apache.ignite.plugin.PluginProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
+import org.junit.jupiter.api.Test;
 import static org.apache.ignite.plugin.security.SecurityPermissionSetBuilder.ALLOW_ALL;
 
 /**
  * Checks user attributes presents in GridClient messages.
  */
-@RunWith(JUnit4.class)
 public class AttributeSecurityCheckTest extends CommonSecurityCheckTest {
     /** */
     private static Map<String, Object> userAttrs;

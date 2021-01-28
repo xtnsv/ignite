@@ -52,9 +52,9 @@ import org.apache.ignite.spi.systemview.view.ContinuousQueryView;
 import org.apache.ignite.spi.systemview.view.SystemView;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -196,13 +196,13 @@ public class CacheContinuousQueryBufferLimitTest extends GridCommonAbstractTest 
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void resetMessageCounter() {
         msgCntr.set(0);
     }
 
     /** */
-    @After
+    @AfterEach
     public void stopAllInstances() {
         stopAllGrids();
     }

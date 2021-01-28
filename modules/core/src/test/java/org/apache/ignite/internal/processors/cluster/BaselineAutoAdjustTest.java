@@ -35,17 +35,14 @@ import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.testframework.GridTestUtils.waitForCondition;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  *
@@ -61,7 +58,7 @@ public class BaselineAutoAdjustTest extends GridCommonAbstractTest {
     /**
      * @throws Exception if failed.
      */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         stopAllGrids();
 
@@ -73,7 +70,7 @@ public class BaselineAutoAdjustTest extends GridCommonAbstractTest {
     /**
      * @throws Exception if failed.
      */
-    @After
+    @AfterEach
     public void after() throws Exception {
         stopAllGrids();
 
@@ -284,32 +281,33 @@ public class BaselineAutoAdjustTest extends GridCommonAbstractTest {
         if (isPersistent())
             assertEquals(initBaseline, baselineAfterNodeLeft);
         else {
-            assertThat(initBaseline, is(not(equalTo(baselineAfterNodeLeft))));
+            Assertions.assertNotEquals(initBaseline, baselineAfterNodeLeft);
 
             assertEquals(1, baselineAfterNodeLeft.size());
         }
     }
 
     /**
-     * @throws Exception if failed.
      */
-    @Test(expected = BaselineAdjustForbiddenException.class)
-    public void testBaselineAutoAdjustThrowExceptionWhenBaselineChangedManually() throws Exception {
-        Ignite ignite0 = startGrids(2);
+    @Test
+    public void testBaselineAutoAdjustThrowExceptionWhenBaselineChangedManually() {
+        Assertions.assertThrows(BaselineAdjustForbiddenException.class, () -> {
+            Ignite ignite0 = startGrids(2);
 
-        ignite0.cluster().baselineAutoAdjustEnabled(true);
+            ignite0.cluster().baselineAutoAdjustEnabled(true);
 
-        ignite0.cluster().active(true);
+            ignite0.cluster().active(true);
 
-        ignite0.cluster().baselineAutoAdjustTimeout(autoAdjustTimeout);
+            ignite0.cluster().baselineAutoAdjustTimeout(autoAdjustTimeout);
 
-        Collection<BaselineNode> baselineNodes = ignite0.cluster().currentBaselineTopology();
+            Collection<BaselineNode> baselineNodes = ignite0.cluster().currentBaselineTopology();
 
-        assertEquals(2, baselineNodes.size());
+            assertEquals(2, baselineNodes.size());
 
-        stopGrid(1);
+            stopGrid(1);
 
-        ignite0.cluster().setBaselineTopology(Arrays.asList(((IgniteEx)ignite0).localNode()));
+            ignite0.cluster().setBaselineTopology(Arrays.asList(((IgniteEx) ignite0).localNode()));
+        });
     }
 
     /**

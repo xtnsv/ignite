@@ -70,8 +70,8 @@ import org.apache.ignite.internal.util.typedef.internal.CU;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.cache.persistence.checkpoint.CheckpointStatus.NULL_PTR;
 
@@ -1029,7 +1029,7 @@ public class WalRecoveryTxLogicalRecordsTest extends GridCommonAbstractTest {
      * @param rl2 Data 2 (after restore).
      */
     private void checkEquals(T2<long[], Integer> rl1, T2<long[], Integer> rl2) {
-        Assert.assertArrayEquals(rl1.get1(), rl2.get1());
+        Assertions.assertArrayEquals(rl1.get1(), rl2.get1());
         assertEquals(rl1.get2(), rl2.get2());
     }
 
@@ -1054,10 +1054,10 @@ public class WalRecoveryTxLogicalRecordsTest extends GridCommonAbstractTest {
                 long tails1[] = m1.get(bucket);
                 long tails2[] = m2.get(bucket);
 
-                Assert.assertArrayEquals(tails1, tails2);
+                Assertions.assertArrayEquals(tails1, tails2);
             }
 
-            Assert.assertArrayEquals("Wrong counts [part=" + part + ']', t1.get2(), t2.get2());
+            Assertions.assertArrayEquals(t1.get2(), t2.get2(), "Wrong counts [part=" + part + ']');
         }
     }
 

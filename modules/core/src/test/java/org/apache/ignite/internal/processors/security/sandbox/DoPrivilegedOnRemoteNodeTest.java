@@ -30,9 +30,9 @@ import org.apache.ignite.lang.IgniteCallable;
 import org.apache.ignite.lang.IgniteRunnable;
 import org.apache.ignite.resources.IgniteInstanceResource;
 import org.apache.ignite.spi.deployment.local.LocalDeploymentSpi;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.plugin.security.SecurityPermissionSetBuilder.ALLOW_ALL;
 import static org.apache.ignite.testframework.GridTestUtils.assertThrowsWithCause;
@@ -102,13 +102,13 @@ public class DoPrivilegedOnRemoteNodeTest extends AbstractSandboxTest {
     }
 
     /** */
-    @Before
+    @BeforeEach
     public void prepare() throws IOException {
         srcTmpDir = Files.createTempDirectory(getClass().getSimpleName());
     }
 
     /** */
-    @After
+    @AfterEach
     public void cleanup() {
         U.delete(srcTmpDir);
     }

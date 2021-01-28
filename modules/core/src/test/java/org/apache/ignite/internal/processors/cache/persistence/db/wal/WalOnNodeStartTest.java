@@ -32,11 +32,8 @@ import org.apache.ignite.internal.processors.cache.persistence.tree.io.PageIO;
 import org.apache.ignite.internal.processors.cache.persistence.wal.WALPointer;
 import org.apache.ignite.internal.processors.cache.persistence.wal.reader.IgniteWalIteratorFactory;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /** */
 public class WalOnNodeStartTest extends GridCommonAbstractTest {
@@ -124,7 +121,7 @@ public class WalOnNodeStartTest extends GridCommonAbstractTest {
                 ByteBuffer data = pageSnapshot.pageDataBuffer();
 
                 // No metapages should be present in WAL because they all were in correct states already.
-                assertThat(PageIO.T_PART_META, not(equalTo(PageIO.getType(data))));
+                Assertions.assertNotEquals(PageIO.T_PART_META, PageIO.getType(data));
             }
         });
     }

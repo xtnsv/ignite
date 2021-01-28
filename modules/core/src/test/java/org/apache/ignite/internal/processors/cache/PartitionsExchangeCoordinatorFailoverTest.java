@@ -50,8 +50,8 @@ import org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Advanced coordinator failure scenarios during PME.
@@ -188,7 +188,7 @@ public class PartitionsExchangeCoordinatorFailoverTest extends GridCommonAbstrac
         for (Ignite grid : G.allGrids()) {
             IgniteCache cache = grid.cache(CACHE_NAME);
 
-            Assert.assertNotNull(cache);
+            Assertions.assertNotNull(cache);
 
             cache.put(0, 0);
         }
@@ -314,10 +314,10 @@ public class PartitionsExchangeCoordinatorFailoverTest extends GridCommonAbstrac
         for (Ignite grid : G.allGrids()) {
             IgniteCache cache = grid.cache(CACHE_NAME);
 
-            Assert.assertNotNull(cache);
+            Assertions.assertNotNull(cache);
 
             for (int k = 0; k < 1024; k++)
-                Assert.assertEquals(k, cache.get(k));
+                Assertions.assertEquals(k, cache.get(k));
 
             for (int k = 0; k < 1024; k++)
                 cache.put(k, k);
@@ -371,8 +371,8 @@ public class PartitionsExchangeCoordinatorFailoverTest extends GridCommonAbstrac
         // Additionally start 2 new nodes. Their exchange should be merged with exchange on join new coordinator node.
         startGridsMultiThreaded(2, 2);
 
-        Assert.assertFalse("New coordinator join shouldn't be happened before stopping old coordinator.",
-            newCrdJoinFut.isDone());
+        Assertions.assertFalse(newCrdJoinFut.isDone(),
+            "New coordinator join shouldn't be happened before stopping old coordinator.");
 
         // Stop coordinator.
         stopGrid(CRD_NONE);
@@ -399,8 +399,8 @@ public class PartitionsExchangeCoordinatorFailoverTest extends GridCommonAbstrac
                 expAssignmentNode = nodeEx;
             }
             else
-                Assert.assertEquals("Affinity assignments are different " +
-                    "[expectedNode=" + expAssignmentNode + ", actualNode=" + nodeEx + "]", expAssignment, assignment);
+                Assertions.assertEquals(assignment, expAssignment, "Affinity assignments are different " +
+                    "[expectedNode=" + expAssignmentNode + ", actualNode=" + nodeEx + "]");
         }
     }
 
@@ -438,8 +438,8 @@ public class PartitionsExchangeCoordinatorFailoverTest extends GridCommonAbstrac
             }, 60_000
         );
 
-        Assert.assertFalse("New coordinator join shouldn't be happened before stopping old coordinator.",
-            newCrdJoinFut.isDone());
+        Assertions.assertFalse(newCrdJoinFut.isDone(),
+            "New coordinator join shouldn't be happened before stopping old coordinator.");
 
         // Stop coordinator.
         stopGrid(CRD_NONE);

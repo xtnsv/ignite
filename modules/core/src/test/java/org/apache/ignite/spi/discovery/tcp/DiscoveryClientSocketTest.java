@@ -31,11 +31,11 @@ import org.apache.ignite.internal.IgniteInternalFuture;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.ssl.SslContextFactory;
 import org.apache.ignite.testframework.GridTestUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Check a ssl socket configuration which used in discovery.
@@ -59,7 +59,7 @@ public class DiscoveryClientSocketTest {
     /**
      * Configure SSL and Discovery.
      */
-    @Before
+    @BeforeEach
     public void before() {
         SslContextFactory socketFactory = (SslContextFactory)GridTestUtils.sslTrustedFactory("node01", "trustone");
         SSLContext sslCtx = socketFactory.create();
@@ -129,7 +129,7 @@ public class DiscoveryClientSocketTest {
                 fail("Failed to read from socket.");
         }
 
-        assertEquals("Handshake did not pass, readed bytes: " + read, Arrays.asList(U.IGNITE_HEADER), Arrays.asList(U.IGNITE_HEADER));
+        assertEquals(Arrays.asList(U.IGNITE_HEADER), Arrays.asList(U.IGNITE_HEADER), "Handshake did not pass, readed bytes: " + read);
     }
 
     /**

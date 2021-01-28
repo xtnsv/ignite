@@ -59,8 +59,8 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionRollbackException;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.cache.persistence.file.FilePageStoreManager.DFLT_STORE_DIR;
 
@@ -541,7 +541,7 @@ public class ClientAffinityAssignmentWithBaselineTest extends GridCommonAbstract
      * Tests that if dynamic cache has no affinity nodes at the moment of start,
      * it will still work correctly when affinity nodes will appear.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-8652")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-8652")
     @Test
     public void testDynamicCacheStartNoAffinityNodes() throws Exception {
         IgniteEx ig0 = startGrid(0);

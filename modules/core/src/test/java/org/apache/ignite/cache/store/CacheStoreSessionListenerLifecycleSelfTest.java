@@ -34,8 +34,8 @@ import org.apache.ignite.resources.IgniteInstanceResource;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 
@@ -47,7 +47,7 @@ public class CacheStoreSessionListenerLifecycleSelfTest extends GridCommonAbstra
     private static final Queue<String> evts = new ConcurrentLinkedDeque<>();
 
     /** */
-    @Before
+    @BeforeEach
     public void beforeCacheStoreSessionListenerLifecycleSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
     }

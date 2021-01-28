@@ -35,16 +35,16 @@ import org.apache.ignite.internal.processors.cache.tree.PendingRow;
 import org.apache.ignite.internal.util.lang.GridCursor;
 import org.apache.ignite.internal.util.typedef.internal.CU;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 /** */
 public class PendingTreeCorruptionTest extends GridCommonAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         stopAllGrids();
 
@@ -52,7 +52,7 @@ public class PendingTreeCorruptionTest extends GridCommonAbstractTest {
     }
 
     /** */
-    @After
+    @AfterEach
     public void after() throws Exception {
         stopAllGrids();
 

@@ -29,9 +29,9 @@
  import org.apache.ignite.internal.util.GridConcurrentLinkedHashSet;
  import org.apache.ignite.testframework.GridTestUtils;
  import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
- import org.junit.Assume;
- import org.junit.Before;
- import org.junit.Test;
+ import org.junit.jupiter.api.Assumptions;
+ import org.junit.jupiter.api.BeforeEach;
+ import org.junit.jupiter.api.Test;
 
  /**
   * <b>Tests in the class strongly depend on implementation of {@link GridEventStorageManager} and internal logic of
@@ -43,9 +43,9 @@
   */
  public class ServiceDeploymentDiscoveryListenerNotificationOrderTest extends GridCommonAbstractTest {
      /** */
-     @Before
+     @BeforeEach
      public void check() {
-         Assume.assumeTrue(isEventDrivenServiceProcessorEnabled());
+         Assumptions.assumeTrue(isEventDrivenServiceProcessorEnabled());
      }
 
      /**

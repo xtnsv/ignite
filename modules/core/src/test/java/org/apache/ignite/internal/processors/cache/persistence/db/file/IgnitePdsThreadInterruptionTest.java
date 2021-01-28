@@ -37,10 +37,10 @@ import org.apache.ignite.internal.util.GridConcurrentHashSet;
 import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test what interruptions of writing threads do not affect PDS.
@@ -81,12 +81,12 @@ public class IgnitePdsThreadInterruptionTest extends GridCommonAbstractTest {
         return cfg;
     }
 
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         cleanPersistenceDir();
     }
 
-    @After
+    @AfterEach
     public void after() throws Exception {
         stopAllGrids();
 
@@ -162,8 +162,8 @@ public class IgnitePdsThreadInterruptionTest extends GridCommonAbstractTest {
         // Get all keys.
         Map<Integer, byte[]> res = cache.getAll(keysToCheck);
 
-        Assert.assertEquals(maxKey, keysToCheck.size());
-        Assert.assertEquals(maxKey, res.size());
+        Assertions.assertEquals(maxKey, keysToCheck.size());
+        Assertions.assertEquals(maxKey, res.size());
 
         // Post check.
         for (Integer key: keysToCheck) {
@@ -175,7 +175,7 @@ public class IgnitePdsThreadInterruptionTest extends GridCommonAbstractTest {
             verifiedKeys++;
         }
 
-        Assert.assertEquals(maxKey, verifiedKeys);
+        Assertions.assertEquals(maxKey, verifiedKeys);
 
         log.info("Verified keys: " + verifiedKeys);
     }
@@ -247,7 +247,7 @@ public class IgnitePdsThreadInterruptionTest extends GridCommonAbstractTest {
 
         Map<Integer, byte[]> res = cache.getAll(keysToCheck);
 
-        Assert.assertEquals(res.size(), keysToCheck.size());
+        Assertions.assertEquals(res.size(), keysToCheck.size());
 
         // Post check.
         for (Integer key: keysToCheck) {

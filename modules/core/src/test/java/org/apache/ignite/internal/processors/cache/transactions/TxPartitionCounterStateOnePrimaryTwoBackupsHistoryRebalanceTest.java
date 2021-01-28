@@ -19,8 +19,8 @@ package org.apache.ignite.internal.processors.cache.transactions;
 
 import org.apache.ignite.internal.processors.cache.persistence.db.wal.IgniteWalRebalanceTest;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_PREFER_WAL_REBALANCE;
 
@@ -45,14 +45,14 @@ public class TxPartitionCounterStateOnePrimaryTwoBackupsHistoryRebalanceTest
 
     /** {@inheritDoc} */
     @Test
-    @Ignore
+    @Disabled
     @Override public void testMissingUpdateBetweenMultipleCheckpoints() throws Exception {
         // No-op.
     }
 
     /** {@inheritDoc} */
     @Test
-    @Ignore
+    @Disabled
     @Override public void testCommitReorderWithRollbackNoRebalanceAfterRestart() throws Exception {
         // No-op.
     }

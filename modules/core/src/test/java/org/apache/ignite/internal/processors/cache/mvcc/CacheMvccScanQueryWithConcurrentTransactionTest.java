@@ -28,7 +28,7 @@ import org.apache.ignite.cache.query.ScanQuery;
 import org.apache.ignite.internal.util.lang.IgniteClosure2X;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.lang.IgniteBiPredicate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

@@ -34,8 +34,8 @@ import org.apache.ignite.lang.IgniteBiPredicate;
 import org.apache.ignite.resources.IgniteInstanceResource;
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
@@ -134,7 +134,7 @@ public class GridCacheGlobalLoadTest extends IgniteCacheAbstractTest {
         for (int i = 0; i < gridCount(); i++) {
             Object[] args = map.get(getTestIgniteInstanceName(i));
 
-            Assert.assertArrayEquals(expArgs, args);
+            Assertions.assertArrayEquals(expArgs, args);
         }
 
         assertEquals(cache.get(1), (Integer)1);
@@ -173,7 +173,7 @@ public class GridCacheGlobalLoadTest extends IgniteCacheAbstractTest {
         for (int i = 0; i < gridCount(); i++) {
             Object[] args = map.get(getTestIgniteInstanceName(i));
 
-            Assert.assertArrayEquals(expArgs, args);
+            Assertions.assertArrayEquals(expArgs, args);
         }
 
         assertEquals(cache.get(1), (Integer)1);

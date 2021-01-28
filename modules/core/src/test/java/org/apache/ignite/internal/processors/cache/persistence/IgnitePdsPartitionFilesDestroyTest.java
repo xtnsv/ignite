@@ -44,8 +44,8 @@ import org.apache.ignite.internal.processors.cache.persistence.file.RandomAccess
 import org.apache.ignite.internal.util.typedef.G;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.processors.cache.persistence.file.FilePageStoreManager.DFLT_STORE_DIR;
 
@@ -136,7 +136,8 @@ public class IgnitePdsPartitionFilesDestroyTest extends GridCommonAbstractTest {
         IgniteCache<Integer, Integer> cache = ignite.cache(DEFAULT_CACHE_NAME);
 
         for (int k = 0; k < keysCnt; k++)
-            Assert.assertEquals("node = " + ignite.name() + ", key = " + k, (Integer)(k * multiplier), cache.get(k));
+            Assertions.assertEquals((Integer)(k * multiplier), cache.get(k),
+                    "node = " + ignite.name() + ", key = " + k);
     }
 
     /**
@@ -258,7 +259,7 @@ public class IgnitePdsPartitionFilesDestroyTest extends GridCommonAbstractTest {
         try {
             forceCheckpoint(problemNode);
 
-            Assert.assertTrue("Checkpoint must be failed", false);
+            Assertions.assertTrue(false, "Checkpoint must be failed");
         }
         catch (Exception expected) {
             expected.printStackTrace();
@@ -327,7 +328,7 @@ public class IgnitePdsPartitionFilesDestroyTest extends GridCommonAbstractTest {
         try {
             forceCheckpoint(problemNode);
 
-            Assert.assertTrue("Checkpoint must be failed", false);
+            Assertions.assertTrue(false, "Checkpoint must be failed");
         }
         catch (Exception expected) {
             expected.printStackTrace();
@@ -402,18 +403,18 @@ public class IgnitePdsPartitionFilesDestroyTest extends GridCommonAbstractTest {
 
             if (exists) {
                 if (part != null && part.state() == GridDhtPartitionState.EVICTED)
-                    Assert.assertTrue("Partition file has deleted ahead of time: " + partFile, partFile.exists());
+                    Assertions.assertTrue(partFile.exists(), "Partition file has deleted ahead of time: " + partFile);
 
                 evicted++;
             }
             else {
                 if (part == null || part.state() == GridDhtPartitionState.EVICTED)
-                    Assert.assertTrue("Partition file has not deleted: " + partFile, !partFile.exists());
+                    Assertions.assertTrue(!partFile.exists(), "Partition file has not deleted: " + partFile);
             }
         }
 
         if (exists)
-            Assert.assertTrue("There should be at least 1 eviction", evicted > 0);
+            Assertions.assertTrue(evicted > 0, "There should be at least 1 eviction");
     }
 
     /**

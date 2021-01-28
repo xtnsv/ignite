@@ -23,7 +23,7 @@ import org.apache.ignite.cache.CacheWriteSynchronizationMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.IgniteEx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for a lazy MVCC processor start.

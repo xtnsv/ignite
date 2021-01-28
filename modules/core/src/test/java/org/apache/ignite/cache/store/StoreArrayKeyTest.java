@@ -30,9 +30,9 @@ import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.IgniteEx;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -121,7 +121,7 @@ public class StoreArrayKeyTest extends GridCommonAbstractTest {
     /**
      *
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         node1 = startGrid(0);
         node2 = startGrid(1);
@@ -132,7 +132,7 @@ public class StoreArrayKeyTest extends GridCommonAbstractTest {
     /**
      *
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         stopAllGrids();
         cleanPersistenceDir();

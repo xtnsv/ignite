@@ -59,8 +59,8 @@ import org.apache.ignite.lang.IgniteBiTuple;
 import org.apache.ignite.spi.eventstorage.NoopEventStorageSpi;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.internal.pagemem.wal.record.WALRecord.RecordType.METASTORE_DATA_RECORD;
 import static org.apache.ignite.internal.processors.cache.persistence.wal.serializer.RecordV1Serializer.HEADER_RECORD_SIZE;
@@ -191,7 +191,7 @@ public class IgniteWalIteratorSwitchSegmentTest extends GridCommonAbstractTest {
 
         int recordSize = serializer.size(switchSegmentRecord);
 
-        Assert.assertEquals(1, recordSize);
+        Assertions.assertEquals(1, recordSize);
     }
 
     /**
@@ -254,7 +254,7 @@ public class IgniteWalIteratorSwitchSegmentTest extends GridCommonAbstractTest {
             attempt--;
         }
 
-        Assert.assertNotNull(rec);
+        Assertions.assertNotNull(rec);
 
         int recordsToWrite = SEGMENT_SIZE / recSize;
 
@@ -316,7 +316,7 @@ public class IgniteWalIteratorSwitchSegmentTest extends GridCommonAbstractTest {
             }
         }
 
-        Assert.assertEquals("Not all records read during iteration.", expRecords, actualRecords);
+        Assertions.assertEquals(expRecords, actualRecords, "Not all records read during iteration.");
     }
 
     /**
@@ -406,7 +406,7 @@ public class IgniteWalIteratorSwitchSegmentTest extends GridCommonAbstractTest {
         assertEquals(workDir + WORK_SUB_DIR + File.separator + "0000000000000000.wal", startedSegmentPath.get());
         assertEquals(workDir + ARCHIVE_SUB_DIR + File.separator + "0000000000000000.wal", finishedSegmentPath.get());
 
-        Assert.assertEquals("Not all records read during iteration.", recordsToWrite, actualRecords.get());
+        assertEquals("Not all records read during iteration.", recordsToWrite, actualRecords.get());
     }
 
     /***

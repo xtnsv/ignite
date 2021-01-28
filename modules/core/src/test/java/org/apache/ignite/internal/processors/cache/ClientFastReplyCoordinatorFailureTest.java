@@ -32,8 +32,8 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Covers race with client join and instant successive coordinator change.
@@ -103,7 +103,7 @@ public class ClientFastReplyCoordinatorFailureTest extends GridCommonAbstractTes
     /**
      * Cleanup after test.
      */
-    @After
+    @AfterEach
     public void cleanUp() {
         stopAllGrids();
     }

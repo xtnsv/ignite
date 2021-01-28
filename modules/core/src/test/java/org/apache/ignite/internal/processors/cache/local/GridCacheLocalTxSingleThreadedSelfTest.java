@@ -24,7 +24,7 @@ import org.apache.ignite.internal.processors.cache.IgniteTxSingleThreadedAbstrac
 import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.apache.ignite.cache.CacheMode.LOCAL;
 
@@ -33,7 +33,7 @@ import static org.apache.ignite.cache.CacheMode.LOCAL;
  */
 public class GridCacheLocalTxSingleThreadedSelfTest extends IgniteTxSingleThreadedAbstractTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheLocalTxSingleThreadedSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.LOCAL_CACHE);
     }

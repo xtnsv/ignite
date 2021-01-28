@@ -49,8 +49,8 @@ import org.apache.ignite.lang.IgniteReducer;
 import org.apache.ignite.lang.IgniteRunnable;
 import org.apache.ignite.testframework.junits.IgniteConfigVariationsAbstractTest;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Full API compute test.
@@ -2442,7 +2442,7 @@ public class IgniteComputeConfigVariationsFullApiTest extends IgniteConfigVariat
             assertEquals(Float.MAX_VALUE, fltVal);
             assertEquals(Double.MAX_VALUE, dblVal);
             assertEquals(STR_VAL, strVal);
-            Assert.assertArrayEquals(ARRAY_VAL, arrVal);
+            Assertions.assertArrayEquals(ARRAY_VAL, arrVal);
             assertEquals(TestJobEnum.VALUE_2, eVal);
         }
 

@@ -37,14 +37,14 @@ import org.apache.ignite.testframework.GridTestNode;
 import org.apache.ignite.testframework.config.GridTestProperties;
 import org.apache.ignite.testframework.junits.GridTestKernalContext;
 import org.apache.ignite.testframework.junits.logger.GridTestLog4jLogger;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -65,7 +65,7 @@ public class ServiceReassignmentFunctionSelfTest {
     private final List<IgniteServiceProcessor> processors;
 
     /** */
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         GridTestProperties.init();
     }
@@ -204,7 +204,7 @@ public class ServiceReassignmentFunctionSelfTest {
      * @param cfg Service configuration to test.
      * @throws Exception In case of an error.
      */
-    @Ignore
+    @Disabled
     public void runTestReassignFunction(IgniteUuid srvcId, ServiceConfiguration cfg,
         TreeMap<UUID, Integer> oldTop) throws Exception {
         final IgniteServiceProcessor proc0 = processors.get(0);

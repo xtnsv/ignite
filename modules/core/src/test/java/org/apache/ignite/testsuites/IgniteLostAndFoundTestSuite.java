@@ -38,7 +38,7 @@ import org.apache.ignite.jvmtest.ServerSocketMultiThreadedTest;
 import org.apache.ignite.lang.GridSystemCurrentTimeMillisTest;
 import org.apache.ignite.lang.GridThreadPriorityTest;
 import org.apache.ignite.startup.servlet.GridServletLoaderTest;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -80,7 +80,7 @@ public class IgniteLostAndFoundTestSuite {
         BlockingQueueTest.class,
         MultipleFileIOTest.class
     })
-    @Ignore
+    @Disabled
     public static class TentativeTests {
     }
 }

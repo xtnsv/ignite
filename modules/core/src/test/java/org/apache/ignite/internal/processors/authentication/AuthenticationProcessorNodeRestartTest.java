@@ -28,8 +28,8 @@ import org.apache.ignite.internal.cluster.ClusterTopologyCheckedException;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link IgniteAuthenticationProcessor} on unstable topology.
@@ -104,7 +104,7 @@ public class AuthenticationProcessorNodeRestartTest extends GridCommonAbstractTe
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-7472")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-7472")
     @Test
     public void testConcurrentAddUpdateRemoveNodeRestartCoordinator() throws Exception {
         final IgniteInternalFuture restartFut = restartCoordinator();

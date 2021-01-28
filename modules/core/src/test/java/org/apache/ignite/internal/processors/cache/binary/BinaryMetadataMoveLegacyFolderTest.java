@@ -33,16 +33,16 @@ import org.apache.ignite.internal.binary.BinaryMetadata;
 import org.apache.ignite.internal.binary.BinaryTypeImpl;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for moving binary metadata and marshaller folders to PDS.
  */
 public class BinaryMetadataMoveLegacyFolderTest extends GridCommonAbstractTest {
     /** {@inheritDoc} */
-    @Before
+    @BeforeEach
     @Override public void beforeTest() throws Exception {
         super.beforeTest();
 
@@ -52,7 +52,7 @@ public class BinaryMetadataMoveLegacyFolderTest extends GridCommonAbstractTest {
     }
 
     /** {@inheritDoc} */
-    @After
+    @AfterEach
     @Override public void afterTest() throws Exception {
         super.afterTest();
 

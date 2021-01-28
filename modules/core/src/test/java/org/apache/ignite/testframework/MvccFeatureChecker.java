@@ -24,10 +24,10 @@ import org.apache.ignite.internal.util.typedef.X;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.apache.ignite.transactions.TransactionSerializationException;
-import org.junit.Assume;
+import org.junit.jupiter.api.Assumptions;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_FORCE_MVCC_MODE_IN_TESTS;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Provides checks for features supported when FORCE_MVCC mode is on.
@@ -79,7 +79,7 @@ public class MvccFeatureChecker {
 
         String reason = unsupportedReason(f);
 
-        Assume.assumeTrue(reason, reason == null);
+        Assumptions.assumeTrue(reason == null, reason);
     }
 
     /**

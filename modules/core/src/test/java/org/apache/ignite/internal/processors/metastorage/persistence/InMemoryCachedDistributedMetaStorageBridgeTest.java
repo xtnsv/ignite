@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.ignite.IgniteCheckedException;
 import org.apache.ignite.marshaller.jdk.JdkMarshaller;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static org.apache.ignite.internal.processors.metastorage.persistence.DistributedMetaStorageUtil.COMMON_KEY_PREFIX;
@@ -34,10 +34,7 @@ import static org.apache.ignite.internal.processors.metastorage.persistence.Dist
 import static org.apache.ignite.internal.processors.metastorage.persistence.DmsDataWriterWorker.DUMMY_VALUE;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 /** */
 public class InMemoryCachedDistributedMetaStorageBridgeTest {
@@ -48,7 +45,7 @@ public class InMemoryCachedDistributedMetaStorageBridgeTest {
     private InMemoryCachedDistributedMetaStorageBridge bridge;
 
     /** */
-    @Before
+    @BeforeEach
     public void before() {
         marshaller = JdkMarshaller.DEFAULT;
 
@@ -79,7 +76,7 @@ public class InMemoryCachedDistributedMetaStorageBridgeTest {
         List<String> values = new ArrayList<>();
 
         bridge.iterate("key", (key, value) -> {
-            assertThat(value, is(instanceOf(String.class)));
+            assertTrue(value instanceof String);
 
             keys.add(key);
             values.add((String)value);

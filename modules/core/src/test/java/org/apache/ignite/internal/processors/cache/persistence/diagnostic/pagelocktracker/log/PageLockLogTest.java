@@ -24,8 +24,8 @@ import org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelo
 import org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelocktracker.log.PageLockLogSnapshot.LogEntry;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.GridTestUtils.SF;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static java.lang.System.out;
 import static java.time.Duration.ofMinutes;
@@ -34,8 +34,6 @@ import static org.apache.ignite.internal.processors.cache.persistence.diagnostic
 import static org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelocktracker.PageLockTracker.BEFORE_READ_LOCK;
 import static org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelocktracker.PageLockTracker.READ_LOCK;
 import static org.apache.ignite.internal.processors.cache.persistence.diagnostic.pagelocktracker.PageLockTracker.READ_UNLOCK;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /** */
 public abstract class PageLockLogTest extends AbstractPageLockTest {
@@ -478,11 +476,11 @@ public abstract class PageLockLogTest extends AbstractPageLockTest {
 
         log = lockLog.dump();
 
-        Assert.assertTrue(lockLog.isInvalid());
+        Assertions.assertTrue(lockLog.isInvalid());
 
         String msg = lockLog.invalidContext().msg;
 
-        Assert.assertTrue(msg, msg.contains("Log overflow"));
+        Assertions.assertTrue(msg.contains("Log overflow"), msg);
     }
 
     /** */
@@ -542,14 +540,14 @@ public abstract class PageLockLogTest extends AbstractPageLockTest {
                 assertTrue(logDump.nextOpPageId != 0);
 
             assertTrue(logDump.time != 0);
-            Assert.assertNotNull(logDump.name);
+            Assertions.assertNotNull(logDump.name);
 
             if (logDump.headIdx > 0) {
                 for (int j = 0; j < logDump.headIdx; j++)
-                    Assert.assertNotNull(String.valueOf(logDump.headIdx), logDump.locklog.get(j));
+                Assertions.assertNotNull(logDump.locklog.get(j), String.valueOf(logDump.headIdx));
             }
 
-            Assert.assertNotNull(logDump);
+            Assertions.assertNotNull(logDump);
 
             totalExecutionTime += logTime;
 

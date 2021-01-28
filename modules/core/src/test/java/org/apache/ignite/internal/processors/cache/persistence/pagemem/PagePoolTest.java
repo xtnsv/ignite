@@ -33,9 +33,9 @@ import org.apache.ignite.internal.util.OffheapReadWriteLock;
 import org.apache.ignite.internal.util.typedef.internal.U;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -117,7 +117,7 @@ public class PagePoolTest extends GridCommonAbstractTest {
 
     /**
      */
-    @Before
+    @BeforeEach
     public void prepare() {
         provider = new UnsafeMemoryProvider(log);
         provider.initialize(new long[] {sysPageSize * PAGES + 16});
@@ -129,7 +129,7 @@ public class PagePoolTest extends GridCommonAbstractTest {
 
     /**
      */
-    @After
+    @AfterEach
     public void cleanup() {
         provider.shutdown(true);
     }

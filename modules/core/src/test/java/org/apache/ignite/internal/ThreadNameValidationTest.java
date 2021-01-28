@@ -32,13 +32,11 @@ import org.apache.ignite.configuration.DataRegionConfiguration;
 import org.apache.ignite.configuration.DataStorageConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.internal.util.typedef.internal.U;
-import org.apache.ignite.testframework.junits.GridAbstractTest;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TestRule;
-import org.junit.runners.model.Statement;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 /**
  * Check threads for default names in single and thread pool instances.
@@ -57,17 +55,10 @@ public class ThreadNameValidationTest extends GridCommonAbstractTest {
     /** Sequence for sets objects. */
     private static final transient AtomicLong SEQUENCE = new AtomicLong();
 
-    /** */
-    private static final TestRule beforeAllTestRule = (base, description) -> new Statement() {
-        @Override public void evaluate() throws Throwable {
-            defaultThreadFactoryCountBeforeTest = getDefaultPoolCount();
-            base.evaluate();
-        }
-    };
-
-    /** Manages before first test execution. */
-    @ClassRule public static transient RuleChain firstLastTestRule
-        = RuleChain.outerRule(beforeAllTestRule).around(GridAbstractTest.firstLastTestRule);
+    @Order(0)
+    @RegisterExtension
+    public static final BeforeAllCallback callback =
+            context -> defaultThreadFactoryCountBeforeTest = getDefaultPoolCount();
 
     /** */
     private final ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();

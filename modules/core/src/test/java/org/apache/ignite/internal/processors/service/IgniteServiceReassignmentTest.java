@@ -38,8 +38,8 @@ import org.apache.ignite.services.ServiceContext;
 import org.apache.ignite.testframework.GridStringLogger;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -211,7 +211,7 @@ public class IgniteServiceReassignmentTest extends GridCommonAbstractTest {
      */
     @Test
     public void testZombieAssignmentsCleanup() throws Exception {
-        Assume.assumeTrue(!isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(!isEventDrivenServiceProcessorEnabled());
 
         useStrLog = true;
 
@@ -282,7 +282,7 @@ public class IgniteServiceReassignmentTest extends GridCommonAbstractTest {
      */
     @Test
     public void testNodeStopWhileThereAreCacheActivitiesInServiceProcessor() throws Exception {
-        Assume.assumeTrue(!isEventDrivenServiceProcessorEnabled());
+        Assumptions.assumeTrue(!isEventDrivenServiceProcessorEnabled());
 
         final int nodesCnt = 2;
         final int maxSvc = 1024;

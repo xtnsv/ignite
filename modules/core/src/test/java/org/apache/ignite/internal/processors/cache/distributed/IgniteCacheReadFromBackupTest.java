@@ -44,8 +44,8 @@ import org.apache.ignite.internal.processors.cache.distributed.near.GridNearSing
 import org.apache.ignite.lang.IgniteBiPredicate;
 import org.apache.ignite.plugin.extensions.communication.Message;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cache.CacheAtomicityMode.ATOMIC;
 import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
@@ -89,7 +89,7 @@ public class IgniteCacheReadFromBackupTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-10274")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-10274")
     @Test
     public void testMvccGetFromBackupStoreReadThroughEnabled() throws Exception {
         checkGetFromBackupStoreReadThroughEnabled(mvccCacheConfigurations());
@@ -150,7 +150,7 @@ public class IgniteCacheReadFromBackupTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-10274")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-10274")
     @Test
     public void testMvccGetFromBackupStoreReadThroughDisabled() throws Exception {
         checkGetFromBackupStoreReadThroughDisabled(mvccCacheConfigurations());
@@ -195,7 +195,7 @@ public class IgniteCacheReadFromBackupTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-10274")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-10274")
     @Test
     public void testMvccGetFromPrimaryPreloadInProgress() throws Exception {
         checkGetFromPrimaryPreloadInProgress(mvccCacheConfigurations());
@@ -298,7 +298,7 @@ public class IgniteCacheReadFromBackupTest extends GridCommonAbstractTest {
     /**
      * @throws Exception If failed.
      */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-10274")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-10274")
     @Test
     public void testMvccNoPrimaryReadPreloadFinished() throws Exception {
         checkNoPrimaryReadPreloadFinished(mvccCacheConfigurations());

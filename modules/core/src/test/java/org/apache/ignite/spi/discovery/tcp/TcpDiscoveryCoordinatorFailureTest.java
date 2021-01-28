@@ -40,8 +40,8 @@ import org.apache.ignite.spi.discovery.tcp.messages.TcpDiscoveryConnectionCheckM
 import org.apache.ignite.spi.discovery.tcp.messages.TcpDiscoveryNodeAddFinishedMessage;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -97,7 +97,7 @@ public class TcpDiscoveryCoordinatorFailureTest extends GridCommonAbstractTest {
     /**
      *
      */
-    @After
+    @AfterEach
     public void testCleanup() {
         discoSpis = null;
     }

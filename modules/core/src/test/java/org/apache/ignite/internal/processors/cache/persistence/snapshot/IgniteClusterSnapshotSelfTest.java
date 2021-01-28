@@ -78,8 +78,8 @@ import org.apache.ignite.lang.IgniteFuture;
 import org.apache.ignite.spi.metric.LongMetric;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.transactions.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cluster.ClusterState.ACTIVE;
 import static org.apache.ignite.events.EventType.EVTS_CLUSTER_SNAPSHOT;
@@ -113,7 +113,7 @@ public class IgniteClusterSnapshotSelfTest extends AbstractSnapshotSelfTest {
     protected volatile boolean jvm;
 
     /** @throws Exception If fails. */
-    @Before
+    @BeforeEach
     @Override public void beforeTestSnapshot() throws Exception {
         super.beforeTestSnapshot();
 

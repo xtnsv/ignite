@@ -37,8 +37,8 @@ import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -114,7 +114,7 @@ public class TxDataConsistencyOnCommitFailureTest extends GridCommonAbstractTest
     }
 
     /** */
-    @Ignore("https://issues.apache.org/jira/browse/IGNITE-9806")
+    @Disabled("https://issues.apache.org/jira/browse/IGNITE-9806")
     @Test
     public void testCommitErrorOnColocatedNode2PC() throws Exception {
         nodesCnt = 3;

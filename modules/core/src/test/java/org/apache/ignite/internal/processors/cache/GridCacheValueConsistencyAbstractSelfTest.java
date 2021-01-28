@@ -28,8 +28,8 @@ import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.NearCacheConfiguration;
 import org.apache.ignite.testframework.GridTestUtils.SF;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_ATOMIC_CACHE_DELETE_HISTORY_SIZE;
 import static org.apache.ignite.cache.CacheMode.PARTITIONED;
@@ -235,7 +235,7 @@ public abstract class GridCacheValueConsistencyAbstractSelfTest extends GridCach
      */
     @Test
     public void testPutConsistencyMultithreaded() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-627", nearEnabled());
+        Assumptions.assumeFalse(nearEnabled(), "https://issues.apache.org/jira/browse/IGNITE-627");
 
         for (int i = 0; i < 20; i++) {
             log.info("Iteration: " + i);
@@ -288,7 +288,7 @@ public abstract class GridCacheValueConsistencyAbstractSelfTest extends GridCach
      */
     @Test
     public void testPutRemoveConsistencyMultithreaded() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-627", nearEnabled());
+        Assumptions.assumeFalse(nearEnabled(), "https://issues.apache.org/jira/browse/IGNITE-627");
 
        for (int i = 0; i < SF.applyLB(10, 2); i++) {
            log.info("Iteration: " + i);

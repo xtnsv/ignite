@@ -21,7 +21,7 @@ import org.apache.ignite.internal.sql.command.SqlBeginTransactionCommand;
 import org.apache.ignite.internal.sql.command.SqlCommand;
 import org.apache.ignite.internal.sql.command.SqlCommitTransactionCommand;
 import org.apache.ignite.internal.sql.command.SqlRollbackTransactionCommand;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for processing of keywords BEGIN, COMMIT, ROLLBACK, START.

@@ -42,8 +42,8 @@ import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
 import org.apache.ignite.transactions.TransactionConcurrency;
 import org.apache.ignite.transactions.TransactionIsolation;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.testframework.GridTestUtils.runAsync;
 import static org.apache.ignite.testframework.GridTestUtils.runMultiThreadedAsync;
@@ -152,7 +152,7 @@ public class TxWithSmallTimeoutAndContentionOneKeyTest extends GridCommonAbstrac
      */
     @Test
     public void test() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-10455", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-10455");
 
         startGrids(4);
 

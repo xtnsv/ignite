@@ -44,9 +44,9 @@ import org.apache.ignite.internal.util.typedef.internal.CU;
 import org.apache.ignite.spi.IgniteSpiException;
 import org.apache.ignite.testframework.GridTestUtils;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.cluster.ClusterState.ACTIVE;
 import static org.apache.ignite.cluster.ClusterState.ACTIVE_READ_ONLY;
@@ -435,7 +435,7 @@ public class IgniteClusterActivateDeactivateTestWithPersistence extends IgniteCl
      */
     @Test
     public void testDeactivateDuringEvictionAndRebalance() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-7384", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-7384");
 
         IgniteEx srv = startGrids(3);
 
@@ -518,17 +518,17 @@ public class IgniteClusterActivateDeactivateTestWithPersistence extends IgniteCl
             for (int k = 1; k <= keysCount; k++) {
                 Object val = cache1.get(k);
 
-                Assert.assertNotNull("node=" + ignite.name() + ", key=" + k, val);
+            Assertions.assertNotNull(val, "node=" + ignite.name() + ", key=" + k);
 
-                Assert.assertTrue("node=" + ignite.name() + ", key=" + k + ", val=" + val, (int) val == k);
+            Assertions.assertTrue((int) val == k, "node=" + ignite.name() + ", key=" + k + ", val=" + val);
             }
 
             for (int k : addedKeys) {
                 Object val = cache1.get(k);
 
-                Assert.assertNotNull("node=" + ignite.name() + ", key=" + k, val);
+            Assertions.assertNotNull(val, "node=" + ignite.name() + ", key=" + k);
 
-                Assert.assertTrue("node=" + ignite.name() + ", key=" + k + ", val=" + val, (int) val == k);
+            Assertions.assertTrue((int) val == k, "node=" + ignite.name() + ", key=" + k + ", val=" + val);
             }
         }
     }

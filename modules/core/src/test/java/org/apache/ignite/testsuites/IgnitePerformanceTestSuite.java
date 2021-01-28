@@ -57,7 +57,7 @@ import org.apache.ignite.loadtests.mergesort.GridMergeSortLoadTest;
 import org.apache.ignite.loadtests.nio.GridNioBenchmarkTest;
 import org.apache.ignite.marshaller.GridMarshallerPerformanceTest;
 import org.apache.ignite.spi.communication.tcp.GridTcpCommunicationSpiLanLoadTest;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -118,7 +118,7 @@ public class IgnitePerformanceTestSuite {
         GridNioBenchmarkTest.class,
         GridSingleExecutionTest.class
     })
-    @Ignore
+    @Disabled
     public static class TentativeTests {
     }
 }

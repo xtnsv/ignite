@@ -19,14 +19,14 @@ package org.apache.ignite.internal.processors.cache;
 
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.testframework.MvccFeatureChecker;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests {@link org.apache.ignite.cache.CacheInterceptor}.
  */
 public class GridCacheInterceptorLocalWithStoreSelfTest extends GridCacheInterceptorLocalSelfTest {
     /** */
-    @Before
+    @BeforeEach
     public void beforeGridCacheInterceptorLocalWithStoreSelfTest() {
         MvccFeatureChecker.skipIfNotSupported(MvccFeatureChecker.Feature.CACHE_STORE);
     }

@@ -67,8 +67,8 @@ import org.apache.ignite.testframework.MvccFeatureChecker;
 import org.apache.ignite.testframework.junits.WithSystemProperty;
 import org.apache.ignite.testframework.junits.common.GridCommonAbstractTest;
 import org.apache.ignite.transactions.Transaction;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.ignite.IgniteSystemProperties.IGNITE_DUMP_TX_COLLISIONS_INTERVAL;
 import static org.apache.ignite.transactions.TransactionConcurrency.PESSIMISTIC;
@@ -108,7 +108,7 @@ public class CacheMetricsManageTest extends GridCommonAbstractTest {
      */
     @Test
     public void testJmxNoPdsStatisticsEnable() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-9224", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-9224");
 
         testJmxStatisticsEnable(false);
     }
@@ -118,7 +118,7 @@ public class CacheMetricsManageTest extends GridCommonAbstractTest {
      */
     @Test
     public void testJmxPdsStatisticsEnable() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-9224", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-9224");
 
         testJmxStatisticsEnable(true);
     }
@@ -559,7 +559,7 @@ public class CacheMetricsManageTest extends GridCommonAbstractTest {
     @Test
     @WithSystemProperty(key = IGNITE_DUMP_TX_COLLISIONS_INTERVAL, value = "30000")
     public void testTxContentionMetric() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-9224", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-9224");
 
         backups = 1;
 
@@ -695,7 +695,7 @@ public class CacheMetricsManageTest extends GridCommonAbstractTest {
     /** Tests metric change interval. */
     @Test
     public void testKeyCollisionsMetricDifferentTimeout() throws Exception {
-        Assume.assumeFalse("https://issues.apache.org/jira/browse/IGNITE-9224", MvccFeatureChecker.forcedMvcc());
+        Assumptions.assumeFalse(MvccFeatureChecker.forcedMvcc(), "https://issues.apache.org/jira/browse/IGNITE-9224");
 
         backups = 2;
 
